@@ -1,0 +1,27 @@
+{
+  "name": "bagmati_woodland",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bliss-y/Bagmati_woodLand.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bliss-y/Bagmati_woodLand/issues"
+  },
+  "homepage": "https://github.com/Bliss-y/Bagmati_woodLand#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
