@@ -2,10 +2,10 @@
   "name": "bagmati_woodland",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "nodemon server.js",
+    "dev": "nodemon servers.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,11 @@
   },
   "homepage": "https://github.com/Bliss-y/Bagmati_woodLand#readme",
   "dependencies": {
-    "express": "^4.18.1"
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "mongodb": "^3.5.7",
+    "mongoose": "^5.9.13"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
