@@ -9,9 +9,9 @@ const path = require("path");
 
 const app = express();
 
-const url = 'mongodb+srv://bliss:<password>@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const url = 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
-mongoose.connect(url, { useNewUrkParser: true });
+mongoose.connect(url, { useNewUrlParser: true });
 
 const db = mongoose.connection;
 
@@ -24,6 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // test
 app.get("/", (req, res) => {
+
 	res.render("index");
 });
 
