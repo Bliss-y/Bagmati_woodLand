@@ -6,10 +6,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
+const multer = require('multer');
+const fs = require("fs");
+const session = require("express-session");
+const users = require('./testData');
+
+const upload = multer();
 
 const app = express();
 
 const url = 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+
+
 
 mongoose.connect(url, { useNewUrlParser: true });
 
@@ -21,18 +29,28 @@ const db = mongoose.connection;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+app.use(session({
+	name: 'UserSess',
+	resave: false,
+	saveUninitialized: false,
+	secret: 'mySecret',
+	cookie: {
+		maxAge: 60 * 60 * 2 * 1000,
+		sameSite: true,
+		secure: false
+	}
+}));
 
-// test
-app.get("/", (req, res) => {
 
-	res.render("index");
-});
+// load routes
 
-// test
+app.use('/', require('./server/routes/router'));
+
+app.use('/fileget', express.static("./testUploads/"));
 
 // use ejs to generate html instead of writing html manually for all pages
 app.set("view engine", "ejs");
-// app.set("views", path.resolve(__dirname, ""))
+// app.set("views", path.resolve(__dirname, "views/admin"));
 
 // loat all assets with middleware
 

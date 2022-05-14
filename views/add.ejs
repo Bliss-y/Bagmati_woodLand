@@ -1,0 +1,33 @@
+<!-- include header -->
+<%- include ('include/_header') %>
+<!-- include header -->
+
+
+<form method="POST" action="/add">
+  <div  class="form-group"  id = "Update">
+    <label for="exampleFormControlInput1">Email address</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" name = "mail" placeholder="abc@example.com">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1" >Example select</label>
+    <select class="form-control"name="options" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" name="text" rows="3"></textarea>
+  </div>
+  <a href="/">
+   <button type="submit" class="btn btn-primary">Submit</button></a>
+</form>
+
+
+
+<%- include ('include/_footer') %>
+
+<!-- header -->

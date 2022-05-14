@@ -1,0 +1,17 @@
+<!--
+	Takes :- Id, fullname, Gender, BirthDate, Address, Contact number, Email
+-->
+
+
+<div class="table">
+	<table class="table table-all">
+		<% for (let key in keys) { %>
+		<tr>
+			<th><%= keys[key] %></th>
+			<td><%= data[keys[key]]%></td>
+		</tr>
+		
+	<% } %>
+	</table>
+
+</div>

@@ -1,18 +1,22 @@
 <!-- <script src="/js/table.js"></script> -->
 
-<!-- <div class="table-data" data-url = "/data">
-	<% for (key in data[0].keys()) { %>
-		<th>key</th>
+<div class="table">
+	<table class="table table-all">
+		<% var keys = Object.keys(data)%>
+		<% for (let key in keys) { %>
+		<th><%= keys[key] %></th>
 	<% } %>
 
-
-	<% data.forEach(data =>{ %>
+	<% if (data.length > 0){%>
+	<% for(i = 0; i < data.length; i++){ %>
 		<tr>
-			<% for(key in data.keys()){ %>
-			<td>	<%= data.key %>	</td>
+			<% for(let c in keys){ %>
+			<td><%= data[i][[c]]%></td>
 			<% } %>
 		</tr>
 		
-	<% }) %>
+	<% } %>
+	<% } %>
+	</table>
 
-</div> -->
+</div>
