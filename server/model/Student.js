@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User.js');
 
 const { Schema } = mongoose;
 
@@ -9,9 +10,14 @@ const studentSchema = new Schema({
 		required: true
 
 	},
-	course: String
+	course: {
+		type: Schema.Types.ObjectId,
+		ref: 'Course',
 
-})
+	},
+
+
+}, { versionKey: false })
 
 const Student = mongoose.model('Student', studentSchema);
 

@@ -3,11 +3,11 @@
 <!-- include header -->
 
 <% if(data._id){ %>
-  <% post = "/edituser/students" %>
+  <% post = "/edituser/teachers" %>
 
   <% }else{  %>
 
-  <% post = "adduser/students" %>
+  <% post = "adduser/teachers" %>
   <% data = "" %>
 
   <% } %>
@@ -37,8 +37,19 @@
     <input type="date" class="form-control" id="email" name = "dob" value="<%= data.dob  %>" required>
   </div>
     <div  class="form-group"  id = "Update">
-    <label for="email">Course</label>
-    <input type="text" class="form-control" id="email" name = "course" value="<%= data.course  %>" required>
+    <label for="email">Salary</label>
+    <input type="text" class="form-control" id="email" name = "salary" value="<%= data.salary  %>" required>
+  </div>
+  <div  class="form-group"  id = "Update">
+    <label for="email">Module</label>
+    <input type="text" class="form-control" id="email" name = "module" value="<%= data.module  %>" required>
+  </div>
+  <label for="email">Role</label>
+	<select name = "role" value="<%= data.module  %>" required>
+		<option value="teacher">Teacher</option>
+		<option value="leader">Leader</option>
+		<option value="admin">Admin</option>
+</select>
   </div>
 
   <a href="#">

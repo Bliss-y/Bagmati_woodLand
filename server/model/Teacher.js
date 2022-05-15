@@ -9,12 +9,17 @@ const teacherSchema = new Schema({
 		required: true
 
 	},
-	module: String,
+	module: {
+		type: Schema.Types.ObjectId,
+		ref: 'Module',
+
+	},
 	salary: Number,
 	personalStudentId: {
-		type: require('./Student')
+		type: Schema.Types.ObjectId,
+		ref: 'Student',
 	}
-})
+}, { versionKey: false })
 
 teacherSchema.methods.isAval = function () {
 	if (!this.personalStudentId) {

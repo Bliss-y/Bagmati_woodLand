@@ -1,18 +1,23 @@
 <!-- <script src="/js/table.js"></script> -->
 
+<a href="/adduser/<%= dataType %>">add</a>
+
 <div class="table">
 	<table class="table table-all">
-		<% var keys = Object.keys(data)%>
+		<% var keys = Object.keys(data[0])%>
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>
+			<th span="2">actions</th>
 
 	<% if (data.length > 0){%>
 	<% for(i = 0; i < data.length; i++){ %>
 		<tr>
 			<% for(let c in keys){ %>
-			<td><%= data[i][[c]]%></td>
+			<td><%= data[i][keys[c]]%></td>
 			<% } %>
+			<td><a href="/students/edit/<%= data[i]._id %>" id = "">Edit</a></td>
+			<td><a  href="/remove/<%= dataType %>&<%= data[i]._id %>">Remove</a></td>
 		</tr>
 		
 	<% } %>

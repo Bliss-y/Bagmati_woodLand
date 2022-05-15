@@ -1,5 +1,6 @@
 const User = require('../model/User.js');
 const moment = require('moment');
+const bcrypt = require('bcrypt');
 
 exports.findAll = () => {
 	const data = require('../../testData');
@@ -10,9 +11,19 @@ exports.findAll = () => {
 	return data;
 }
 
+
+exports.verify = (id, password) => {
+	const user = User.findOne({ uID: id }).populate();
+	if (!user) {
+		return null;
+	}
+	if (bcrypt.compare(password, user.password)) {
+		return user;
+	}
+}
+
 exports.find = (userId, password) => {
 	const data = require('../../testData');
-
 	if (password) {
 		for (let i = 0; i < data.length; i++) {
 			if (data[i].uid == userId && data[i].pass == password) {
@@ -31,40 +42,50 @@ exports.find = (userId, password) => {
 	return null;
 }
 
-exports.add = ({ name, email, dob, phoneNumber }, cb) => {
+exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 	var v;
-	const d = moment(dob).format('YYYY-MM-DD');
-	console.log('nuser');
-	User.findOne({}).limit(1).sort({ $natural: -1 }).exec((err, data) => {
-		if (err) {
-			console.log('err');
-		}
-		console.log('nuser');
-		let lastuid;
-		if (!data) {
-			lastuid = 1000;
-		} else {
-			lastuid = data.uID;
-		}
-		const nuser = new User({
-			name,
-			email,
-			d,
-			phoneNumber,
-			role: 'student',
-			uID: lastuid + 1
-		});
-		console.log('nuser');
-		nuser.save();
+	data = await User.findOne({}).limit(1).sort({ $natural: -1 }).populate();
+	password = name;
+	try {
+		const salt = await bcrypt.genSalt(10);
+		console.log(salt);
+		password = await bcrypt.hash(password, salt);
+		console.log(password);
+	} catch {
+		return console.log("err");
+	}
 
-
-		console.log(nuser._id);
-		v = nuser;
-		cb(nuser, CountQueuingStrategy);
-
+	let lastuid;
+	if (!data) {
+		lastuid = 1000;
+	} else {
+		lastuid = data.uID;
+	}
+	const nuser = new User({
+		name,
+		email,
+		dob: moment(dob).format('YYYY-MM-DD'),
+		password,
+		address,
+		phoneNumber,
+		role,
+		uID: lastuid + 1
 	});
-
-	return v;
-
+	console.log(nuser)
+	await nuser.save();
+	return nuser;
 }
 
+exports.edit = async (edited, _id) => {
+	return User.findOneAndUpdate({ _id }, {
+		name: edited.name,
+		email: edited.email,
+		phoneNnumber: edited.phoneNumber,
+		address: edited.address,
+		dob: edited.dob
+	}, { new: true });
+}
+
+exports.delete = async (_id) => {
+	await User.deleteOne({ _id });
+}

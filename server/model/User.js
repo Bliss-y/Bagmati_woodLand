@@ -11,7 +11,7 @@ const userSchema = new Schema({
 	uID: { type: Number, unique: true, required: true },
 	role: String,
 	dob: Date
-})
+}, { versionKey: false })
 
 const User = mongoose.model('User', userSchema);
 
