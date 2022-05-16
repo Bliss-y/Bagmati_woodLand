@@ -16,10 +16,14 @@ route.post('/login', postReqs.login);
 
 route.get('/users/:type', sessionControl.notLogged, sessionControl.isAdmin, renders.uData);
 
+route.get('/announcements', sessionControl.notLogged, renders.announcements);
+
 
 
 route.get('/adduser/:type', sessionControl.notLogged, renders.addUser);
 
+route.get('/announce', renders.announce);
+route.post('/announce', postReqs.announce);
 
 route.post('/adduser/:type', sessionControl.notLogged, postReqs.addUser);
 
