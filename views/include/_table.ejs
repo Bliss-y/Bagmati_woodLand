@@ -19,7 +19,7 @@
 			<% for(let c in keys){ %>
 			<td><%= data[i][keys[c]]%></td>
 			<% } %>
-			<td><a href="/students/edit/<%= data[i]._id %>" id = "">Edit</a></td>
+			<td><a href="/edituser/<%= dataType %>&<%= data[i]._id %>" id = "">Edit</a></td>
 			<td><a  href="/remove/<%= dataType %>&<%= data[i]._id %>">Remove</a></td>
 		</tr>
 		

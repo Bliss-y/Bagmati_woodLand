@@ -1,17 +1,20 @@
 const Module = require('../model/Module.js');
+const Course = require('../model/Course');
 
 
-exports.find = async ({ _id, course }) => {
-	if (course) {
-		console.log("here???")
+exports.find = async (_id, course) => {
+	if (course != undefined) {
+		console.log("HERE")
 		const courseID = await require('../controller/courses.js').find(course);
 		const modules = await Module.find({ course: courseID }).populate('course');
-		return modules
+		return modules;
 	}
-	else if (_id) {
+	else if (_id != undefined) {
+
 		return await Module.findById(_id).populate('course');
 	}
-	return await Module.find({}).populate('course');
+	const modules = await Module.find({}).populate('course');
+	return modules;
 }
 
 exports.add = async (data, course) => {

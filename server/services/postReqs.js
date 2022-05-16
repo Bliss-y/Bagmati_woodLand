@@ -24,6 +24,13 @@ exports.addUser = async (req, res) => {
 	res.redirect('/adduser/' + req.params.type);
 }
 
+exports.editUser = async (req, res) => {
+	const { type } = req.params;
+	const User = await require('../controller/' + type).edit(req.body);
+
+	res.json(User);
+}
+
 exports.addTeacher = async (req, res) => {
 	const { name, email, dob, module, phoneNumber, salary } = req.body;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, course, role })

@@ -12,18 +12,19 @@ exports.login = (req, res) => {
 
 exports.home = async (req, res) => {
 	var user = await require('../controller/users').find(req.session.uID);
-	console.log(user);
 	res.render("index", { keys: ['ID', 'name', 'role', 'address'], data: { ID: user.uID, name: user.name, role: user.role, address: user.address } });
 }
 
-exports.addUser = (req, res) => {
+exports.addUser = async (req, res) => {
 	const { type } = req.params;
 	switch (type) {
 		case "students":
 			res.render("addStudent", { data: {} });
 			break;
 		case "teachers":
-			res.render("addTeachers", { data: {} });
+			const modules = await require('../controller/modules').find();
+			console.log(modules);
+			res.render("addTeacher", { data: {}, modules });
 			break;
 	}
 }
@@ -34,6 +35,9 @@ exports.uData = async (req, res) => {
 	var data = [];
 
 	// deconstructing users data
+	/**
+	 * @TODO Data Destructuring Turn it into funcction later !! 
+	 */
 	var users = await require('../controller/' + type).find();
 	var data = [];
 	for (let x in users) {
@@ -52,35 +56,46 @@ exports.uData = async (req, res) => {
 			}
 		}
 		var hi = moment(me.dob).format('YYYY-MM-DD');
-		console.log(hi);
 		me.dob = hi;
 		data.push(me);
 	}
-	console.log(data);
 	res.render('students', { data, dataType: type });
 }
 
-exports.editStudent = async (req, res) => {
-	const { _id } = req.params;
-	var student = await require('../controller/students').find(_id);
-	if (!student) {
-		console.log('no student')
+exports.editUser = async (req, res) => {
+	const { _id, type } = req.params;
+	var User = await require('../controller/' + type).find(_id);
+	if (!User) {
+		console.log('no student');
+		res.redirect('adduser/' + type);
 	}
-	var data = {
-		_id: student._id,
-		name: student.user.name,
-		email: student.user.email,
-		phoneNumber: student.user.phoneNumber,
-		address: student.user.address,
-		uID: student.user.uID,
-		dob: moment(student.user.dob.toString()).format('YYYY-MM-DD'),
-		course: student.course
+
+	/**
+	 * @TODO Data Destructuring Turn it into funcction later !! 
+	 */
+	var keys = Object.keys(User.user.toJSON());
+	var personalKeys = Object.keys(User.toJSON());
+	var data = {};
+	for (let i in keys) {
+		if (keys[i] != '_id' && keys[i] != 'password') {
+			data[keys[i]] = User.user[keys[i]];
+		}
 	}
-	res.render('addStudent', { data })
+
+	for (let i in personalKeys) {
+		if (personalKeys[i] != 'user' && personalKeys[i] != 'dob') {
+			data[personalKeys[i]] = User[personalKeys[i]];
+		}
+	}
+	const hi = moment(data.dob).format('YYYY-MM-DD');
+	data.dob = hi;
+	if (type == 'students') return res.render('addStudent', { data });
+	const modules = require('../controller/modules').find();
+	return res.render('addTeacher', { data, modules });
+
 }
 
 exports.remove = async (req, res) => {
-	console.log('here')
 	const { type, id } = req.params;
 	await require('../controller/' + type).delete(id);
 	res.redirect('/');
@@ -113,7 +128,7 @@ exports.courses = async (req, res) => {
 	var data = [];
 	for (let i in courses) {
 		var m = {};
-		var modules = await require('../controller/modules').find({ course: courses[i].name });
+		var modules = await require('../controller/modules').find(null, courses[i].name);
 		m = {
 			_id: courses[i]._id,
 			name: courses[i].name,
@@ -147,6 +162,5 @@ exports.addModule = async (req, res) => {
 exports.editModule = async (req, res) => {
 	const { _id } = req.params;
 	const module = await require('../controller/modules').find({ _id, course: null });
-	console.log(module);
 	res.render('addModule', { data: module })
 }

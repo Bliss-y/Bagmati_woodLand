@@ -31,13 +31,14 @@ exports.add = async (user) => {
 
 exports.edit = async (edited) => {
 
-	let student = await Student.findOneAndUpdate({ _id: edited._id }, { course: edited.course }, {
-		new: true
-	}).populate('user');
+	const { name, email, dob, phoneNumber, address } = user;
+	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
+	const getcourse = await require('../controller/courses.js').find(user.course);
+	console.log(getcourse);
 
-	return require('./users').edit(edited, student.user._id);
-
-
+	const student = Student.findByIdAndUpdate({ _id }, {
+		course: getcourse || null
+	});
 }
 
 exports.delete = async (_id) => {

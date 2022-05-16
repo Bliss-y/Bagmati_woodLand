@@ -7,8 +7,6 @@ exports.find = async (_id) => {
 		return teachers;
 	}
 	const teachers = await Teacher.findById(_id).populate('user');
-	console.log('here');
-	console.log(teachers);
 	return teachers;
 }
 
@@ -25,6 +23,18 @@ exports.add = async (user) => {
 
 	})
 	await teacher.save();
+}
+
+exports.edit = async (edited) => {
+
+	const { name, email, dob, phoneNumber, address, salary, module } = edited;
+	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
+	const getModule = await require('../controller/modules.js').find(module)._id || null;
+	const teacher = teacher.findByIdAndUpdate({ _id }, {
+		salary,
+		module: getModule || null,
+	});
+
 }
 
 exports.delete = async (_id) => {
