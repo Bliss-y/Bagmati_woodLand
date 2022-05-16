@@ -50,7 +50,7 @@ exports.uData = async (req, res) => {
 				me[personalKeys[i]] = users[x][personalKeys[i]];
 			}
 		}
-		var hi = moment(me.dob.toString()).format('YYYY-MM-DD');
+		var hi = moment(me.dob).format('YYYY-MM-DD');
 		console.log(hi);
 		me.dob = hi;
 		data.push(me);
