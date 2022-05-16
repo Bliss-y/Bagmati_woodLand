@@ -48,14 +48,19 @@ app.use('/', require('./server/routes/router'));
 
 app.use('/fileget', express.static("./testUploads/"));
 
+
+app.use('/', express.static(__dirname + '/views/include'));
+
+
+
 // use ejs to generate html instead of writing html manually for all pages
 app.set("view engine", "ejs");
 // app.set("views", path.resolve(__dirname, "views/admin"));
 
 // loat all assets with middleware
 
-app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
-app.use('/css', express.static(path.resolve(__dirname, "assets/js")));
+// app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
+// app.use('/css', express.static(path.resolve(__dirname, "assets/js")));
 // app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 
 
