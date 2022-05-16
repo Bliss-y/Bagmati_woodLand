@@ -53,3 +53,15 @@ exports.addCourse = async (req, res) => {
 	const announcement = await require('../controller/courses.js').add({ name, duration, description });
 	res.redirect('/courses');
 }
+
+exports.addModule = async (req, res) => {
+	const { course } = req.params;
+	const module = await require('../controller/modules').add(req.body, course);
+	res.redirect('/courses');
+}
+
+exports.editModule = async (req, res) => {
+	const { _id } = req.params;
+	const module = await require('../controller/modules').edit(req.body, _id);
+	res.redirect('/courses');
+}

@@ -12,7 +12,8 @@ const moduleSchema = new Schema({
 	},
 	name: String,
 	credit: Number,
-	duration: Number
+	duration: Number,
+	description: String
 
 }, { versionKey: false })
 

@@ -2,10 +2,11 @@ const Course = require('../model/Course.js');
 
 exports.find = async (name) => {
 	if (!name) {
-		return await Course.find({}).populate();
+		const course = await Course.find({}).populate();
+		return course;
 	}
-
-	return await Course.findOne({ name }).populate();
+	const course = await Course.findOne({ name }).populate();
+	return course;
 }
 
 exports.add = async ({ name, duration, description }) => {
@@ -30,6 +31,3 @@ exports.edit = (_id, { name, duration }) => {
 	})
 }
 
-exports.addModule = async ({ name, module }) => {
-	const course = Course.findOne({ name },)
-}

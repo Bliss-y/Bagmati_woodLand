@@ -3,7 +3,7 @@
 
 <!-- header -->
 
-<div>
+<div class = "table-main">
 
 <div> Courses </div>
 
@@ -16,6 +16,13 @@
 			Description : <%= data[i].description %> <br>
 			Duration: <%= data[i].duration %> <br>
 		</p>
+		<a href="/addmodule/<%= data[i].name %>">Add module</a>
+		<div>Modules</div>
+		<% if(data[i].modules){ %> 
+			<% for(let x in data[i].modules){ %>
+			<a href="/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a>
+			<% } %>
+			<% } %>
 	</div>
 <% } %>
 </div>
