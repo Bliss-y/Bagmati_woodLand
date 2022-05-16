@@ -1,0 +1,18 @@
+<%- include ('include/_header') %>
+
+<div>
+
+<div> Announcements </div>
+
+<% for(){ %>
+	<div id = "announcements">
+		<div class="announcement-title"> <%= data[i].title %> </div>
+		<p class = "announcement-body">
+			<%= data[i].body %> <br>
+			Date: <%= data[i].title %> <br>
+			Author: <%= data[i].user %>
+		</p>
+	</div>
+<% } %>
+</div>
+<%- include ('include/_footer') %>

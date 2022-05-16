@@ -2,16 +2,17 @@ const session = require('express-session');
 const moment = require('moment');
 const mongoose = require('mongoose');
 
-exports.login = (req, res) => {
-	console.log(req.session.uId);
-	if (!req.session.uId) {
+exports.login = async (req, res) => {
+	console.log(req.session.uID);
+	if (!req.session.uID) {
 		const { uid, pass } = req.body;
-		const findUser = require('../controller/users').find(uid, pass);
+		const findUser = await require('../controller/users').verify(uid, pass);
 		if (!findUser) {
+			console.log(findUser);
 			return res.redirect('/login');
 		}
-		req.session.uId = findUser.uid;
-		req.session.role = findUser.uRole;
+		req.session.uID = findUser._id;
+		req.session.role = findUser.role;
 		return res.redirect('/');
 	}
 	res.redirect('/');
@@ -40,3 +41,9 @@ exports.editStudent = async (req, res) => {
 	res.json(User);
 }
 
+exports.announce = async (req, res) => {
+	const { title, text } = req.body;
+	const _uid = req.session.uID;
+	const announcement = await require('../controller/announcements.js').add({ title, _uid, text });
+	res.redirect('/announcements');
+}

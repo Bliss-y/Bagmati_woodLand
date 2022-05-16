@@ -12,34 +12,30 @@ exports.findAll = () => {
 }
 
 
-exports.verify = (id, password) => {
-	const user = User.findOne({ uID: id }).populate();
+exports.verify = async (id, password) => {
+	const uID = parseInt(id);
+	const user = await User.findOne({ uID }).populate('user');
 	if (!user) {
 		return null;
 	}
-	if (bcrypt.compare(password, user.password)) {
+	if (await bcrypt.compare(password, user.password)) {
 		return user;
 	}
+
+	// , (err, res) => {
+	// 	if (res) {
+	// 		console.log(password);
+	// 		return user;
+	// 	}
+	// 	console.log(user.name);
+	// 	console.log(password + " wrong");
+	// 	return null;
+	// });
 }
 
-exports.find = (userId, password) => {
-	const data = require('../../testData');
-	if (password) {
-		for (let i = 0; i < data.length; i++) {
-			if (data[i].uid == userId && data[i].pass == password) {
-				return data[i];
-			}
-		}
-	}
-
-	if (!password) {
-		for (let i = 0; i < data.length; i++) {
-			if (data[i].uid == userId) {
-				return data[i];
-			}
-		}
-	}
-	return null;
+exports.find = async (_id) => {
+	const user = await User.findById(_id);
+	return user;
 }
 
 exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {

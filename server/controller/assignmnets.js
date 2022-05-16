@@ -1,7 +1,11 @@
 const Assignment = require('../model/Assignment.js');
 
 exports.find = async (_id) => {
-	return await Assignment.findOne({ _id }).populate();
+	if (!_id) {
+		return await Assignment.find({}).populate('user');
+	}
+
+	return await Assignment.findOne({ _id }).populate('user');
 }
 
 exports.add = async ({ mId, due }) => {

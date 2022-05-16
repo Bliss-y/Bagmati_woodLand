@@ -2,15 +2,15 @@
 
 <a href="/adduser/<%= dataType %>">add</a>
 
+<% if (data.length > 0){%>
+
 <div class="table">
 	<table class="table table-all">
 		<% var keys = Object.keys(data[0])%>
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>
-			<th span="2">actions</th>
-
-	<% if (data.length > 0){%>
+			<th span="2">actions</th>	
 	<% for(i = 0; i < data.length; i++){ %>
 		<tr>
 			<% for(let c in keys){ %>
@@ -21,7 +21,8 @@
 		</tr>
 		
 	<% } %>
-	<% } %>
+	
 	</table>
 
 </div>
+<% } %>

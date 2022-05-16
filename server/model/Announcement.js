@@ -11,7 +11,7 @@ const announcementSchema = new Schema({
 	},
 	text: String,
 	title: String,
-	date: new Date()
+	date: Date || new Date()
 
 }, { versionKey: false })
 

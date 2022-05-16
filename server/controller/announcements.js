@@ -5,12 +5,13 @@ exports.find = async (_id) => {
 }
 
 exports.add = async ({ _uid, text, title }) => {
-	const Announcement = await new Announcement({
+	const announcement = await new Announcement({
 		user: _uid,
 		text,
-		title
+		title,
+		date: new Date()
 	});
-	Announcement.save();
+	announcement.save();
 	return Announcement;
 }
 
@@ -25,3 +26,4 @@ exports.edit = (_id, { _uid, text }) => {
 		title
 	})
 }
+

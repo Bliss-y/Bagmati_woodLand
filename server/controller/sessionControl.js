@@ -1,6 +1,6 @@
 exports.notLogged = (req, res, next) => {
 
-	if (!req.session.uId) {
+	if (!req.session.uID) {
 		return res.redirect('/login');
 	} else {
 		next();

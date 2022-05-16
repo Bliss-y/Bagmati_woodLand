@@ -1,17 +1,18 @@
 const moment = require('moment');
 exports.login = (req, res) => {
-	if (req.session.uId) {
+	if (req.session.uID) {
 		return res.redirect('/');
 	}
-	var user = require('../controller/users').find(req.session.uId);
+	var user = require('../controller/users').find(req.session.uID);
 
 	res.render('login');
 
 }
 
-exports.home = (req, res) => {
-	var user = require('../controller/users').find(req.session.uId);
-	res.render("index", { keys: ['ID', 'name', 'role', 'address'], data: { ID: user.uid, name: user.name, role: user.uRole, address: user.address } });
+exports.home = async (req, res) => {
+	var user = await require('../controller/users').find(req.session.uID);
+	console.log(user);
+	res.render("index", { keys: ['ID', 'name', 'role', 'address'], data: { ID: user.uID, name: user.name, role: user.role, address: user.address } });
 }
 
 exports.addUser = (req, res) => {
@@ -80,6 +81,26 @@ exports.editStudent = async (req, res) => {
 exports.remove = async (req, res) => {
 	console.log('here')
 	const { type, id } = req.params;
-	await require('../controller/' + type + 's').delete(id);
+	await require('../controller/' + type).delete(id);
 	res.redirect('/');
+}
+
+exports.announcements = async (req, res) => {
+	const announcements = await require('../controller/announcements').find();
+
+	// destructure the data/// 
+	for (let i in announcements) {
+		var data = {
+			_id: announcements[i]._id,
+			user: announcements[i].user.name,
+			date: moment(announcements[i].date.toString()).format('YYYY-MM-DD'),
+			title: announcements[i].title
+		}
+	}
+
+	res.json(data);
+}
+
+exports.announce = async (req, res) => {
+	res.render('addAnnouncement', { data: {} });
 }

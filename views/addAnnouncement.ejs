@@ -1,0 +1,30 @@
+
+
+<%- include ('include/_header') %>
+
+
+	<% if(data._id){ %>
+  <% post = "/announcedit" %>
+
+  <% }else{  %>
+
+  <% post = "/announce" %>
+  <% data = "" %>
+
+  <% } %>
+
+  <form method="POST" action="#">
+	  
+  <div  class="form-group"  id = "Update">
+	  <label for="announcement-title">Title</label>
+	  <input type="text" class="form-control" id="email" name = "name" value="<%= data.title %>" required>
+	  <label for="announcement-body">Body</label>
+	  <textarea type="tetxt"class="form-control" id="announcement-body" name = "title" value="<%= data.text %>"> </textarea>
+  </div>
+  <a href="#">
+   <button type="submit" class="btn btn-primary">Submit</button></a>
+</form>
+
+
+
+<%- include ('include/_footer') %>
