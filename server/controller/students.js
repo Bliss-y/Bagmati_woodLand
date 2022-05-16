@@ -46,3 +46,4 @@ exports.delete = async (_id) => {
 	await Student.deleteOne({ _id });
 	return;
 }
+

@@ -37,6 +37,12 @@ route.get('/students/edit/:_id', sessionControl.notLogged, sessionControl.isAdmi
 route.post('/students/edit', sessionControl.notLogged, sessionControl.isAdmin, postReqs.editStudent);
 
 route.get('/remove/:type&:id', sessionControl.notLogged, sessionControl.isAdmin, renders.remove);
+
+route.get('/addmodule/:course', sessionControl.notLogged, sessionControl.isAdmin, renders.addModule);
+route.post('/addmodule/:course', sessionControl.notLogged, sessionControl.isAdmin, postReqs.addModule);
+route.get('/editmodule/:_id', sessionControl.notLogged, sessionControl.isAdmin, renders.editModule);
+route.post('/editmodule/:_id', sessionControl.notLogged, sessionControl.isAdmin, postReqs.editModule);
+
 // Teachers url
 
 
@@ -55,29 +61,7 @@ route.get('/file', (req, res) => {
 
 route.get('/api', async (req, res) => {
 
-	// var data = [];
-	// const moment = require('moment');
-
-	// // deconstructing users data
-	// for (let i in users) {
-	// 	var userD = users[i].user;
-	// 	console.log(users[i].user);
-	// 	console.log(delete users[i].user);
-	// 	console.log("users");
-	// 	console.log(users[i]);
-	// 	const keys = Object.keys(users[i]);
-	// 	userD.dob = moment(userD.dob).format('YYYY-MM-DD');
-	// 	for (let key in keys) {
-	// 		userD[keys[key]] = users[keys[key]];
-	// 	}
-	// 	console.log(userD);
-	// 	data.push(userD);
-	// }
-	// if (data.length == 0) {
-	// 	return res.json({ message: "no Students found visit : /students/add" });
-	// }
-	// console.log(data);
-	// res.json({ data: data[0] });
+	res.render('hi')
 
 })
 

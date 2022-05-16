@@ -109,11 +109,44 @@ exports.announce = async (req, res) => {
 }
 
 exports.courses = async (req, res) => {
-	const data = await require('../controller/courses').find();
+	const courses = await require('../controller/courses').find();
+	var data = [];
+	for (let i in courses) {
+		var m = {};
+		var modules = await require('../controller/modules').find({ course: courses[i].name });
+		m = {
+			_id: courses[i]._id,
+			name: courses[i].name,
+			duration: courses[i].duration,
+			modules,
+			description: courses[i].description
+		}
+		data.push(m);
+
+	}
 
 	res.render('courses', { data });
 }
 
 exports.addCourse = (req, res) => {
 	res.render('addCourse', { data: {} });
+}
+
+exports.module = async (res, req) => {
+	const { name } = req.params;
+	const module = await require('../controller/modules').find({ name: name });
+
+	res.json(module);
+}
+
+exports.addModule = async (req, res) => {
+	const { course } = req.params;
+	res.render('addModule', { data: {}, course });
+}
+
+exports.editModule = async (req, res) => {
+	const { _id } = req.params;
+	const module = await require('../controller/modules').find({ _id, course: null });
+	console.log(module);
+	res.render('addModule', { data: module })
 }

@@ -1,0 +1,33 @@
+<%- include ('include/_header') %>
+
+
+	<% if(data._id){ %>
+  <% post = "/editModule/" + data._id %>
+
+  <% }else{  %>
+
+  <% post = "/addmodule/" + course %>
+  <% data = "" %>
+
+  <% } %>
+  <div class="table-main">
+
+  <form method="POST" action="#">
+	  
+  <div  class="form-group"  id = "Update">
+	  <label for="announcement-title">Name</label>
+	  <input type="text" class="form-control" id="email" name = "name" value="<%= data.name %>" required>
+	  <label for="announcement-body">Duration</label>
+	  <input type="number" class="form-control" id="duration" name = "duration" value="<%= data.duration %>" required>
+	  <label for="announcement-body">Description</label>
+	  <textarea type="text"class="form-control" id="announcement-body" name = "description"><%= data.description %> </textarea>
+	  <label for="announcement-body">Credit</label>
+	  <input type="number"class="form-control" id="announcement-body" name = "credit" value="<%= data.credit %>"> </input>
+  </div>
+  <a href="#">
+   <button type="submit" class="btn btn-primary">Submit</button></a>
+</form>
+<a  href="/remove/modules&<%= data._id %>">Remove</a>
+</div>
+
+<%- include ('include/_footer') %>
