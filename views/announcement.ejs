@@ -1,13 +1,13 @@
 <%- include ('include/_header') %>
 
-<div>
+<div class="table-main">
 
 <div> Announcements </div>
 
 <a href="/announce">add</a>
 
 <% for(let i in data){ %>
-	<div id = "announcements">
+	<div id = "announcements" >
 		<div class="announcement-title"> <%= data[i].title %> </div>
 		<p class = "announcement-body">
 			<%= data[i].text %> <br>

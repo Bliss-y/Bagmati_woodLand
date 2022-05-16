@@ -4,13 +4,13 @@
 
 
 <div class="table-main">
+	<h1 class = "table-heading">Profile Details</h1>
 	<table class="table table-all">
 		<% for (let key in keys) { %>
 		<tr>
 			<th><%= keys[key] %></th>
 			<td><%= data[keys[key]]%></td>
 		</tr>
-		
 	<% } %>
 	</table>
 
