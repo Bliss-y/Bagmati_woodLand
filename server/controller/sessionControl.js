@@ -5,7 +5,6 @@ exports.notLogged = (req, res, next) => {
 	} else {
 		next();
 	}
-
 }
 
 exports.isAdmin = (req, res, next) => {

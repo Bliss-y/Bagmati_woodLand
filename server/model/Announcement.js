@@ -15,7 +15,7 @@ const announcementSchema = new Schema({
 
 }, { versionKey: false })
 
-const Announcement = mongoose.model('Student', announcementSchema);
+const Announcement = mongoose.model('Announcement', announcementSchema);
 
 module.exports = Announcement;
 
