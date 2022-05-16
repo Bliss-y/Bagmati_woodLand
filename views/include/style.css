@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(33, 33, 33, 0.5);
+    /* background-color: rgba(33, 33, 33, 0.5); */
 }
 
 .main-container{
@@ -11,7 +11,7 @@ body{
 nav{
     position: fixed;
 
-    background-color: darkgreen;
+    background-color: #091e42;
 
     width: 20%;
     height: 100%;
@@ -59,7 +59,7 @@ li{
 
 /*Table of student informations*/
 .table-main{
-    overflow: scroll;
+    /* overflow: scroll; */
 
     margin: 0 0 0 20%;
 
@@ -92,4 +92,78 @@ th, td, tr{
     font-size: 22px;
 
     border: 3px solid black;
+}
+
+
+/*Form designing*/
+
+form{
+
+    display: block;
+
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 60%;
+
+    background-color: rgba(42, 40, 38, 0.32);
+
+    border-radius: 12px;
+    box-shadow: 1px 8px 16px 6px;
+}
+
+label{
+
+    display: block;
+
+    text-align: center;
+
+    font-weight: 600;
+    font-size: 20px;
+}
+input{
+    margin: 12px 0;
+    padding: 12px;
+
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    
+    border: none;
+    background-color: rgba(42, 40, 38, 0.75);
+
+    width: 45%;
+    color: white;
+    font-weight: bold;
+
+    border-radius: 12px;
+    box-shadow: 1px 2px 3px 1.5px black;
+}
+
+.submit-btn{
+    margin: 12px 0;
+    padding: 12px;
+
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.submit{
+
+    display: block;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    border: none;
+    background-color: rgba(112, 12, 12, 0.7);
+
+    text-decoration: none;
 }
