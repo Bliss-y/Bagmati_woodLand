@@ -1,13 +1,13 @@
 <!-- <script src="/js/table.js"></script> -->
 
-<% if (data.length > 0){%>
+
 
 <div class="table-main">
 	
 	<div class = "add-std">
-		<a href="/adduser/<%= dataType %>">add</a>
+		<button><a href="/adduser/<%= dataType %>" class="add-button">add</a></button>
 	</div>
-
+	<% if (data.length > 0){%>
 	<table class="table table-all">
 		<% var keys = Object.keys(data[0])%>
 		<% for (let key in keys) { %>
@@ -26,10 +26,6 @@
 	<% } %>
 	
 	</table>
-		
-
-	
-
 
 </div>
 <% } %>

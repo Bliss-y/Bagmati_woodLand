@@ -1,5 +1,5 @@
 body{
-    /* background-color: rgb(255,0,0); */
+    background-color: rgba(33, 33, 33, 0.5);
 }
 
 .main-container{
@@ -11,7 +11,7 @@ body{
 nav{
     position: fixed;
 
-    background-color: blue;
+    background-color: darkgreen;
 
     width: 20%;
     height: 100%;
@@ -35,10 +35,16 @@ ul{
     width: 100%;
 }
 
-a{
+ul a{
+    padding: 0 0 0 15px;
+
     text-decoration: none;
 
     color: white;
+}
+ul a:hover{
+    color: black;
+    background-color: aqua;
 }
 
 li{
@@ -51,17 +57,39 @@ li{
     font-weight: bolder;    
 }
 
-
-
-
-
 /*Table of student informations*/
 .table-main{
+    overflow: scroll;
+
     margin: 0 0 0 20%;
 
-    position: fixed;
+    /* position: fixed; */
 
-    background-color: aqua;
-    width: 80%;
+    width: 100%;
 }
 
+.table-heading{
+    margin: 0;
+    padding: 18px 0;
+
+    
+
+    background-color: #34568B;
+
+    text-align: center;
+
+    color: white;
+}
+
+th, td, tr{
+
+    margin: 0;
+    padding: 0;
+
+    background-color: rgba(33, 33, 33, 0.5);
+
+    color: black;
+    font-size: 22px;
+
+    border: 3px solid black;
+}
