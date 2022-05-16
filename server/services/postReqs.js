@@ -8,7 +8,6 @@ exports.login = async (req, res) => {
 		const { uid, pass } = req.body;
 		const findUser = await require('../controller/users').verify(uid, pass);
 		if (!findUser) {
-			console.log(findUser);
 			return res.redirect('/login');
 		}
 		req.session.uID = findUser._id;
@@ -46,4 +45,11 @@ exports.announce = async (req, res) => {
 	const _uid = req.session.uID;
 	const announcement = await require('../controller/announcements.js').add({ title, _uid, text });
 	res.redirect('/announcements');
+}
+
+exports.addCourse = async (req, res) => {
+	const { name, duration, description } = req.body;
+
+	const announcement = await require('../controller/courses.js').add({ name, duration, description });
+	res.redirect('/courses');
 }

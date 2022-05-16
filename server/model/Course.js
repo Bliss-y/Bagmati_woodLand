@@ -8,6 +8,7 @@ const courseSchema = new Schema({
 		unique: true
 	},
 	duration: Number,
+	description: String
 
 }, { versionKey: false })
 

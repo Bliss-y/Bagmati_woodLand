@@ -25,6 +25,11 @@ route.get('/adduser/:type', sessionControl.notLogged, renders.addUser);
 route.get('/announce', renders.announce);
 route.post('/announce', postReqs.announce);
 
+route.get('/courses', sessionControl.notLogged, renders.courses);
+
+route.get('/addcourse', sessionControl.notLogged, renders.addCourse);
+route.post('/addcourse', sessionControl.notLogged, postReqs.addCourse);
+
 route.post('/adduser/:type', sessionControl.notLogged, postReqs.addUser);
 
 route.get('/students/edit/:_id', sessionControl.notLogged, sessionControl.isAdmin, renders.editStudent);

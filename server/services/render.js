@@ -1,4 +1,5 @@
 const moment = require('moment');
+
 exports.login = (req, res) => {
 	if (req.session.uID) {
 		return res.redirect('/');
@@ -87,20 +88,32 @@ exports.remove = async (req, res) => {
 
 exports.announcements = async (req, res) => {
 	const announcements = await require('../controller/announcements').find();
-
+	data = [];
 	// destructure the data/// 
 	for (let i in announcements) {
-		var data = {
+		var d = {
 			_id: announcements[i]._id,
 			user: announcements[i].user.name,
-			date: moment(announcements[i].date.toString()).format('YYYY-MM-DD'),
-			title: announcements[i].title
+			date: moment(announcements[i].date).format('YYYY-MM-DD'),
+			title: announcements[i].title,
+			text: announcements[i].text
 		}
+		data.push(d);
 	}
 
-	res.json(data);
+	res.render('announcement', { data });
 }
 
 exports.announce = async (req, res) => {
 	res.render('addAnnouncement', { data: {} });
+}
+
+exports.courses = async (req, res) => {
+	const data = await require('../controller/courses').find();
+
+	res.render('courses', { data });
+}
+
+exports.addCourse = (req, res) => {
+	res.render('addCourse', { data: {} });
 }

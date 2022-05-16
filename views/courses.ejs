@@ -1,0 +1,25 @@
+<!-- include header -->
+<%- include ('include/_header') %>
+
+<!-- header -->
+
+<div>
+
+<div> Courses </div>
+
+<a href="/addcourse">add</a>
+
+<% for(let i in data){ %>
+	<div id = "courses">
+		<div class="course-title"> <%= data[i].name %> </div>
+		<p class = "course">
+			Description : <%= data[i].description %> <br>
+			Duration: <%= data[i].duration %> <br>
+		</p>
+	</div>
+<% } %>
+</div>
+<!-- include header -->
+<%- include ('include/_footer') %>
+
+<!-- header -->

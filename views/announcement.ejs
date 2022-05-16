@@ -4,12 +4,14 @@
 
 <div> Announcements </div>
 
-<% for(){ %>
+<a href="/announce">add</a>
+
+<% for(let i in data){ %>
 	<div id = "announcements">
 		<div class="announcement-title"> <%= data[i].title %> </div>
 		<p class = "announcement-body">
-			<%= data[i].body %> <br>
-			Date: <%= data[i].title %> <br>
+			<%= data[i].text %> <br>
+			Date: <%= data[i].date %> <br>
 			Author: <%= data[i].user %>
 		</p>
 	</div>

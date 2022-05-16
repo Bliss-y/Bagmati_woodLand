@@ -1,17 +1,19 @@
 const Announcement = require('../model/Announcement.js');
 
 exports.find = async (_id) => {
-	return await Announcement.findOne({ _id }).populate();
+	const announcement = await Announcement.find({}).populate('user');
+	console.log(announcement);
+	return announcement;
 }
 
 exports.add = async ({ _uid, text, title }) => {
-	const announcement = await new Announcement({
+	const announcement = new Announcement({
 		user: _uid,
 		text,
 		title,
 		date: new Date()
 	});
-	announcement.save();
+	await announcement.save();
 	return Announcement;
 }
 
