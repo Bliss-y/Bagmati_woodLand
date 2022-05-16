@@ -1,46 +1,67 @@
 body{
-    background-color: rgba(30, 30, 30, 0.75);
+    /* background-color: rgb(255,0,0); */
 }
-ul{
 
-    margin: 30px 12px;
-    padding: 0;
-
+.main-container{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
-}
-a{
-    margin: 0;
-    padding: 12px 0;
-
-    width: 18%;
-
 }
 
-li{
+nav{
+    position: fixed;
 
+    background-color: blue;
 
+    width: 20%;
+    height: 100%;
 
-    
-
-    font-size: 32px;
-    text-decoration: none;
-    list-style: none;
-    border: 4px solid whitesmoke;
-    border-radius: 16px;
-
-    text-align: center;
     color: white;
 }
 
+.arrow{
+    margin: 0 0 0 80%;
+}
+
+ul{
+    margin: 20px 0;
+    padding: 0;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+a{
+    text-decoration: none;
+
+    color: white;
+}
+
+li{
+    margin: 18px 0;
+    
+    text-decoration: none;
+    list-style: none;
+
+    font-size: 25px;
+    font-weight: bolder;    
+}
+
+
+
+
 
 /*Table of student informations*/
+.table-main{
+    margin: 0 0 0 20%;
 
-table{
-    
+    position: fixed;
 
     background-color: aqua;
+    width: 80%;
 }
 
