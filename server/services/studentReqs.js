@@ -21,7 +21,7 @@ exports.modules = async (req, res) => {
 exports.assignment = async (req, res) => {
 	const assignments = await require('../controller/assignments').findByModule(req.params.module);
 	const submissions = await requiure('../controller/submissions').find(req.session.id, assignment);
-	res.render('stdAssignments', { data: assignments });
+	res.render('stdAssignments', { data });
 }
 
 exports.submit = async (req, res) => {
