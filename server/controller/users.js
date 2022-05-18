@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about Users
+ */
+
 const User = require('../model/User.js');
 const moment = require('moment');
 const bcrypt = require('bcrypt');

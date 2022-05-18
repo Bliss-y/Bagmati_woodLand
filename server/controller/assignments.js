@@ -1,3 +1,8 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about assignments
+ */
+
+
 const Assignment = require('../model/Assignment.js');
 
 exports.find = async (_id) => {

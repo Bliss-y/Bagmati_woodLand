@@ -1,3 +1,7 @@
+/**
+ * @file: handles all requests common from all users
+ */
+
 const express = require('express');
 const route = express.Router();
 const renders = require('../services/render');

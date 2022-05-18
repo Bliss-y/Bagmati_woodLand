@@ -1,4 +1,4 @@
-<%- include ('../include/_header') %>
+<%- include ('_header') %>
 
 
 	<% if(data._id){ %>
@@ -27,7 +27,7 @@
   <a href="#">
    <button type="submit" class="btn btn-primary">Submit</button></a>
 </form>
-<a  href="/remove/modules&<%= data._id %>">Remove</a>
+<a  href="/admin/remove/modules&<%= data._id %>">Remove</a>
 </div>
 
 <%- include ('../include/_footer') %>

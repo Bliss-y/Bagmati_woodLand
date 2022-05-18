@@ -1,5 +1,5 @@
 <!-- include header -->
-<%- include ('include/_header') %>
+<%- include ('_header') %>
 
 <!-- header -->
 <div class = "table-main">
@@ -14,6 +14,7 @@
 			Due: <%= data[i].due %>
 		</p>
 		<a href="/fileget/<%= data[i]._id%>">Download file</a>
+		<a href="/teacher/submissions/<%= data[i]._id%>">view submissions</a>
 	</div>
 <% } %>
 </div>

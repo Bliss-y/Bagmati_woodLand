@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about teachers
+ */
+
 const Module = require('../model/Module.js');
 const Teacher = require('../model/Teacher.js');
 

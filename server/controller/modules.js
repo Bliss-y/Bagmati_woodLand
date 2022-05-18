@@ -1,8 +1,13 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about modules
+ */
+
+
 const Module = require('../model/Module.js');
 const Course = require('../model/Course');
 
 
-exports.find = async (_id, course) => {
+exports.find = async ({ _id, course }) => {
 	if (course != undefined) {
 		console.log("HERE")
 		const courseID = await require('../controller/courses.js').find(course);

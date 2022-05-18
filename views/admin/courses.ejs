@@ -1,5 +1,5 @@
 <!-- include header -->
-<%- include ('include/_header') %>
+<%- include ('_header') %>
 
 <!-- header -->
 
@@ -7,7 +7,7 @@
 
 <div> Courses </div>
 
-<a href="/addcourse">add</a>
+<a href="/admin/addcourse">add</a>
 
 <% for(let i in data){ %>
 	<div id = "courses">
@@ -16,11 +16,11 @@
 			Description : <%= data[i].description %> <br>
 			Duration: <%= data[i].duration %> <br>
 		</p>
-		<a href="/addmodule/<%= data[i].name %>">Add module</a>
+		<a href="/admin/addmodule/<%= data[i].name %>">Add module</a>
 		<div>Modules</div>
 		<% if(data[i].modules){ %> 
 			<% for(let x in data[i].modules){ %>
-			<a href="/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a> <br>
+			<a href="/admin/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a> <br>
 			<% } %>
 			<% } %>
 	</div>

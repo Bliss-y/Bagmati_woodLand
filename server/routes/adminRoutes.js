@@ -10,6 +10,8 @@ const postReqs = require('../services/postReqs');
 
 route.get('/', renders.home);
 
+route.get('/users/:type', sessionControl.notLogged, sessionControl.isAdmin, renders.uData);
+
 route.get('/announce', renders.announce);
 route.post('/announce', postReqs.announce);
 

@@ -1,33 +1,43 @@
-const Submission = require('../model/Submission.js');
+/**
+ * @Purpose = Handles all the queries that might arise for the system about Submissions
+ */
 
-exports.find = async (_id) => {
+const Submission = require('../model/Submission.js');
+const Student = require('../model/Student.js');
+const Teacher = require('../model/Teacher.js');
+
+exports.find = async ({ module, _id, assignment }) => {
+	if (module != undefined) {
+		return await Submission.find({ module }).sort({ grade: -1 }).populate('student').populate('teacher');
+	}
+	if (assignment != undefined) {
+		return await Submission.find({ assignment }).sort({ grade: -1 }).populate('student').populate('teacher');
+	}
 	return await Submission.findOne({ _id }).populate('student').populate('teacher');
 }
 
-exports.findForStudent = async ({ student, course }) => {
-	return await Submission.find({ student, })
+exports.findForStudent = async ({ student, assignment }) => {
+	return await Submission.find({ student, assignment });
 }
 
-exports.add = async ({ _uid, text, title, date }) => {
-	const Log = await new Log({
-		user: _uid,
-		text,
-		title,
-		date
+exports.add = async (student, assignment, filename) => {
+	const submission = await new Submission({
+		student,
+		assignment,
+		filename
 	});
-	Log.save();
-	return Log;
+	submission.save();
+	return submission._id;
 }
 
 exports.delete = (_id) => {
 	Log.findOneAndDelete({ _id });
 }
 
-exports.edit = (_id, { _uid, text, title, date }) => {
-	Log.findByIdAndUpdate({ _id }, {
-		user: _uid,
-		title,
-		text,
-		date
-	})
+exports.edit = async ({ _id, grade, feedback, teacher }) => {
+	await Submission.findByIdAndUpdate({ _id }, {
+		grade,
+		feedback,
+		teacher
+	});
 }

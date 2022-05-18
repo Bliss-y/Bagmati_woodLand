@@ -1,3 +1,8 @@
+/**
+ * @Purpose = Handles all the necessary session validation after login
+ */
+
+
 exports.notLogged = (req, res, next) => {
 
 	if (!req.session.uID) {

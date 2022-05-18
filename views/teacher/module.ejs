@@ -1,0 +1,23 @@
+<!-- include header -->
+<%- include ('_header') %>
+
+<!-- header -->
+<div class="table-main">
+	<h2>Students In <%= module.name %></h2>
+
+	<table>
+		<tr><th>Name</th><th>ID</th></tr>
+		
+		<% for(let i in data) {%>
+			
+			<tr><td><%= data.name %></td><td> <%= data.uID %></td></tr>
+			<% } %>
+	</table>
+
+
+</div>
+
+<!-- include header -->
+<%- include ('include/_footer') %>
+
+<!-- header -->

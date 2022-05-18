@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about Logs
+ */
+
 const Log = require('../model/Log.js');
 
 exports.find = async (_id) => {

@@ -134,7 +134,7 @@ exports.courses = async (req, res) => {
 	var data = [];
 	for (let i in courses) {
 		var m = {};
-		var modules = await require('../controller/modules').find(null, courses[i].name);
+		var modules = await require('../controller/modules').find({ id: null, course: courses[i].name });
 		m = {
 			_id: courses[i]._id,
 			name: courses[i].name,

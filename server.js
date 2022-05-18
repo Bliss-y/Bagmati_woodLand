@@ -1,5 +1,6 @@
 /**
  * Main router page
+ * @purpose  Listens to all the requests and sends them to appropriate functions
  */
 
 const express = require("express");
@@ -15,6 +16,10 @@ const users = require('./testData');
 const upload = multer();
 
 const app = express();
+
+/**
+ * @TODO Use different file to handle mongo connection also store environment variable 
+*/
 
 const url = 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
@@ -45,9 +50,13 @@ app.use(session({
 
 // load routes
 
-app.use('/admin/', sessionControl.notLogged, require('./server/routes/adminRoutes'));
-app.use('/teacher/', sessionControl.notLogged, require('./server/routes/teacherRoutes'));
-app.use('/student/', sessionControl.notLogged, require('./server/routes/studentRoutes'));
+/**
+ * @Todo login - required has been removed Temporarily dont forget to add it
+ */
+
+app.use('/admin/', require('./server/routes/adminRoutes'));
+app.use('/teacher/', require('./server/routes/teacherRoutes'));
+app.use('/student/', require('./server/routes/studentRoutes'));
 app.use('/', require('./server/routes/router'));
 
 app.use('/fileget', express.static("./testUploads/"));
@@ -61,11 +70,6 @@ app.use('/', express.static(__dirname + '/views/include'));
 app.set("view engine", "ejs");
 app.set("views", [path.resolve(__dirname, "views"), path.resolve(__dirname, "views/admin"), path.resolve(__dirname, "views/teacher"), path.resolve(__dirname, "views/student")]);
 
-// loat all assets with middleware
-
-// app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
-// app.use('/css', express.static(path.resolve(__dirname, "assets/js")));
-// app.use('/css', express.static(path.resolve(__dirname, "assets/css")));
 
 
 app.listen(3000, () => {

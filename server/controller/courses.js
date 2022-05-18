@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about Courses
+ */
+
 const Course = require('../model/Course.js');
 
 exports.find = async (name) => {

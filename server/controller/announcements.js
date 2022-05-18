@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about announcements
+ */
+
 const Announcement = require('../model/Announcement.js');
 
 exports.find = async (_id) => {

@@ -1,5 +1,5 @@
 <!-- include header -->
-<%- include ('../include/_header') %>
+<%- include ('_header') %>
 <!-- include header -->
 
 <% if(data._id){ %>
@@ -14,7 +14,7 @@
 
 
   <div class = "table-main">
-    <form method="POST" action="/<%= post %>">
+    <form method="POST" action="/admin/<%= post %>">
   
 
       <div  class="form-group"  id = "Update">

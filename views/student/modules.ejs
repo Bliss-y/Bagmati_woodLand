@@ -1,0 +1,19 @@
+<% include('_header') %>
+
+	<div class = "table-main">
+
+<% for(let i in data){ %>
+	<div id = "announcements" >
+		<div class="announcement-title"> <%= data[i].name %> </div>
+		<p class = "announcement-body">
+			Description: <%= data[i].description %> <br>
+			Credit: <%= data[i].credit %> <br>
+			Duration: <%= data[i].duration + " years" %> 
+		</p>
+		<a href="/student/assignments/<%= data[i]._id %>">Download file</a>
+	</div>
+<% } %>
+</div>
+</div>
+
+<% include('include/_footer') %>

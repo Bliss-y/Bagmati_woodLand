@@ -1,3 +1,8 @@
+/**
+ * @Purpose = To create a testing scenario for the database system
+ */
+
+
 const mongoose = require('mongoose');
 
 const users = reqiore('./users');

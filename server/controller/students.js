@@ -1,3 +1,7 @@
+/**
+ * @Purpose = Handles all the queries that might arise for the system about Students
+ */
+
 const mongoose = require('mongoose');
 const Student = require('../model/Student.js');
 
@@ -53,3 +57,6 @@ exports.delete = async (_id) => {
 	return;
 }
 
+exports.findByCourse = async ({ course }) => {
+	return await Student.find({ course }).populate('user');
+}
