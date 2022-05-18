@@ -2,7 +2,8 @@
 <%- include ('include/_header') %>
 
 <!-- header -->
-<a href="/assignment">add</a>
+<div class = "table-main">
+	<a href="/teacher/addAssignments">add</a>
 
 <% for(let i in data){ %>
 	<div id = "announcements" >
@@ -12,9 +13,10 @@
 			Date: <%= data[i].date %> <br>
 			Due: <%= data[i].due %>
 		</p>
-		<a href="/file/<%= data[i].filename %>">Download file</a>
+		<a href="/fileget/<%= data[i]._id%>">Download file</a>
 	</div>
 <% } %>
+</div>
 </div>
 
 

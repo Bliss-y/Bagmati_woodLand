@@ -15,10 +15,13 @@ const submissionSchema = new Schema({
 		ref: 'Teacher',
 	},
 	fileName: String,
+	comment: String,
 	assignment: {
 		type: Schema.Types.ObjectId,
 		ref: 'Assignment',
-	}
+		required: true
+	},
+	feedback: String
 
 }, { versionKey: false })
 

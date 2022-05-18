@@ -2,19 +2,21 @@ const Assignment = require('../model/Assignment.js');
 
 exports.find = async (_id) => {
 	if (!_id) {
-		return await Assignment.find({}).populate('user');
+		return await Assignment.find({}).populate();
 	}
 
-	return await Assignment.findOne({ _id }).populate('user');
+	return await Assignment.findOne({ _id }).populate();
 }
 
-exports.add = async ({ mId, due }) => {
-	const Assignment = await new Assignment({
-		module: mId,
-		due
+exports.add = async ({ module, due, title, extension }) => {
+	const assignment = await new Assignment({
+		title,
+		module,
+		due,
+		extension
 	});
-	Assignment.save();
-	return Assignment;
+	assignment.save();
+	return assignment;
 }
 
 exports.delete = (_id) => {
@@ -26,4 +28,8 @@ exports.edit = (_id, { mId, date, due }) => {
 		module: mId,
 		due
 	})
+}
+
+exports.findByModule = async (module) => {
+	return await Assignment.find({ module }).populate('module');
 }

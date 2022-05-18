@@ -10,15 +10,28 @@ exports.login = async (req, res) => {
 			return res.redirect('/login');
 		}
 		req.session.uID = findUser._id;
-		req.session.role = findUser.role;
+		const role = findUser.role;
+		req.session.role = role;
 
-		if (findUser.role == "teacher" || findUser.role == "student") {
-			const type = await require('../controller/' + findUser.role + 's').getID(findUser._id);
+		if (role == "teacher" || role == "student") {
+			const type = await require('../controller/' + role + 's').getID(findUser._id);
 			req.session.id = type._id;
-			return res.redirect('/role');
+			req.session.module = type.module;
+			req.session.course = type.course;
+
 		}
+		return res.redirect('/' + role);
 	}
-	return res.redirect('/');
+	return res.redirect('/login');
+}
+
+exports.logout = async (req, res) => {
+	req.session.destroy((err) => {
+		if (err) {
+			res.redirect('/');
+		}
+	})
+	return res.redirect('/login');
 }
 
 exports.addUser = async (req, res) => {

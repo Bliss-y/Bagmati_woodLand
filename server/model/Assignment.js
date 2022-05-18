@@ -8,10 +8,10 @@ const assignmentSchema = new Schema({
 		ref: 'Module',
 		required: true
 	},
-	date: new Date(),
+	date: Date || new Date(),
 	title: String,
-	filename: String,
-	due: Date
+	due: Date,
+	extension: String
 
 }, { versionKey: false })
 

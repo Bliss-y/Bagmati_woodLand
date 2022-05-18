@@ -14,20 +14,6 @@ exports.home = async (req, res) => {
 	var user = await require('../controller/users').find(req.session.uID);
 	var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
 	var divs = [];
-	// if (req.session.role == "admin") {
-	// 	divs.push(
-	// 		{ text: "Teachers", href: "/users/teachers" },
-	// 		{ text: "Students", href: "/users/students" }
-	// 	)
-	// }
-	// else if (req.session.role == "student") {
-
-	// 	divs.push(
-	// 		{ text: },
-	// 		{ text: "Grades", href: "/submissions/"+ }
-	// 	)
-	// }
-
 	return res.render("index", { data, divs });
 }
 

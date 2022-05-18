@@ -3,6 +3,7 @@
  */
 
 const express = require("express");
+const sessionControl = require('./server/controller/sessionControl');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -44,6 +45,9 @@ app.use(session({
 
 // load routes
 
+app.use('/admin/', sessionControl.notLogged, require('./server/routes/adminRoutes'));
+app.use('/teacher/', sessionControl.notLogged, require('./server/routes/teacherRoutes'));
+app.use('/student/', sessionControl.notLogged, require('./server/routes/studentRoutes'));
 app.use('/', require('./server/routes/router'));
 
 app.use('/fileget', express.static("./testUploads/"));

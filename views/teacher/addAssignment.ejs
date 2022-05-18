@@ -1,0 +1,22 @@
+<!-- include header -->
+<%- include ('include/_header') %>
+
+<!-- header -->
+<form action="/teacher/addAssignments" method = "POST" enctype="multipart/form-data">
+	<div class="">
+		<label>Title</label>
+		<input type = "text" name = "title">
+		
+		<label>Due</label>
+		<input type = "date" name="due">
+		
+		<label for="file" class="form-label">Include Resourses</label>
+ 		 <input class="form-control" type="file" id="formFile" name = "upfile">
+
+  <button type="submit" class="btn btn-primary">Submit</button></a>
+</div>
+</form>
+<!-- include header -->
+<%- include ('include/_footer') %>
+
+<!-- header -->

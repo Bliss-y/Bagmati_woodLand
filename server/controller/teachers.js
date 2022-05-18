@@ -40,7 +40,7 @@ exports.edit = async (edited) => {
 
 exports.getID = async (uid) => {
 	const teacher = await Teacher.findOne({ user: uid }).populate();
-	return student;
+	return teacher;
 }
 
 exports.delete = async (_id) => {
