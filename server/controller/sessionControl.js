@@ -15,3 +15,19 @@ exports.isAdmin = (req, res, next) => {
 	}
 }
 
+exports.isTeacher = (req, res, next) => {
+	if (req.session.role != 'student') {
+		return res.redirect('/');
+	} else {
+		next();
+	}
+}
+
+exports.isStudent = (req, res, next) => {
+	if (req.session.role != 'student') {
+		return res.redirect('/');
+	} else {
+		next();
+	}
+}
+

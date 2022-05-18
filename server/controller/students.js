@@ -13,6 +13,11 @@ exports.find = async (id) => {
 	return students;
 }
 
+exports.getID = async (uid) => {
+	const student = await Student.findOne({ user: uid }).populate();
+	return student;
+}
+
 
 exports.add = async (user) => {
 	const { name, email, dob, phoneNumber, address } = user;

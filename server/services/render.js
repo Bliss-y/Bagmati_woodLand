@@ -12,8 +12,25 @@ exports.login = (req, res) => {
 
 exports.home = async (req, res) => {
 	var user = await require('../controller/users').find(req.session.uID);
-	res.render("index", { keys: ['ID', 'name', 'role', 'address'], data: { ID: user.uID, name: user.name, role: user.role, address: user.address } });
+	var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
+	var divs = [];
+	// if (req.session.role == "admin") {
+	// 	divs.push(
+	// 		{ text: "Teachers", href: "/users/teachers" },
+	// 		{ text: "Students", href: "/users/students" }
+	// 	)
+	// }
+	// else if (req.session.role == "student") {
+
+	// 	divs.push(
+	// 		{ text: },
+	// 		{ text: "Grades", href: "/submissions/"+ }
+	// 	)
+	// }
+
+	return res.render("index", { data, divs });
 }
+
 
 exports.addUser = async (req, res) => {
 	const { type } = req.params;
@@ -57,6 +74,9 @@ exports.uData = async (req, res) => {
 		}
 		var hi = moment(me.dob).format('YYYY-MM-DD');
 		me.dob = hi;
+		if (type == 'teachers' && users[x].module != null) {
+			me.module = users[x].module.name;
+		}
 		data.push(me);
 	}
 	res.render('students', { data, dataType: type });
@@ -164,3 +184,4 @@ exports.editModule = async (req, res) => {
 	const module = await require('../controller/modules').find({ _id, course: null });
 	res.render('addModule', { data: module })
 }
+

@@ -55,7 +55,7 @@ app.use('/', express.static(__dirname + '/views/include'));
 
 // use ejs to generate html instead of writing html manually for all pages
 app.set("view engine", "ejs");
-app.set("views", [path.resolve(__dirname, "views"), path.resolve(__dirname, "views/admin")]);
+app.set("views", [path.resolve(__dirname, "views"), path.resolve(__dirname, "views/admin"), path.resolve(__dirname, "views/teacher"), path.resolve(__dirname, "views/student")]);
 
 // loat all assets with middleware
 

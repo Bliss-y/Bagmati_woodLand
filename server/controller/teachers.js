@@ -1,8 +1,9 @@
+const Module = require('../model/Module.js');
 const Teacher = require('../model/Teacher.js');
 
 exports.find = async (_id) => {
 	if (!_id) {
-		const teachers = await Teacher.find({}).populate('user');
+		const teachers = await Teacher.find({}).populate('user').populate('module', 'name');
 
 		return teachers;
 	}
@@ -35,6 +36,11 @@ exports.edit = async (edited) => {
 		module: getModule || null,
 	});
 
+}
+
+exports.getID = async (uid) => {
+	const teacher = await Teacher.findOne({ user: uid }).populate();
+	return student;
 }
 
 exports.delete = async (_id) => {

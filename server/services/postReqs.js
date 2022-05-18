@@ -1,6 +1,5 @@
 const session = require('express-session');
 const moment = require('moment');
-const mongoose = require('mongoose');
 
 exports.login = async (req, res) => {
 	console.log(req.session.uID);
@@ -12,9 +11,14 @@ exports.login = async (req, res) => {
 		}
 		req.session.uID = findUser._id;
 		req.session.role = findUser.role;
-		return res.redirect('/');
+
+		if (findUser.role == "teacher" || findUser.role == "student") {
+			const type = await require('../controller/' + findUser.role + 's').getID(findUser._id);
+			req.session.id = type._id;
+			return res.redirect('/role');
+		}
 	}
-	res.redirect('/');
+	return res.redirect('/');
 }
 
 exports.addUser = async (req, res) => {

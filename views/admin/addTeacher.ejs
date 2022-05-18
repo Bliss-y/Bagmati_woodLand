@@ -12,6 +12,7 @@
 
   <% } %>
 
+
   <div class = "table-main">
     <form method="POST" action="/<%= post %>">
   
@@ -46,11 +47,10 @@
       <select name = "module" required>
         <option> none </option>
         <% for(let x in modules) {%>
-        <option value="<% modules[x]._id %>"><%= modules[x].name %></option>
+        <option value="<%= modules[x]._id %>"><%= modules[x].name %></option>
         <% }%>
     </select>
       </div>
-      
       <label for="email">Role</label>
       <select name = "role" value="<%= data.module  %>" required>
         <option value="teacher">Teacher</option>

@@ -20,7 +20,7 @@
 		<div>Modules</div>
 		<% if(data[i].modules){ %> 
 			<% for(let x in data[i].modules){ %>
-			<a href="/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a>
+			<a href="/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a> <br>
 			<% } %>
 			<% } %>
 	</div>

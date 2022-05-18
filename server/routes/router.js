@@ -4,6 +4,7 @@ const renders = require('../services/render');
 const sessionControl = require('../controller/sessionControl');
 const postReqs = require('../services/postReqs');
 
+
 /**
  * 
  * @type: Common pages
@@ -94,6 +95,10 @@ route.get('/api', async (req, res) => {
 
 })
 
+route.get('/role', (req, res) => {
+	const session = require('express-session');
+	res.send(req.session.role + " " + req.session.id);
+})
 
 // 
 

@@ -7,9 +7,10 @@ const assignmentSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Module',
 		required: true
-
 	},
 	date: new Date(),
+	title: String,
+	filename: String,
 	due: Date
 
 }, { versionKey: false })
