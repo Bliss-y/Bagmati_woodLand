@@ -4,12 +4,12 @@
 
 const Course = require('../model/Course.js');
 
-exports.find = async (name) => {
-	if (!name) {
+exports.find = async (_id) => {
+	if (!_id) {
 		const course = await Course.find({}).populate();
 		return course;
 	}
-	const course = await Course.findOne({ name }).populate();
+	const course = await Course.findById(_id).populate();
 	return course;
 }
 

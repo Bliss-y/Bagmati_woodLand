@@ -22,10 +22,12 @@ exports.addUser = async (req, res) => {
 	const { type } = req.params;
 	switch (type) {
 		case "students":
-			res.render("addStudent", { data: {} });
+			const courses = await require('../controller/courses').find();
+			res.render("addStudent", { data: {}, courses });
+
 			break;
 		case "teachers":
-			const modules = await require('../controller/modules').find();
+			const modules = await require('../controller/modules').find({});
 			console.log(modules);
 			res.render("addTeacher", { data: {}, modules });
 			break;
@@ -95,7 +97,10 @@ exports.editUser = async (req, res) => {
 	}
 	const hi = moment(data.dob).format('YYYY-MM-DD');
 	data.dob = hi;
-	if (type == 'students') return res.render('addStudent', { data });
+	if (type == 'students') {
+		const courses = await require('../controller/courses').find();
+		return res.render('addStudent', { data, courses })
+	};
 	const modules = require('../controller/modules').find();
 	return res.render('addTeacher', { data, modules });
 
@@ -134,7 +139,7 @@ exports.courses = async (req, res) => {
 	var data = [];
 	for (let i in courses) {
 		var m = {};
-		var modules = await require('../controller/modules').find({ id: null, course: courses[i].name });
+		var modules = await require('../controller/modules').find({ id: null, course: courses[i]._id });
 		m = {
 			_id: courses[i]._id,
 			name: courses[i].name,

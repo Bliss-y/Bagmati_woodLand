@@ -4,12 +4,13 @@
 
 exports.home = async (req, res) => {
 	const user = await require('../controller/users').find(req.session.uID);
+
 	const data = { ID: user.uID, name: user.name, role: user.role, address: user.address };
 	res.render('stdIndex', { data });
 }
 
 exports.modules = async (req, res) => {
-	const modules = await require('../controller/modules').findForStudent(req.session.course);
+	const modules = await require('../controller/modules').find({ id: null, course: req.session.course });
 	res.render('modules', { data: modules });
 }
 
@@ -20,12 +21,14 @@ exports.modules = async (req, res) => {
 
 exports.assignment = async (req, res) => {
 	const assignments = await require('../controller/assignments').findByModule(req.params.module);
-	const submissions = await requiure('../controller/submissions').find(req.session.id, assignment);
-	res.render('stdAssignments', { data });
+
+	res.render('stdAssignments', { data: assignments });
 }
 
 exports.submit = async (req, res) => {
-	res.render('submit');
+	const { assignment } = req.params;
+	const submissions = await require('../controller/submissions').find(req.session.id, assignment);
+	res.render('submit', { data: submissions });
 }
 
 exports.saveSubmission = async (req, res) => {

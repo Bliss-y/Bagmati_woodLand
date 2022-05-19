@@ -12,6 +12,7 @@ const multer = require('multer');
 const fs = require("fs");
 const session = require("express-session");
 const users = require('./testData');
+const sessions = require('./server/controller/sessionControl');
 
 const upload = multer();
 
@@ -50,13 +51,10 @@ app.use(session({
 
 // load routes
 
-/**
- * @Todo login - required has been removed Temporarily dont forget to add it
- */
 
-app.use('/admin/', require('./server/routes/adminRoutes'));
-app.use('/teacher/', require('./server/routes/teacherRoutes'));
-app.use('/student/', require('./server/routes/studentRoutes'));
+app.use('/admin/', sessions.notLogged, require('./server/routes/adminRoutes'));
+app.use('/teacher/', sessions.notLogged, require('./server/routes/teacherRoutes'));
+app.use('/student/', sessions.notLogged, require('./server/routes/studentRoutes'));
 app.use('/', require('./server/routes/router'));
 
 app.use('/fileget', express.static("./testUploads/"));

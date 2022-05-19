@@ -16,6 +16,7 @@ exports.login = async (req, res) => {
 		if (role == "teacher" || role == "student") {
 			const type = await require('../controller/' + role + 's').getID(findUser._id);
 			req.session.id = type._id;
+			console.log(type);
 			req.session.module = type.module;
 			req.session.course = type.course;
 
@@ -38,14 +39,15 @@ exports.addUser = async (req, res) => {
 	delete req.body._id;
 
 	const User = require('../controller/' + req.params.type).add(req.body);
-	res.redirect('/adduser/' + req.params.type);
+	res.redirect('/admin/adduser/' + req.params.type);
 }
 
 exports.editUser = async (req, res) => {
 	const { type } = req.params;
+	req.body._id = req.params._id;
 	const User = await require('../controller/' + type).edit(req.body);
 
-	res.json(User);
+	res.redirect('/admin/users/' + type);
 }
 
 exports.addTeacher = async (req, res) => {

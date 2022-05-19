@@ -60,14 +60,15 @@ exports.grade = async (req, res) => {
 }
 
 exports.module = async (req, res) => {
-	const { moduleid } = req.session;
-	const module = await require('../controller/modules').find({ _id: moduleid });
-	const students = await require('../controller/students').findByCourse({ course: module.course });
+	const { module } = req.session;
+	const mod = await require('../controller/modules').find({ _id: module });
+	const students = await require('../controller/students').findByCourse({ course: mod.course._id });
 	var data = [];
 	for (let i in students) {
 		m = {}
 		m.name = students[i].user.name;
 		m.uID = students[i].user.uID;
+		console.log(m)
 		data.push(m);
 	}
 

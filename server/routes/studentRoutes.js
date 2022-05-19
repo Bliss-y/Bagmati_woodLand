@@ -8,13 +8,11 @@ const sessionControl = require('../controller/sessionControl');
 const reqs = require('../services/studentReqs');
 
 
-route.get('/', (req, res) => {
-	res.send('hello student');
-})
+route.get('/', reqs.home);
 
 route.get('/modules', reqs.modules);
-route.get('/assignment/:module', reqs.assignment);
-route.post('/submit', reqs.submit);
-route.post('/submit', reqs.saveSubmission);
+route.get('/assignments/:module', reqs.assignment);
+route.get('/submit/:assignment', reqs.submit);
+route.post('/submit/:assignment', reqs.saveSubmission);
 
 module.exports = route;

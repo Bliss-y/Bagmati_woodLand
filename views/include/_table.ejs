@@ -5,11 +5,12 @@
 <div class="table-main">
 	
 	<div class = "add-std">
-		<button><a href="/adduser/<%= dataType %>" class="add-button">add</a></button>
+		<button><a href="/admin/adduser/<%= dataType %>" class="add-button">add</a></button>
 	</div>
 	<% if (data.length > 0){%>
 	<table class="table table-all">
 		<% var keys = Object.keys(data[0])%>
+		<%  keys.splice(keys.indexOf('_id')) %>
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>
@@ -19,8 +20,8 @@
 			<% for(let c in keys){ %>
 			<td><%= data[i][keys[c]]%></td>
 			<% } %>
-			<td><a href="/edituser/<%= dataType %>&<%= data[i]._id %>" id = "">Edit</a></td>
-			<td><a  href="/remove/<%= dataType %>&<%= data[i]._id %>">Remove</a></td>
+			<td><a href="/admin/edituser/<%= dataType %>&<%= data[i]._id %>" id = "">Edit</a></td>
+			<td><a  href="/admin/remove/<%= dataType %>&<%= data[i]._id %>">Remove</a></td>
 		</tr>
 		
 	<% } %>

@@ -4,35 +4,33 @@
 
 const mongoose = require('mongoose');
 const Student = require('../model/Student.js');
+const Course = require('../model/Course.js');
 
 exports.find = async (id) => {
 	if (!id) {
-		const students = await Student.find({}).populate('user');
+		const students = await Student.find({}).populate('user').populate('course');
 
 		return students;
 	}
-	const students = await Student.findById(id).populate('user');
-	console.log('here');
-	console.log(students);
+	const students = await Student.findById(id).populate('user').populate('course');
 	return students;
 }
 
 exports.getID = async (uid) => {
-	const student = await Student.findOne({ user: uid }).populate();
+	const student = await Student.findOne({ user: uid }).populate('course');
 	return student;
 }
 
 
 exports.add = async (user) => {
-	const { name, email, dob, phoneNumber, address } = user;
+	const { name, email, dob, phoneNumber, address, course } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role: "student" });
-	const getcourse = await require('../controller/courses.js').find(user.course);
-	console.log(getcourse);
+
 
 	const student = new Student({
 
 		user: User._id,
-		course: getcourse || null
+		course
 
 	})
 	await student.save();
@@ -40,13 +38,14 @@ exports.add = async (user) => {
 
 exports.edit = async (edited) => {
 
-	const { name, email, dob, phoneNumber, address } = user;
+	const { name, email, dob, phoneNumber, address, course, _id } = edited;
+	console.log(_id);
+	console.log(course);
 	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
-	const getcourse = await require('../controller/courses.js').find(user.course);
-	console.log(getcourse);
 
 	const student = Student.findByIdAndUpdate({ _id }, {
-		course: getcourse || null
+		course
+
 	});
 }
 
@@ -58,5 +57,6 @@ exports.delete = async (_id) => {
 }
 
 exports.findByCourse = async ({ course }) => {
-	return await Student.find({ course }).populate('user');
+	const students = await Student.find({ course }).populate('user');
+	return students;
 }

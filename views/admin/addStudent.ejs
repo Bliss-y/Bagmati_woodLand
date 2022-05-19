@@ -3,17 +3,17 @@
 <!-- include header -->
 
 <% if(data._id){ %>
-  <% post = "/edituser/students" %>
+  <% post = "/edituser/students&"+data._id %>
 
   <% }else{  %>
 
-  <% post = "adduser/students" %>
+  <% post = "/adduser/students" %>
   <% data = "" %>
 
   <% } %>
 
 <div class = "table-main"> 
-  <form method="POST" action="/admin/<%= post %>">
+  <form method="POST" action="/admin<%= post %>">
   
 
     <div  class="form-group"  id = "Update">
@@ -37,10 +37,15 @@
       <label for="email">Dob</label>
       <input type="date" id="email" name = "dob" value="<%= data.dob  %>" required>
     </div>
-      <div  class="form-group"  id = "Update">
-      <label for="email">Course</label>
-      <input type="text" id="email" name = "course" value="<%= data.course  %>" required>
-    </div>
+     <div class="form-group">
+       <label for="email">Courses</label>
+      <select name = "course" required>
+        <option> none </option>
+        <% for(let x in courses) {%>
+        <option value="<%= courses[x]._id %>"><%= courses[x].name %></option>
+        <% }%>
+    </select>
+     </div>
   
     <a href="#">
      <button type="submit" class="submit">Submit</button></a>

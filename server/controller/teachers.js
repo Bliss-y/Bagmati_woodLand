@@ -7,24 +7,23 @@ const Teacher = require('../model/Teacher.js');
 
 exports.find = async (_id) => {
 	if (!_id) {
-		const teachers = await Teacher.find({}).populate('user').populate('module', 'name');
+		const teachers = await Teacher.find({}).populate('user').populate('module', 'name').populate('module');
 
 		return teachers;
 	}
-	const teachers = await Teacher.findById(_id).populate('user');
+	const teachers = await Teacher.findById(_id).populate('user').populate('module');
 	return teachers;
 }
 
 exports.add = async (user) => {
 
-	const { name, email, dob, phoneNumber, address, role } = user;
+	const { name, email, dob, phoneNumber, address, role, module } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role });
-	const getModule = await require('../controller/modules.js').find(user.module);
 
 	const teacher = new Teacher({
 
 		user: User._id,
-		module: getModule || null
+		module
 
 	})
 	await teacher.save();
@@ -34,10 +33,9 @@ exports.edit = async (edited) => {
 
 	const { name, email, dob, phoneNumber, address, salary, module } = edited;
 	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
-	const getModule = await require('../controller/modules.js').find(module)._id || null;
 	const teacher = teacher.findByIdAndUpdate({ _id }, {
 		salary,
-		module: getModule || null,
+		module
 	});
 
 }
