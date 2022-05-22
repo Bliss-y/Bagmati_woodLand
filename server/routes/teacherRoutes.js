@@ -20,4 +20,6 @@ route.post('/grade/:id', reqs.grade);
 
 route.get('/module', reqs.module);
 
+route.get('/delete/:type&:_id', reqs.delete);
+
 module.exports = route;

@@ -9,7 +9,7 @@ const submissionSchema = new Schema({
 		required: true
 
 	},
-	date: Date || new Date(),
+	date: { type: Date, default: Date.now },
 	grade: String,
 	teacher: {
 		type: Schema.Types.ObjectId,

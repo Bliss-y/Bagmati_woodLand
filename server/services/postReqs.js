@@ -15,7 +15,7 @@ exports.login = async (req, res) => {
 
 		if (role == "teacher" || role == "student") {
 			const type = await require('../controller/' + role + 's').getID(findUser._id);
-			req.session.id = type._id;
+			req.session._id = type._id;
 			console.log(type);
 			req.session.module = type.module;
 			req.session.course = type.course;

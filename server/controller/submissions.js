@@ -17,10 +17,17 @@ exports.find = async ({ module, _id, assignment }) => {
 }
 
 exports.findForStudent = async ({ student, assignment }) => {
-	return await Submission.find({ student, assignment });
+	return await Submission.findOne({ student, assignment }).populate();
 }
 
-exports.add = async (student, assignment, filename) => {
+exports.add = async (assignment, student, filename) => {
+	const prev = await Submission.findOne({ student, assignment }).populate();
+	if (prev) {
+		await Submission.findOneAndDelete({ _id: prev._id });
+		const path = require("path");
+		const fs = require("fs");
+		fs.unlinkSync(path.resolve(__dirname, "server/testUpload/" + prev._id + prev.filename));
+	}
 	const submission = await new Submission({
 		student,
 		assignment,
@@ -30,8 +37,12 @@ exports.add = async (student, assignment, filename) => {
 	return submission._id;
 }
 
-exports.delete = (_id) => {
-	Log.findOneAndDelete({ _id });
+exports.delete = async (_id) => {
+	const id = Submissions.findOneById(_id).populate().filename;
+	await Submission.findOneAndDelete({ _id });
+	const path = require("path");
+	const fs = require("fs");
+	fs.unlinkSync(path.resolve(__dirname, "server/testUpload/" + _id + id));
 }
 
 exports.edit = async ({ _id, grade, feedback, teacher }) => {

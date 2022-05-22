@@ -11,7 +11,7 @@ const logSchema = new Schema({
 	},
 	text: String,
 	date: Date,
-	created: new Date()
+	created: { type: Date, default: Date.now },
 
 
 }, { versionKey: false })

@@ -1,4 +1,4 @@
-<% include('_header') %>
+<%- include ('_header') %>
 <% if(data.length == 0) { %>
 		<h1>No Assignments</h1>
 	<% } %>
@@ -7,33 +7,20 @@
 		
 
 	<% for(let i in data){ %>
-		<div id = "announcements" >
-			<div class="announcement-title"> <%= data[i].name %> </div>
-			<p class = "announcement-body">
-				Description: <%= data[i].description %> <br>
-				Credit: <%= data[i].credit %> <br>
-				Duration: <%= data[i].duration + " years" %> 
-			</p>
-			<a href="/student/assignments/<%= data[i]._id %>">Download file</a>
-			<a href="/student/submit/<%= data[i]._id %>">Submit</a>
-		</div>
-	<% } %>
+	<div id = "announcements" >
+		<div class="announcement-title"> <%= data[i].title %> </div>
+		<p class = "announcement-body">
+			<%= data[i].text %> <br>
+			Date: <%= data[i].date %> <br>
+			Due: <%= data[i].due %>
+		</p>
+		<a href="/fileget/<%= data[i]._id%>">Download file</a>
+		<a href="/student/submit/<%= data[i]._id%>">view submissions</a>
+	</div>
+<% } %>
 </div>
 
 <!-- header -->
-<form action="/teacher/addAssignments" method = "POST" enctype="multipart/form-data">
-	<div class="">
-		<label>Title</label>
-		<input type = "text" name = "title">
-		
-		<label>Due</label>
-		<input type = "date" name="due">
-		
-		<label for="file" class="form-label">Include Resourses</label>
- 		<input class="form-control" type="file" id="formFile" name = "upfile">
 
-  <button type="submit" class="btn btn-primary">Submit</button></a>
-</div>
-</form>
 
 <% include('include/_footer') %>

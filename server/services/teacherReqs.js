@@ -5,6 +5,7 @@
 
 const session = require('express-session');
 const fs = require('fs');
+const { type } = require('os');
 
 
 
@@ -73,4 +74,10 @@ exports.module = async (req, res) => {
 	}
 
 	res.render('module', { data: data, module })
+}
+
+exports.delete = async (req, res) => {
+	const { type, _id } = req.params;
+	const del = await require('../controller/' + type).delete(_id);
+	res.send('Deleted Successfully');
 }

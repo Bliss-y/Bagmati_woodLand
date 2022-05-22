@@ -1,3 +1,4 @@
+node . command on terminal to run or nodemone -run start if u have nodemon set up
 
 
 the app listens on port 3000

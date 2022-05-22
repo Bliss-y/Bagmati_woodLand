@@ -8,7 +8,7 @@ const assignmentSchema = new Schema({
 		ref: 'Module',
 		required: true
 	},
-	date: Date || new Date(),
+	date: { type: Date, default: Date.now },
 	title: String,
 	due: Date,
 	extension: String

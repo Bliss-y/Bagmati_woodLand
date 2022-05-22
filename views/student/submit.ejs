@@ -3,20 +3,33 @@
 
 <!-- header -->
 <div class = "table-main">
-	<a href="/teacher/addAssignments">add</a>
 
-<% for(let i in data){ %>
-	<div id = "announcements" >
-		<div class="announcement-title"> <%= data[i].title %> </div>
+
+	<div class="announcement-title"> <%= assignment.title %> </div>
+	<% if(data){ %>
+		<div id = "announcements" >
 		<p class = "announcement-body">
-			<%= data[i].text %> <br>
-			Date: <%= data[i].date %> <br>
-			Due: <%= data[i].due %>
+			<%= data.comment %> <br>
+			Date: <%= data.date %> <br>
 		</p>
-		<a href="/fileget/<%= data[i]._id%>">Download file</a>
-		<a href="/teacher/submissions/<%= data[i]._id%>">view submissions</a>
+		<a href="/fileget/<%= data._id%>">Download file</a>
 	</div>
-<% } %>
+	<% } %>
+
+		<% if(new Date(assignment.due) > new Date() ) { %>
+			<h3>Submit or resubmit</h3>
+	<form action="/student/submit/<%= assignment._id %>" method="post" enctype="multipart/form-data">
+
+		<div class="mb-3">
+			<label for="formFile" class="form-label">write comments on your submission</label>
+			<input type="text" name="comment">
+			<label for="formFile" class="form-label">Upload file</label>
+			<input class="form-control" type="file" id="formFile" name = "upfile">
+			<button type="submit" class="btn btn-primary" name = "upfile">Submit</button></a>
+		</div>
+	</form>
+		<% } %>
+
 </div>
 </div>
 

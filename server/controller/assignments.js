@@ -24,8 +24,8 @@ exports.add = async ({ module, due, title, extension }) => {
 	return assignment;
 }
 
-exports.delete = (_id) => {
-	Assignment.findOneAndDelete({ _id });
+exports.delete = async (_id) => {
+	await Assignment.findOneAndDelete({ _id });
 }
 
 exports.edit = (_id, { mId, date, due }) => {

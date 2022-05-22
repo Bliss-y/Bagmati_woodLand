@@ -19,8 +19,8 @@ exports.add = async ({ _uid, text, title, date }) => {
 	return Log;
 }
 
-exports.delete = (_id) => {
-	Log.findOneAndDelete({ _id });
+exports.delete = async (_id) => {
+	await Log.findOneAndDelete({ _id });
 }
 
 exports.edit = (_id, { _uid, text, title, date }) => {
