@@ -1,9 +1,9 @@
 {
 	"edit-announcement": "todo",
 	"edit-courses": "todo",
-	"logs-diary": "todo",
-	"submissions": "todo",
 	"grade": "todo",
+	"submissions": "completed",
+	"logs-diary": "completed",
 	"module-resources": "completed",
 	"edit-modules": "completed",
 	"assignments": "completed",

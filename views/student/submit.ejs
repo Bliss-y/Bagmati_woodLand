@@ -12,7 +12,7 @@
 			<%= data.comment %> <br>
 			Date: <%= data.date %> <br>
 		</p>
-		<a href="/fileget/<%= data._id%>">Download file</a>
+		<a href="/fileget/<%= data._id + data.filename %>">Download file</a>
 	</div>
 	<% } %>
 
@@ -24,7 +24,7 @@
 			<label for="formFile" class="form-label">write comments on your submission</label>
 			<input type="text" name="comment">
 			<label for="formFile" class="form-label">Upload file</label>
-			<input class="form-control" type="file" id="formFile" name = "upfile">
+			<input class="form-control" type="file" id="formFile" name = "upfile" required>
 			<button type="submit" class="btn btn-primary" name = "upfile">Submit</button></a>
 		</div>
 	</form>

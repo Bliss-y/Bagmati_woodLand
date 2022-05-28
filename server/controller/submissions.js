@@ -25,10 +25,10 @@ exports.add = async (assignment, student, filename, comment) => {
 	console.log(filename);
 	console.log(prev);
 	if (prev) {
-		await Submission.findOneAndDelete({ _id: prev._id });
 		const path = require("path");
 		const fs = require("fs");
-		fs.unlinkSync(path.resolve(__dirname, "../../testUpload/" + prev._id + prev.filename));
+		fs.unlinkSync(path.resolve(__dirname, "../../testUploads/" + prev._id + prev.filename));
+		await Submission.findOneAndDelete({ _id: prev._id });
 	}
 	const submission = await new Submission({
 		student,

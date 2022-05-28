@@ -25,6 +25,11 @@ exports.add = async ({ module, due, title, extension }) => {
 }
 
 exports.delete = async (_id) => {
+
+	const assignment = await Assignment.findById(_id).populate();
+	const path = require("path");
+	const fs = require("fs");
+	fs.unlinkSync(path.resolve(__dirname, "../../testUploads/" + _id + assignment.extension));
 	await Assignment.findOneAndDelete({ _id });
 }
 
