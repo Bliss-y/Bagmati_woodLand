@@ -1,0 +1,23 @@
+<%- include ('include/_header') %>
+
+
+<div class="table-main">
+
+<div> Logs </div>
+
+<a href="/logs/add/<%= user %>">add</a>
+
+<% for(let i in data){ %>
+	<div id = "announcements" >
+		<div class="logs-title"> <%= data[i].date %> </div>
+		<p class = "logbody">
+			<%= data[i].text %>
+		</p>
+		<a href="/remove/logs&<%= data[i]._id %>">Delete log</a>
+	</div>
+<% } %>
+</div>
+
+
+
+<%- include ('include/_footer') %>

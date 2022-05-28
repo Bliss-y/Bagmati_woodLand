@@ -1,0 +1,13 @@
+<%- include ('include/_header') %>
+
+<form action="" method="POST">
+	<textarea name = "text">
+		<% if(data != undefined){ %>
+		<%= data.text %>
+		<% } %>
+	</textarea>
+	<button type="submit">submit</button>
+</form>
+
+
+<%- include ('include/_footer') %>

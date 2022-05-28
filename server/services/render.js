@@ -4,17 +4,15 @@ exports.login = (req, res) => {
 	if (req.session.uID) {
 		return res.redirect('/');
 	}
-	var user = require('../controller/users').find(req.session.uID);
 
 	res.render('login');
 
 }
 
 exports.home = async (req, res) => {
-	var user = await require('../controller/users').find(req.session.uID);
+	var user = await require('../controller/users').find({ _id: req.session.uID });
 	var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
-	var divs = [];
-	return res.render("index", { data, divs });
+	return res.render("index", { data });
 }
 
 
@@ -127,7 +125,7 @@ exports.announcements = async (req, res) => {
 		data.push(d);
 	}
 
-	res.render('announcement', { data });
+	res.render(req.session.role + 'Announcement', { data });
 }
 
 exports.announce = async (req, res) => {
@@ -176,3 +174,22 @@ exports.editModule = async (req, res) => {
 	res.render('addModule', { data: module })
 }
 
+exports.logs = async (req, res) => {
+	let data = [];
+	const user = req.session.uID;
+	const logs = await require('../controller/logs').find({ user });
+
+	// deconstructing 
+	for (let log in logs) {
+		m = {}
+		m.text = logs[log].text;
+		m.date = logs[log].date;
+		data.push(m);
+	}
+	res.render('logs', { data, user });
+
+}
+
+exports.addLog = async (req, res) => {
+	res.render('addLog', { data: undefined });
+}

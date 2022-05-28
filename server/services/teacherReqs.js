@@ -10,7 +10,7 @@ const { type } = require('os');
 
 
 exports.home = async (req, res) => {
-	var user = await require('../controller/users').find(req.session.uID);
+	var user = await require('../controller/users').find({ _id: req.session.uID });
 	var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
 	var divs = [];
 	return res.render("tchIndex", { data, divs });

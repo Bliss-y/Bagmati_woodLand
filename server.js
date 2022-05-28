@@ -72,5 +72,8 @@ app.set("views", [path.resolve(__dirname, "views"), path.resolve(__dirname, "vie
 
 app.listen(3000, () => {
 	console.log("App Started");
+	console.log("Listening on: ");
+	console.log("http://localhost:3000/");
+
 });
 

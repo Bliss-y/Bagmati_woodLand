@@ -7,13 +7,9 @@ const logSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'User',
 		required: true
-
 	},
 	text: String,
-	date: Date,
-	created: { type: Date, default: Date.now },
-
-
+	date: { type: Date, default: Date.now }
 }, { versionKey: false })
 
 const Log = mongoose.model('Log', logSchema);

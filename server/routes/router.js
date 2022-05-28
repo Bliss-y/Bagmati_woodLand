@@ -26,33 +26,13 @@ route.get('/logout', postReqs.logout);
 
 route.get('/users/:type', sessionControl.notLogged, sessionControl.isAdmin, renders.uData);
 
-route.get('/announcements', sessionControl.notLogged, renders.announcements);
+route.get('/announcements/', sessionControl.notLogged, renders.announcements);
 
+route.get('/logs', renders.logs);
+route.get('/logs/add/:user', renders.addLog);
+route.post('/logs/add/:user', postReqs.addLog);
+route.get('/remove/:type&:id', renders.remove);
 
-/**
- * @requires:- admin
- */
-
-
-
-
-
-
-
-/**]
- * @TeachersPages 
- */
-
-
-
-
-
-
-
-
-/**
- * @requires : Students
- */
 
 
 

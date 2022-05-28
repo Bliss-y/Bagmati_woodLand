@@ -16,13 +16,13 @@ exports.login = async (req, res) => {
 		if (role == "teacher" || role == "student") {
 			const type = await require('../controller/' + role + 's').getID(findUser._id);
 			req.session._id = type._id;
-			console.log(type);
 			req.session.module = type.module;
 			req.session.course = type.course;
 
 		}
 		return res.redirect('/' + role);
 	}
+
 	return res.redirect('/login');
 }
 
@@ -90,4 +90,12 @@ exports.editModule = async (req, res) => {
 	const { _id } = req.params;
 	const module = await require('../controller/modules').edit(req.body, _id);
 	res.redirect('/courses');
+}
+
+exports.addLog = async (req, res) => {
+	const { text } = req.body;
+	const { user } = req.params;
+	console.log('here');
+	const log = await require('../controller/logs').add({ user, text });
+	res.redirect('/logs/add/' + user);
 }

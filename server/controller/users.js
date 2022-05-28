@@ -25,20 +25,13 @@ exports.verify = async (id, password) => {
 	if (await bcrypt.compare(password, user.password)) {
 		return user;
 	}
-
-	// , (err, res) => {
-	// 	if (res) {
-	// 		console.log(password);
-	// 		return user;
-	// 	}
-	// 	console.log(user.name);
-	// 	console.log(password + " wrong");
-	// 	return null;
-	// });
 }
 
-exports.find = async (_id) => {
-	const user = await User.findById(_id);
+exports.find = async ({ _id, uID }) => {
+	if (_id == undefined) {
+		return await User.findOne({ uID }).populate();
+	}
+	const user = await User.findById(_id).populate();
 	return user;
 }
 

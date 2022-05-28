@@ -3,7 +3,7 @@
  */
 
 exports.home = async (req, res) => {
-	const user = await require('../controller/users').find(req.session.uID);
+	const user = await require('../controller/users').find({ _id: req.session.uID });
 
 	const data = { ID: user.uID, name: user.name, role: user.role, address: user.address };
 	res.render('stdIndex', { data });
@@ -18,7 +18,6 @@ exports.modules = async (req, res) => {
  * 
  * @Produce give assignment with submissions by the student, and a button to submit 
  */
-
 exports.assignment = async (req, res) => {
 	const assignments = await require('../controller/assignments').findByModule(req.params.module);
 

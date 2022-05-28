@@ -4,19 +4,21 @@
 
 const Log = require('../model/Log.js');
 
-exports.find = async (_id) => {
-	return await Log.findOne({ _id }).populate();
+exports.find = async ({ _id, user }) => {
+	if (user) {
+		return await Log.find({ user }).populate();
+	}
+
+	return await Log.findById(_id).populate();
 }
 
-exports.add = async ({ _uid, text, title, date }) => {
-	const Log = await new Log({
-		user: _uid,
+exports.add = async ({ user, text }) => {
+	const log = await new Log({
+		user,
 		text,
-		title,
-		date
 	});
-	Log.save();
-	return Log;
+	log.save();
+	return log;
 }
 
 exports.delete = async (_id) => {
