@@ -2,7 +2,6 @@ const session = require('express-session');
 const moment = require('moment');
 
 exports.login = async (req, res) => {
-	console.log(req.session.uID);
 	if (!req.session.uID) {
 		const { uid, pass } = req.body;
 		const findUser = await require('../controller/users').verify(uid, pass);
@@ -95,7 +94,6 @@ exports.editModule = async (req, res) => {
 exports.addLog = async (req, res) => {
 	const { text } = req.body;
 	const { user } = req.params;
-	console.log('here');
 	const log = await require('../controller/logs').add({ user, text });
 	res.redirect('/logs/add/' + user);
 }

@@ -1,9 +1,9 @@
 <%- include ('_header') %>
-<% if(data.length == 0) { %>
-		<h1>No Assignments</h1>
-	<% } %>
 
-	<div class = "table-main">
+<div class = "table-main">
+		<% if(data.length == 0) { %>
+				<h1>No Assignments</h1>
+			<% } %>
 		
 
 	<% for(let i in data){ %>

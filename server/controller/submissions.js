@@ -20,18 +20,21 @@ exports.findForStudent = async ({ student, assignment }) => {
 	return await Submission.findOne({ student, assignment }).populate();
 }
 
-exports.add = async (assignment, student, filename) => {
+exports.add = async (assignment, student, filename, comment) => {
 	const prev = await Submission.findOne({ student, assignment }).populate();
+	console.log(filename);
+	console.log(prev);
 	if (prev) {
 		await Submission.findOneAndDelete({ _id: prev._id });
 		const path = require("path");
 		const fs = require("fs");
-		fs.unlinkSync(path.resolve(__dirname, "server/testUpload/" + prev._id + prev.filename));
+		fs.unlinkSync(path.resolve(__dirname, "../../testUpload/" + prev._id + prev.filename));
 	}
 	const submission = await new Submission({
 		student,
 		assignment,
-		filename
+		filename,
+		comment
 	});
 	submission.save();
 	return submission._id;

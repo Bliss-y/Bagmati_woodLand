@@ -9,7 +9,6 @@ const Course = require('../model/Course');
 
 exports.find = async ({ _id, course }) => {
 	if (course != undefined) {
-		console.log("HERE")
 		const modules = await Module.find({ course }).populate('course');
 		return modules;
 	}

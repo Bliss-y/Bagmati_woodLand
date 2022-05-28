@@ -15,7 +15,7 @@ const submissionSchema = new Schema({
 		type: Schema.Types.ObjectId,
 		ref: 'Teacher',
 	},
-	fileName: String,
+	filename: String,
 	comment: String,
 	assignment: {
 		type: Schema.Types.ObjectId,

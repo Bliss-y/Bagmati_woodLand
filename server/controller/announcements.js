@@ -6,7 +6,6 @@ const Announcement = require('../model/Announcement.js');
 
 exports.find = async (_id) => {
 	const announcement = await Announcement.find({}).sort({ date: -1 }).populate('user');
-	console.log(announcement);
 	return announcement;
 }
 

@@ -41,9 +41,7 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 	password = name;
 	try {
 		const salt = await bcrypt.genSalt(10);
-		console.log(salt);
 		password = await bcrypt.hash(password, salt);
-		console.log(password);
 	} catch {
 		return console.log("err");
 	}
@@ -64,7 +62,6 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 		role,
 		uID: lastuid + 1
 	});
-	console.log(nuser)
 	await nuser.save();
 	return nuser;
 }

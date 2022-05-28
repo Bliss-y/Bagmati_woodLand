@@ -28,7 +28,6 @@ exports.addAssignment = async (req, res) => {
 exports.saveAssignments = async (req, res) => {
 	const { due, title } = req.body;
 	const module = req.session.module;
-	console.log(req.file);
 	const filename = req.file.originalname;
 	extension = filename.substring(filename.lastIndexOf('.'), filename.length);
 	const assign = await require('../controller/assignments').add({ module, due, title, extension });
@@ -69,7 +68,6 @@ exports.module = async (req, res) => {
 		m = {}
 		m.name = students[i].user.name;
 		m.uID = students[i].user.uID;
-		console.log(m)
 		data.push(m);
 	}
 
