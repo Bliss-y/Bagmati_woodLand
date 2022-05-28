@@ -17,7 +17,7 @@ exports.find = async ({ module, _id, assignment }) => {
 }
 
 exports.findForStudent = async ({ student, assignment }) => {
-	return await Submission.findOne({ student, assignment }).populate();
+	return await Submission.findOne({ student, assignment }).populate('teacher');
 }
 
 exports.add = async (assignment, student, filename, comment) => {
@@ -48,7 +48,7 @@ exports.delete = async (_id) => {
 	fs.unlinkSync(path.resolve(__dirname, "server/testUpload/" + _id + id));
 }
 
-exports.edit = async ({ _id, grade, feedback, teacher }) => {
+exports.grade = async ({ _id, grade, feedback, teacher }) => {
 	await Submission.findByIdAndUpdate({ _id }, {
 		grade,
 		feedback,

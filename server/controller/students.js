@@ -13,6 +13,7 @@ exports.find = async (id) => {
 		return students;
 	}
 	const students = await Student.findById(id).populate('user').populate('course');
+	console.log(id);
 	return students;
 }
 

@@ -41,9 +41,11 @@ exports.submissions = async (req, res) => {
 	const data = [];
 	for (let i in submissions) {
 		var m = {};
-		m.uid = submissions[i].student.id;
-		m.name = submissions[i].student.name;
-		m.comments = submissions[i].comments;
+		let student = await require('../controller/students').find(submissions[i].student._id);
+		m.uid = student.user.uID;
+		m._id = submissions[i]._id;
+		m.name = student.user.name;
+		m.comment = submissions[i].comment;
 		m.date = submissions[i].date;
 		data.push(m);
 	}

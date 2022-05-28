@@ -41,7 +41,7 @@ exports.edit = async (edited) => {
 }
 
 exports.getID = async (uid) => {
-	const teacher = await Teacher.findOne({ user: uid }).populate();
+	const teacher = await Teacher.findOne({ user: uid }).populate('module');
 	return teacher;
 }
 

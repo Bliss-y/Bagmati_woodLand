@@ -10,7 +10,7 @@ const submissionSchema = new Schema({
 
 	},
 	date: { type: Date, default: Date.now },
-	grade: String,
+	grade: { type: String, default: "Not graded" },
 	teacher: {
 		type: Schema.Types.ObjectId,
 		ref: 'Teacher',
