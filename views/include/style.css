@@ -59,25 +59,16 @@ li{
 
 /*Table of student informations*/
 .table-main{
-    /* overflow: scroll; */
 
     margin: 0 0 0 20%;
-
-    /* position: fixed; */
-
     width: 100%;
 }
 
 .table-heading{
     margin: 0;
     padding: 18px 0;
-
-    
-
-    background-color: #34568B;
-
+    background-color:  rgba(33, 33, 33, 1);
     text-align: center;
-
     color: white;
 }
 
@@ -166,4 +157,25 @@ input{
     background-color: rgba(112, 12, 12, 0.7);
 
     text-decoration: none;
+}
+
+.add-std button{
+    margin: 12px 20px;
+    padding: 10px 30px;
+    background-color: #1a73e8;
+    color: aliceblue;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 3px 3px 13px 3px black;
+}
+
+.add-std button a{
+    
+
+    color: white;
+    text-decoration: none;
+}
+.add-std button i{
+    padding: 0 12px 0 0;
+    
 }

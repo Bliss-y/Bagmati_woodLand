@@ -1,11 +1,12 @@
 <!-- <script src="/js/table.js"></script> -->
 
-
-
 <div class="table-main">
 	
 	<div class = "add-std">
-		<button><a href="/admin/adduser/<%= dataType %>" class="add-button">add</a></button>
+		<button>
+			<i class="fa fa-plus"></i>
+			<a href="/admin/adduser/<%= dataType %>" class="add-button">Add</a>
+		</button>
 	</div>
 	<% if (data.length > 0){%>
 	<table class="table table-all">
@@ -14,14 +15,14 @@
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>
-			<th span="2">actions</th>	
+			<th span="2" colspan="2">actions</th>	
 	<% for(i = 0; i < data.length; i++){ %>
 		<tr>
 			<% for(let c in keys){ %>
 			<td><%= data[i][keys[c]]%></td>
 			<% } %>
 			<td><a href="/admin/edituser/<%= dataType %>&<%= data[i]._id %>" id = "">Edit</a></td>
-			<td><a  href="/admin/remove/<%= dataType %>&<%= data[i]._id %>">Remove</a></td>
+			<td><a  href="/admin/remove/<%= dataType %>&<%= data[i]._id %>" class="removeData">Remove</a></td>
 		</tr>
 		
 	<% } %>
