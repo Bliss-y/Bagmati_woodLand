@@ -67,7 +67,7 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 }
 
 exports.edit = async (edited, _id) => {
-	return User.findOneAndUpdate({ _id }, {
+	return await User.findOneAndUpdate(_id, {
 		name: edited.name,
 		email: edited.email,
 		phoneNnumber: edited.phoneNumber,

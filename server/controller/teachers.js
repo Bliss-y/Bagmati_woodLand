@@ -33,7 +33,7 @@ exports.edit = async (edited) => {
 
 	const { name, email, dob, phoneNumber, address, salary, module } = edited;
 	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
-	const teacher = teacher.findByIdAndUpdate({ _id }, {
+	const teacher = await teacher.findByIdAndUpdate({ _id }, {
 		salary,
 		module
 	});

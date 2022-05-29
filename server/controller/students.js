@@ -40,11 +40,12 @@ exports.add = async (user) => {
 exports.edit = async (edited) => {
 
 	const { name, email, dob, phoneNumber, address, course, _id } = edited;
-	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" });
+	const student = Student.findById(_id);
+	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" }, student.user);
 
-	const student = Student.findByIdAndUpdate({ _id }, {
+	console.log(_id);
+	await Student.findByIdAndUpdate(_id, {
 		course
-
 	});
 }
 
