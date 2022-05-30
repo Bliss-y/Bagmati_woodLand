@@ -3,20 +3,33 @@
 
 <div class="table-main">
 
-<div> Logs </div>
 
-<a href="/logs/add/<%= user %>">add</a>
+	<h1 class="log-heading">Logs</h1>
+	<button class="log-adding-btn">
+		<i class="fa fa-plus"></i>
+		<a href="/logs/add/<%= user %>" class="add-button">Add</a>
+	</button>
+
+
 
 <% for(let i in data){ %>
-	<div id = "announcements" >
+	<div id = "announcements" class="log-main-container" >
 		<div class="logs-title"> <%= data[i].date %> </div>
 		<p class = "logbody">
 			<%= data[i].text %>
 		</p>
-		<a href="/remove/logs&<%= data[i]._id %>">Delete log</a>
+		
+		
+
+		<button class="log-remove-btn">
+			<i class="fa fa-trash-o"></i>
+			<a href="/remove/logs&<%= data[i]._id %>">Delete log</a>
+		</button>
 	</div>
 <% } %>
 </div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
 

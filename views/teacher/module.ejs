@@ -3,10 +3,13 @@
 
 <!-- header -->
 <div class="table-main">
-	<h2>Students In <%= module.name %></h2>
+	<h1 class="table-heading">Students In <%= module.name %></h1>
 
-	<table>
-		<tr><th>Name</th><th>ID</th></tr>
+	<table class="module-table">
+		<tr>
+			<th>Name</th>
+			<th>ID</th>
+		</tr>
 		
 		<% for(let i in data) {%>
 			

@@ -19,10 +19,6 @@ nav{
     color: white;
 }
 
-.arrow{
-    margin: 0 0 0 80%;
-}
-
 ul{
     margin: 20px 0;
     padding: 0;
@@ -64,7 +60,7 @@ li{
     width: 100%;
 }
 
-.table-heading{
+.table-heading, .log-heading, .announcement-heading, .course-heading{
     margin: 0;
     padding: 18px 0;
     background-color:  rgba(33, 33, 33, 1);
@@ -159,7 +155,7 @@ input{
     text-decoration: none;
 }
 
-.add-std button{
+.add-std button, .log-adding-btn, .ann-adding-btn{
     margin: 12px 20px;
     padding: 10px 30px;
     background-color: #1a73e8;
@@ -169,13 +165,49 @@ input{
     box-shadow: 3px 3px 13px 3px black;
 }
 
-.add-std button a{
-    
+.add-std button a, .log-adding-btn a, .ann-adding-btn a{
 
     color: white;
     text-decoration: none;
 }
-.add-std button i{
+.add-std button i, .log-adding-btn i, .ann-adding-btn i{
+    padding: 0 12px 0 0;
+}
+
+/*editing Announcement page*/
+.announcements, .log-main-container, .course-main-container, .assignment-main-container{
+    margin: 18px;
+    padding: 12px;
+
+    background-color: rgba(33, 33, 33, 0.5);
+
+    border: 0.5px solid black;
+
+    box-shadow: 3px 3px 12px 2px black;
+
+}
+.log-remove-btn{
+    margin: 12px 20px;
+    padding: 10px 30px;
+    background-color: #f32013;
+    color: aliceblue;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 3px 3px 13px 3px black;
+}
+
+.log-remove-btn a{
+
+    color: white;
+    text-decoration: none;
+}
+
+.log-remove-btn i{
     padding: 0 12px 0 0;
     
+}
+
+
+.module-table th, .module-table td{
+    padding: 12px;
 }

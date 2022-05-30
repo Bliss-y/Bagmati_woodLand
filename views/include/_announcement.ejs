@@ -1,7 +1,7 @@
 
 <% for(let i in data){ %>
-	<div id = "announcements" >
-		<div class="announcement-title"> <%= data[i].title %> </div>
+	<div id = "announcements" class="announcements">
+		<h2 class="announcement-title"> <%= data[i].title %> </h2>
 		<p class = "announcement-body">
 			<%= data[i].text %> <br>
 			Date: <%= data[i].date %> <br>

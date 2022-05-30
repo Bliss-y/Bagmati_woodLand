@@ -3,10 +3,15 @@
 
 <!-- header -->
 <div class = "table-main">
-	<a href="/teacher/addAssignments">add</a>
+	<button class="ann-adding-btn">
+		<i class="fa fa-plus"></i>
+		<a href="/teacher/addAssignments" class="add-button">Add</a>
+	</button>
+
+	
 
 <% for(let i in data){ %>
-	<div id = "announcements" >
+	<div id = "announcements" class="assignment-main-container">
 		<div class="announcement-title"> <%= data[i].title %> </div>
 		<p class = "announcement-body">
 			<%= data[i].text %> <br>
@@ -16,7 +21,13 @@
 		<a href="/fileget/<%= data[i]._id%>">Download file</a>
 		<a href="/teacher/submissions/<%= data[i]._id%>">view submissions</a>
 	</div>
-	<a href="/teacher/delete/assignments&<%= data[i]._id %>">Remove</a>
+	<button class="log-remove-btn">
+		<i class="fa fa-trash-o"></i>
+		<a href="/teacher/delete/assignments&<%= data[i]._id %>">Remove</a>
+	</button>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 <% } %>
 </div>
 </div>

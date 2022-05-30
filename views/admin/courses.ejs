@@ -5,18 +5,29 @@
 
 <div class = "table-main">
 
-<div> Courses </div>
+<h1 class="course-heading"> Courses </h1>
 
-<a href="/admin/addcourse">add</a>
+<button class="ann-adding-btn">
+	<i class="fa fa-plus"></i>
+	<a href="/admin/addcourse" class="add-button">Add</a>
+</button>
+
+
 
 <% for(let i in data){ %>
-	<div id = "courses">
+	<div id = "courses" class="course-main-container">
 		<div class="course-title"> <%= data[i].name %> </div>
 		<p class = "course">
 			Description : <%= data[i].description %> <br>
 			Duration: <%= data[i].duration %> <br>
 		</p>
-		<a href="/admin/addmodule/<%= data[i].name %>">Add module</a>
+		
+
+		<button class="ann-adding-btn">
+			<i class="fa fa-plus"></i>
+			<a href="/admin/addmodule/<%= data[i].name %>" class="add-button">Add module</a>
+		</button>
+
 		<div>Modules</div>
 		<% if(data[i].modules){ %> 
 			<% for(let x in data[i].modules){ %>
