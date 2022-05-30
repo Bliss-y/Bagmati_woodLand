@@ -99,7 +99,7 @@ exports.editUser = async (req, res) => {
 		const courses = await require('../controller/courses').find();
 		return res.render('addStudent', { data, courses })
 	};
-	const modules = require('../controller/modules').find();
+	const modules = require('../controller/modules').find({});
 	return res.render('addTeacher', { data, modules });
 
 }
