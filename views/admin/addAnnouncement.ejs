@@ -15,17 +15,20 @@
 
   <% } %>
 
-  <form method="POST" action="#">
+    <div class="table-main">
+      <form method="POST" action="#" class="ann-form">
 	  
-  <div  class="form-group"  id = "Update">
-	  <label for="announcement-title">Title</label>
-	  <input type="text" class="form-control" id="email" name = "title" value="<%= data.title %>" required>
-	  <label for="announcement-body">Body</label>
-	  <textarea type="tetxt"class="form-control" id="announcement-body" name = "text" value="<%= data.text %>"> </textarea>
-  </div>
-  <a href="#">
-   <button type="submit" class="btn btn-primary">Submit</button></a>
-</form>
+        <div  class="form-group"  id = "Update">
+          <label for="announcement-title">Title</label>
+          <input type="text" class="form-control" id="email" name = "title" value="<%= data.title %>" required>
+          <label for="announcement-body">Body</label>
+          <textarea type="tetxt"class="form-control" id="announcement-body" name = "text" value="<%= data.text %>"> </textarea>
+        </div>
+        <a href="#">
+         <button type="submit" class="submit">Submit</button></a>
+      </form>
+
+    </div>
 
 
 

@@ -5,16 +5,16 @@
 <form action="/teacher/addAssignments" method = "POST" enctype="multipart/form-data">
 	<div class="">
 		<label>Title</label>
-		<input type = "text" name = "title">
+		<input type = "text" name = "title" class="course-input">
 		
 		<label>Due</label>
-		<input type = "date" name="due">
+		<input type = "date" name="due" class="course-input">
 		
 		<label for="file" class="form-label">Include Resourses</label>
  		 <input class="form-control" type="file" id="formFile" name = "upfile" required>
 
-  <button type="submit" class="btn btn-primary">Submit</button></a>
-</div>
+  	<a href="#"><button type="submit" class="submit">Submit</button></a>
+	</div>
 </form>
 <!-- include header -->
 <%- include ('include/_footer') %>

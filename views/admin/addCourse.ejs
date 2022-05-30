@@ -13,19 +13,22 @@
 
   <% } %>
 
+<div class="table-main">
   <form method="POST" action="#">
 	  
-  <div  class="form-group"  id = "Update">
-	  <label for="announcement-title">Name</label>
-	  <input type="text" class="form-control" id="email" name = "name" value="<%= data.name %>" required>
-	  <label for="announcement-body">Duration</label>
-	  <input type="number" class="form-control" id="duration" name = "duration" value="<%= data.duration %>" required>
-	  <label for="announcement-body">Description</label>
-	  <textarea type="tetxt"class="form-control" id="announcement-body" name = "description" value="<%= data.description %>"> </textarea>
-  </div>
-  <a href="#">
-   <button type="submit" class="btn btn-primary">Submit</button></a>
-</form>
+    <div  class="form-group"  id = "Update">
+      <label for="announcement-title">Name</label>
+      <input type="text" class="form-control course-input" id="email" name = "name" value="<%= data.name %>" required>
+      <label for="announcement-body">Duration</label>
+      <input type="number" class="form-control course-input" id="duration" name = "duration" value="<%= data.duration %>" required>
+      <label for="announcement-body">Description</label>
+      <textarea type="tetxt"class="form-control course-text" id="announcement-body" name = "description" value="<%= data.description %>"> </textarea>
+    </div>
+    <a href="#">
+     <button type="submit" class="submit">Submit</button></a>
+  </form>
+
+</div>
 
 
 
