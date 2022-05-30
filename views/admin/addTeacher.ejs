@@ -44,7 +44,7 @@
       </div>
       <div  class="form-group"  id = "Update">
          <label for="module">Module</label>
-      <select name = "module" required>
+      <select name = "module" required required class ="sel-opt">
         <option> none </option>
         <% for(let x in modules) {%>
         <option value="<%= modules[x]._id %>"><%= modules[x].name %></option>
@@ -52,7 +52,7 @@
     </select>
       </div>
       <label for="email">Role</label>
-      <select name = "role" value="<%= data.module  %>" required>
+      <select name = "role" value="<%= data.module  %>" required class ="sel-opt">
         <option value="teacher">Teacher</option>
         <option value="leader">Leader</option>
         <option value="admin">Admin</option>
@@ -60,7 +60,8 @@
      
     
       <a href="#">
-       <button type="submit" class="submit">Submit</button></a>
+        <button type="submit" class="submit">Submit</button>
+      </a>
     </form>
     
   </div>

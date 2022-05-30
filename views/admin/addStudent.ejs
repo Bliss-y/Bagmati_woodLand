@@ -39,7 +39,7 @@
     </div>
      <div class="form-group">
        <label for="email">Courses</label>
-      <select name = "course" required>
+      <select name = "course" class="sel-opt" required>
         <option> none </option>
         <% for(let x in courses) {%>
         <option value="<%= courses[x]._id %>"><%= courses[x].name %></option>
@@ -47,8 +47,10 @@
     </select>
      </div>
   
-    <a href="#">
-     <button type="submit" class="submit">Submit</button></a>
+    <a href="#" class="sub-link">
+     <button type="submit" class="submit">Submit</button>
+    </a>
+
   </form>
   
 </div>

@@ -9,7 +9,7 @@
 
 <button class="ann-adding-btn">
 	<i class="fa fa-plus"></i>
-	<a href="/admin/addcourse" class="add-button">Add</a>
+	<a href="/admin/addcourse" class="add-button">Add Courses</a>
 </button>
 
 
@@ -31,7 +31,9 @@
 		<div>Modules</div>
 		<% if(data[i].modules){ %> 
 			<% for(let x in data[i].modules){ %>
-			<a href="/admin/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a> <br>
+				<button class="ann-adding-btn">
+					<a href="/admin/editmodule/<%= data[i].modules[x]._id %>"> <%= data[i].modules[x].name %> </a>
+				</button>
 			<% } %>
 			<% } %>
 	</div>

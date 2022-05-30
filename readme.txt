@@ -10,7 +10,4 @@ format: id(password)
 	Admin: 1002(admin1)
 	Students : 1008(student1), 1012(student2)
 
-
-
-
 	id(1011) password(teacher2)

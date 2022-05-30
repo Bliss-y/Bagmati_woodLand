@@ -3,6 +3,7 @@
 
 <!-- header -->
 <div class = "table-main">
+	<h1>Assignments</h1>
 	<button class="ann-adding-btn">
 		<i class="fa fa-plus"></i>
 		<a href="/teacher/addAssignments" class="add-button">Add</a>
@@ -18,8 +19,15 @@
 			Date: <%= data[i].date %> <br>
 			Due: <%= data[i].due %>
 		</p>
-		<a href="/fileget/<%= data[i]._id%>">Download file</a>
-		<a href="/teacher/submissions/<%= data[i]._id%>">view submissions</a>
+		<button class="ann-adding-btn">
+			<a href="/fileget/<%= data[i]._id%>" class="add-button">Download file</a>
+		</button>
+
+		<button class="ann-adding-btn">
+			<a href="/teacher/submissions/<%= data[i]._id%>" class="add-button">view submissions</a>
+		</button>
+		
+		
 	</div>
 	<button class="log-remove-btn">
 		<i class="fa fa-trash-o"></i>

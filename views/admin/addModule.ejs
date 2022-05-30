@@ -16,18 +16,22 @@
 	  
   <div  class="form-group"  id = "Update">
 	  <label for="announcement-title">Name</label>
-	  <input type="text" class="form-control" id="email" name = "name" value="<%= data.name %>" required>
+	  <input type="text" class="form-control course-input" id="email" name = "name" value="<%= data.name %>" required>
 	  <label for="announcement-body">Duration</label>
-	  <input type="number" class="form-control" id="duration" name = "duration" value="<%= data.duration %>" required>
+	  <input type="number" class="form-control course-input" id="duration" name = "duration" value="<%= data.duration %>" required>
 	  <label for="announcement-body">Description</label>
-	  <textarea type="text"class="form-control" id="announcement-body" name = "description"><%= data.description %> </textarea>
+	  <textarea type="text"class="form-control course-text" id="announcement-body" name = "description"><%= data.description %> </textarea>
 	  <label for="announcement-body">Credit</label>
-	  <input type="number"class="form-control" id="announcement-body" name = "credit" value="<%= data.credit %>"> </input>
+	  <input type="number"class="form-control course-input" id="announcement-body" name = "credit" value="<%= data.credit %>"> </input>
   </div>
   <a href="#">
-   <button type="submit" class="btn btn-primary">Submit</button></a>
+   <button type="submit" class="submit">Submit</button></a>
 </form>
-<a  href="/admin/remove/modules&<%= data._id %>">Remove</a>
+<button class="log-remove-btn">
+  <i class="fa fa-trash-o"></i>
+  <a  href="/admin/remove/modules&<%= data._id %>">Remove</a>
+</button>
+
 </div>
 
 <%- include ('../include/_footer') %>
