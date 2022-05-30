@@ -175,17 +175,8 @@ exports.editModule = async (req, res) => {
 }
 
 exports.logs = async (req, res) => {
-	let data = [];
 	const user = req.session.uID;
-	const logs = await require('../controller/logs').find({ user });
-
-	// deconstructing 
-	for (let log in logs) {
-		m = {}
-		m.text = logs[log].text;
-		m.date = logs[log].date;
-		data.push(m);
-	}
+	const data = await require('../controller/logs').find({ user });
 	res.render('logs', { data, user });
 
 }
