@@ -2,20 +2,24 @@
 <%- include ('_header') %>
 
 <!-- header -->
-<form action="/teacher/addAssignments" method = "POST" enctype="multipart/form-data">
-	<div class="">
-		<label>Title</label>
-		<input type = "text" name = "title" class="course-input">
-		
-		<label>Due</label>
-		<input type = "date" name="due" class="course-input">
-		
-		<label for="file" class="form-label">Include Resourses</label>
- 		 <input class="form-control" type="file" id="formFile" name = "upfile" required>
 
-  	<a href="#"><button type="submit" class="submit">Submit</button></a>
-	</div>
-</form>
+<div class="table-main">
+	<form action="/teacher/addAssignments" method = "POST" enctype="multipart/form-data">
+		<div class="">
+			<label>Title</label>
+			<input type = "text" name = "title">
+			
+			<label>Due</label>
+			<input type = "date" name="due">
+			
+			<label for="file" class="form-label">Include Resourses</label>
+			  <input class="form-control course-input" type="file" id="formFile" name = "upfile" required>
+	
+		  <a href="#"><button type="submit" class="submit">Submit</button></a>
+		</div>
+	</form>
+</div>
+
 <!-- include header -->
 <%- include ('include/_footer') %>
 

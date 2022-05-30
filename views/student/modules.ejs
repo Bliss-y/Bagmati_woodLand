@@ -2,6 +2,8 @@
 
 	<div class = "table-main">
 
+		<h1 class="table-heading">Modules</h1>
+
 <% for(let i in data){ %>
 	<div id = "announcements" class="course-main-container">
 		<div class="announcement-title"> <%= data[i].name %> </div>
@@ -10,7 +12,10 @@
 			Credit: <%= data[i].credit %> <br>
 			Duration: <%= data[i].duration + " years" %> 
 		</p>
-		<a href="/student/assignments/<%= data[i]._id %>">View Assignments</a>
+		<button class="ann-adding-btn">
+			<a href="/student/assignments/<%= data[i]._id %>" class="add-button">View Assignments</a>
+		</button>
+		
 	</div>
 <% } %>
 </div>
