@@ -176,8 +176,9 @@ exports.editModule = async (req, res) => {
 
 exports.logs = async (req, res) => {
 	const user = req.session.uID;
+	const role = req.session.role;
 	const data = await require('../controller/logs').find({ user });
-	res.render('logs', { data, user });
+	res.render(role + 'Logs', { data, user });
 
 }
 
