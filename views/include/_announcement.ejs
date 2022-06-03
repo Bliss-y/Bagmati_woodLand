@@ -7,12 +7,12 @@
 			Date: <%= data[i].date %> <br>
 			Author: <%= data[i].user %>
 
-			<% if(role){ %>
+			<% if(role == "admin"){ %>
 				<button class="ann-adding-btn">
 					<i class="fa fa-plus"></i>
 		  
 		
-				<a  href="/admin/remove/courses&<%= data[i]._id %>">Remove course</a>
+				<a  href="/admin/remove/announcements&<%= data[i]._id %>">Remove announcements</a>
 					
 				</button>
 

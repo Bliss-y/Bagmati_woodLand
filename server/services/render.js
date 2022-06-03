@@ -125,7 +125,7 @@ exports.announcements = async (req, res) => {
 		data.push(d);
 	}
 
-	res.render(req.session.role + 'Announcement', { data, role: "admin" });
+	res.render(req.session.role + 'Announcement', { data, role: req.session.role });
 }
 
 exports.announce = async (req, res) => {
