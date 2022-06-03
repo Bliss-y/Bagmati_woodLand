@@ -21,10 +21,17 @@
 			Description : <%= data[i].description %> <br>
 			Duration: <%= data[i].duration %> <br>
 		</p>
-		
-
 		<button class="ann-adding-btn">
 			<i class="fa fa-plus"></i>
+  
+
+		<a  href="/admin/remove/courses&<%= data[i]._id %>">Remove course</a>
+			
+		</button>
+		<button class="ann-adding-btn">
+			<i class="fa fa-plus"></i>
+  
+
 			<a href="/admin/addmodule/<%= data[i].name %>" class="add-button">Add module</a>
 		</button>
 

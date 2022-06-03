@@ -76,7 +76,7 @@ exports.addCourse = async (req, res) => {
 	const { name, duration, description } = req.body;
 
 	const announcement = await require('../controller/courses.js').add({ name, duration, description });
-	res.redirect('/courses');
+	res.redirect('/admin/courses');
 }
 
 exports.addModule = async (req, res) => {
@@ -95,5 +95,5 @@ exports.addLog = async (req, res) => {
 	const { text } = req.body;
 	const { user } = req.params;
 	const log = await require('../controller/logs').add({ user, text });
-	res.redirect('/logs/add/' + user);
+	res.redirect('/logs/');
 }

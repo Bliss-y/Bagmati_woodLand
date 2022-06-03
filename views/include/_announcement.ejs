@@ -6,6 +6,17 @@
 			<%= data[i].text %> <br>
 			Date: <%= data[i].date %> <br>
 			Author: <%= data[i].user %>
+
+			<% if(role){ %>
+				<button class="ann-adding-btn">
+					<i class="fa fa-plus"></i>
+		  
+		
+				<a  href="/admin/remove/courses&<%= data[i]._id %>">Remove course</a>
+					
+				</button>
+
+			<% } %>
 		</p>
 	</div>
 <% } %>

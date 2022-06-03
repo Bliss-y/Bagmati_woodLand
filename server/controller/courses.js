@@ -24,8 +24,8 @@ exports.add = async ({ name, duration, description }) => {
 	return course;
 }
 
-exports.delete = async (name) => {
-	await Course.findOneAndDelete({ name });
+exports.delete = async (_id) => {
+	await Course.findByIdAndDelete(_id);
 }
 
 exports.edit = (_id, { name, duration }) => {
