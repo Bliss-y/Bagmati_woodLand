@@ -15,13 +15,35 @@ exports.find = async (_id) => {
 	return teachers;
 }
 
+exports.findByModule = async (module) => {
+	const teachers = await Teacher.find({ module }).populate('user').populate('module');
+	return teachers
+}
+
+
+exports.getAvailableTeachers = async (module) => {
+	let teachers = await Teacher.find({ module }).populate('user').populate('module');
+	for (let i in teachers) {
+		if (teachers.personalstudentId != undefined) {
+			teachers.splice(i);
+		}
+	}
+	return teachers;
+}
+
+exports.removeModule = async (module) => {
+	const teachers = await Teacher.find({ module });
+	for (let i = 0; i < teachers.length; i++) {
+		await Teacher.findByIdAndUpdate(teachers[i]._id, { module: undefined });
+	}
+}
+
 exports.add = async (user) => {
 
 	const { name, email, dob, phoneNumber, address, role, module } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role });
 
 	const teacher = new Teacher({
-
 		user: User._id,
 		module
 

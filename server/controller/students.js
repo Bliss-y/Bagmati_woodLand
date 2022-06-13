@@ -26,8 +26,6 @@ exports.getID = async (uid) => {
 exports.add = async (user) => {
 	const { name, email, dob, phoneNumber, address, course } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role: "student" });
-
-
 	const student = new Student({
 
 		user: User._id,
@@ -59,4 +57,9 @@ exports.delete = async (_id) => {
 exports.findByCourse = async ({ course }) => {
 	const students = await Student.find({ course }).populate('user');
 	return students;
+}
+
+exports.checkPersonalTutor = async (module, student) => {
+	var tutor = await require('../model/Student.js').find({ module, student }).populate();
+	return tutor;
 }

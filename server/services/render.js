@@ -15,7 +15,6 @@ exports.home = async (req, res) => {
 	return res.render("index", { data });
 }
 
-
 exports.addUser = async (req, res) => {
 	const { type } = req.params;
 	switch (type) {
@@ -35,36 +34,8 @@ exports.addUser = async (req, res) => {
 exports.uData = async (req, res) => {
 	const { type } = req.params;
 	var users = await require('../controller/' + type).find();
-	var data = [];
+	var data = require('../controller/users').parseUsers(users, type);
 
-	// deconstructing users data
-	/**
-	 * @TODO Data Destructuring Turn it into funcction later !! 
-	 */
-	var users = await require('../controller/' + type).find();
-	var data = [];
-	for (let x in users) {
-		var keys = Object.keys(users[x].user.toJSON());
-		var personalKeys = Object.keys(users[x].toJSON());
-		var me = {};
-		for (let i in keys) {
-			if (keys[i] != '_id' && keys[i] != 'password') {
-				me[keys[i]] = users[x].user[keys[i]];
-			}
-		}
-
-		for (let i in personalKeys) {
-			if (personalKeys[i] != 'user' && personalKeys[i] != 'dob') {
-				me[personalKeys[i]] = users[x][personalKeys[i]];
-			}
-		}
-		var hi = moment(me.dob).format('YYYY-MM-DD');
-		me.dob = hi;
-		if (type == 'teachers' && users[x].module != null) {
-			me.module = users[x].module.name;
-		}
-		data.push(me);
-	}
 	res.render('students', { data, dataType: type });
 }
 
@@ -184,4 +155,46 @@ exports.logs = async (req, res) => {
 
 exports.addLog = async (req, res) => {
 	res.render('addLog', { data: undefined });
+}
+
+exports.test = async (req, res) => {
+
+	const { type } = req.params;
+	const tests = require('../controller/TestFile');
+	switch (type) {
+		case "addcourses":
+			console.log('tf');
+			await tests.addDummyCourses(4);
+			break;
+		case "addmodules":
+			console.log('tf');
+			await tests.addModulesForAllCourses(3);
+			break;
+		case "addstudents":
+			console.log('tf');
+			await tests.addDummyStudents(3);
+			break;
+		case "addannouncements":
+			console.log('tf');
+			await tests.addDummyAnnouncements(2);
+			break;
+		case "addteachers":
+			break;
+		case "addAssignments":
+			break;
+		case "addsubmission":
+			break;
+		case "addlogs":
+			break;
+		case "deleteannouncements":
+			break;
+		case "deletecourses":
+			break;
+		case "deletestudents":
+			break;
+		case "dropdatabase":
+			await require('mongoose').connection.db.dropDatabase();
+			break;
+	}
+	res.redirect('/admin/test');
 }

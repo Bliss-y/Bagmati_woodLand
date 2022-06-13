@@ -44,8 +44,7 @@
       </div>
       <div  class="form-group"  id = "Update">
          <label for="module">Module</label>
-      <select name = "module" required required class ="sel-opt">
-        <option> none </option>
+      <select name = "module" class ="sel-opt">
         <% for(let x in modules) {%>
         <option value="<%= modules[x]._id %>"><%= modules[x].name %></option>
         <% }%>

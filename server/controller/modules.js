@@ -35,6 +35,9 @@ exports.add = async (data, course) => {
 }
 
 exports.delete = async (_id) => {
+
+	await require('./teachers').removeModule(_id);
+
 	return await Module.findByIdAndDelete(_id);
 }
 

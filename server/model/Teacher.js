@@ -21,18 +21,7 @@ const teacherSchema = new Schema({
 	}
 }, { versionKey: false })
 
-teacherSchema.methods.isAval = function () {
-	if (!this.personalStudentId) {
-		return true;
-	}
-	return false;
-}
 
-teacherSchema.methods.addAsPersonalTutor = function (student) {
-	if (this.isAval()) {
-		return this.personalStudentId = student;
-	}
-}
 
 const Teacher = mongoose.model('Teacher', teacherSchema);
 

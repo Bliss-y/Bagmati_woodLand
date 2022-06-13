@@ -23,6 +23,9 @@ route.post('/addcourse', postReqs.addCourse);
 route.get('/adduser/:type', renders.addUser);
 route.post('/adduser/:type', postReqs.addUser);
 
+route.get('/test', (req, res) => { res.render('test') });
+route.get('/testing/:type', renders.test);
+
 route.get('/edituser/:type&:_id', sessionControl.isAdmin, renders.editUser);
 route.post('/edituser/:type&:_id', sessionControl.isAdmin, postReqs.editUser);
 

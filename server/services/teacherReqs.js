@@ -64,6 +64,7 @@ exports.grade = async (req, res) => {
 exports.module = async (req, res) => {
 	const { module } = req.session;
 	const mod = await require('../controller/modules').find({ _id: module });
+	console.log(mod);
 	const students = await require('../controller/students').findByCourse({ course: mod.course._id });
 	var data = [];
 	for (let i in students) {

@@ -2,8 +2,12 @@ const session = require('express-session');
 const moment = require('moment');
 
 exports.login = async (req, res) => {
+	var userFile = require('../controller/users');
 	if (!req.session.uID) {
 		const { uid, pass } = req.body;
+		if (await userFile.dataBaseEmpty()) {
+			await userFile.add({ name: "Admin init", email: "email", dob: new Date(), phoneNumber: "number", role: "admin", address: "address" });
+		}
 		const findUser = await require('../controller/users').verify(uid, pass);
 		if (!findUser) {
 			return res.redirect('/login');
@@ -73,8 +77,8 @@ exports.announce = async (req, res) => {
 }
 
 exports.addCourse = async (req, res) => {
+	console.log('requested to add course');
 	const { name, duration, description } = req.body;
-
 	const announcement = await require('../controller/courses.js').add({ name, duration, description });
 	res.redirect('/admin/courses');
 }

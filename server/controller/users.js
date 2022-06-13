@@ -6,15 +6,18 @@ const User = require('../model/User.js');
 const moment = require('moment');
 const bcrypt = require('bcrypt');
 
-exports.findAll = () => {
-	const data = require('../../testData');
-	for (let d in data) {
-		delete data[d]['pass'];
+exports.dataBaseEmpty = async () => {
+	const data = await User.estimatedDocumentCount();
+	if (data == 0) {
+		return true;
 	}
 
-	return data;
+	else return false;
 }
 
+exports.getAdmins = async () => {
+	return await User.find({ role: "admin" }).populate();
+}
 
 exports.verify = async (id, password) => {
 	const uID = parseInt(id);
@@ -78,4 +81,33 @@ exports.edit = async (edited, _id) => {
 
 exports.delete = async (_id) => {
 	await User.deleteOne({ _id });
+}
+
+exports.parseUsers = (users, type) => {
+	let data = [];
+	for (let x in users) {
+		var keys = Object.keys(users[x].user.toJSON());
+		var personalKeys = Object.keys(users[x].toJSON());
+		var me = {};
+		for (let i in keys) {
+			if (keys[i] != '_id' && keys[i] != 'password') {
+				me[keys[i]] = users[x].user[keys[i]];
+			}
+		}
+
+		for (let i in personalKeys) {
+			if (personalKeys[i] != 'user' && personalKeys[i] != 'dob') {
+				me[personalKeys[i]] = users[x][personalKeys[i]];
+			}
+		}
+		var hi = moment(me.dob).format('YYYY-MM-DD');
+		me.dob = hi;
+		if (type == 'teachers' && users[x].module != null) {
+			me.module = users[x].module.name;
+			me.moduleId = users[x].module._id;
+		}
+		data.push(me);
+	}
+	return data;
+
 }

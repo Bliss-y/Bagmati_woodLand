@@ -41,3 +41,27 @@ exports.saveSubmission = async (req, res) => {
 	res.redirect('/modules');
 }
 
+exports.availableTutors = async (req, res) => {
+	const { _id } = req.params;
+	if (await require('../controller/students').checkPersonalTutor(_id, req.session._id)) {
+		res.render('availableTutors', { data: [] });
+	}
+	let data = await require('../controller/teachers').findByModule(_id);
+	res.render('availableTutors', { data });
+
+}
+
+exports.requestTutor = async (req, res) => {
+	const { _id, teacher } = req.params;
+	const student = req.session._id;
+	let requests = require('../model/PersonalTutorRequests');
+	let request = new requests({
+		student: student,
+		teacher: teacher
+	}, (data, err) => {
+		if (err) res.send(err);
+	});
+	await request.save();
+
+	res.redirect('/modules');
+}

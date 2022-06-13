@@ -25,6 +25,10 @@ exports.add = async ({ name, duration, description }) => {
 }
 
 exports.delete = async (_id) => {
+	let modules = await require('./modules').find({ course: _id });
+	for (let i = 0; i < modules.length; i++) {
+		await require('./modules').delete(modules[i]._id);
+	}
 	await Course.findByIdAndDelete(_id);
 }
 

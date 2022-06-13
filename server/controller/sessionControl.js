@@ -4,7 +4,9 @@
 
 
 exports.notLogged = (req, res, next) => {
-
+	if (req.session.super) {
+		return next();
+	}
 	if (!req.session.uID) {
 		return res.redirect('/login');
 	} else {
@@ -13,6 +15,9 @@ exports.notLogged = (req, res, next) => {
 }
 
 exports.isAdmin = (req, res, next) => {
+	if (req.session.super) {
+		return next();
+	}
 	if (req.session.role != 'admin') {
 		return res.redirect('/');
 	} else {
@@ -21,6 +26,9 @@ exports.isAdmin = (req, res, next) => {
 }
 
 exports.isTeacher = (req, res, next) => {
+	if (req.session.super) {
+		return next();
+	}
 	if (req.session.role != 'student') {
 		return res.redirect('/');
 	} else {
