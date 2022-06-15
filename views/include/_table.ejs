@@ -1,6 +1,6 @@
 <!-- <script src="/js/table.js"></script> -->
 
-<div class="table-main">
+
 	
 	<div class = "add-std">
 		<button>
@@ -9,9 +9,9 @@
 		</button>
 	</div>
 	<% if (data.length > 0){%>
-	<table class="table table-all">
+	<table id="realTable">
 		<% var keys = Object.keys(data[0])%>
-		<%  keys.splice(keys.indexOf('_id')) %>
+		<%  keys.splice(keys.indexOf('_id'),0) %>
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>
@@ -29,5 +29,5 @@
 	
 	</table>
 
-</div>
+
 <% } %>

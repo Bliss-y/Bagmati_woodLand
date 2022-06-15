@@ -1,78 +1,95 @@
-body{
+body {
     /* background-color: rgba(33, 33, 33, 0.5); */
 }
 
-.main-container{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+.main-container {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    column-gap: 0;
+    max-width: 100vw;
 }
 
-nav{
-    position: fixed;
+nav {
 
     background-color: #091e42;
-
-    width: 20%;
-    height: 100%;
-
+    max-height: 100vh;
+    width: fit-content;
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
     color: white;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
-ul{
-    margin: 20px 0;
+ul {
     padding: 0;
-
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 
     width: 100%;
 }
 
-ul a{
+ul a {
     padding: 0 0 0 15px;
 
     text-decoration: none;
 
     color: white;
 }
-ul a:hover{
+
+ul a:hover {
     color: black;
     background-color: aqua;
 }
 
-li{
+li {
     margin: 18px 0;
-    
+
     text-decoration: none;
     list-style: none;
 
     font-size: 25px;
-    font-weight: bolder;    
+    font-weight: bolder;
 }
 
-/*Table of student informations*/
-.table-main{
+.table-main {
+    height: 100vh;
+    max-height: 100vh;
+    max-width: 100%;
+    overflow-y: scroll;
+}
 
-    margin: 0 0 0 20%;
+
+
+#realTable {
+    max-width: 100%;
+    display: block;
     width: 100%;
+    height: 80%;
+    /* overflow-y: scroll; */
 }
 
-.table-heading, .log-heading, .announcement-heading, .course-heading, .std-heading{
+
+.table-heading,
+.log-heading,
+.announcement-heading,
+.course-heading,
+.std-heading {
     margin: 0;
-    padding: 18px 0;
-    background-color:  rgba(33, 33, 33, 1);
+    padding: 0.5vw 0;
+    background-color: rgba(33, 33, 33, 1);
     text-align: center;
     color: white;
 }
 
-th, td, tr{
+th,
+td,
+tr {
 
     margin: 0;
     padding: 0;
@@ -88,7 +105,7 @@ th, td, tr{
 
 /*Form designing*/
 
-form{
+form {
     padding: 20px 0;
 
     display: block;
@@ -107,7 +124,7 @@ form{
     box-shadow: 1px 8px 16px 6px;
 }
 
-label{
+label {
 
     display: block;
 
@@ -116,7 +133,8 @@ label{
     font-weight: 600;
     font-size: 20px;
 }
-input{
+
+input {
     margin: 12px 0;
     padding: 12px;
 
@@ -125,7 +143,7 @@ input{
     margin-left: auto;
     margin-right: auto;
 
-    
+
     border: none;
     background-color: rgba(42, 40, 38, 0.75);
 
@@ -137,7 +155,7 @@ input{
     box-shadow: 1px 2px 3px 1.5px black;
 }
 
-.sel-opt{
+.sel-opt {
     display: block;
 
     margin-left: auto;
@@ -156,12 +174,12 @@ input{
     margin-right: auto;
 } */
 
-.submit{
+.submit {
     display: block;
     margin-left: auto;
     margin-right: auto;
 
-   
+
     padding: 10px 30px;
     background-color: #1a73e8;
     color: aliceblue;
@@ -169,15 +187,20 @@ input{
     border-radius: 24px;
     box-shadow: 1px 2px 8px 0px black;
 }
-.sub-link{
+
+.sub-link {
     text-decoration: none;
 }
 
-.ann-form input, .course-input, .main-input{
+.ann-form input,
+.course-input,
+.main-input {
     width: 80%;
 }
 
-.ann-form textarea, .log-text, .course-text{
+.ann-form textarea,
+.log-text,
+.course-text {
 
     display: block;
 
@@ -195,7 +218,9 @@ input{
 
 
 /*from decoration ended*/
-.add-std button, .log-adding-btn, .ann-adding-btn{
+.add-std button,
+.log-adding-btn,
+.ann-adding-btn {
     margin: 12px 20px;
     padding: 10px 30px;
     background-color: #1a73e8;
@@ -205,17 +230,25 @@ input{
     box-shadow: 3px 3px 13px 3px black;
 }
 
-.add-std button a, .log-adding-btn a, .ann-adding-btn a{
+.add-std button a,
+.log-adding-btn a,
+.ann-adding-btn a {
 
     color: white;
     text-decoration: none;
 }
-.add-std button i, .log-adding-btn i, .ann-adding-btn i{
+
+.add-std button i,
+.log-adding-btn i,
+.ann-adding-btn i {
     padding: 0 12px 0 0;
 }
 
 /*editing Announcement page*/
-.announcements, .log-main-container, .course-main-container, .assignment-main-container{
+.announcements,
+.log-main-container,
+.course-main-container,
+.assignment-main-container {
     margin: 18px;
     padding: 12px;
 
@@ -226,7 +259,8 @@ input{
     box-shadow: 3px 3px 12px 2px black;
 
 }
-.log-remove-btn{
+
+.log-remove-btn {
     margin: 12px 20px;
     padding: 10px 30px;
     background-color: #f32013;
@@ -236,34 +270,34 @@ input{
     box-shadow: 3px 3px 13px 3px black;
 }
 
-.log-remove-btn a{
+.log-remove-btn a {
 
     color: white;
     text-decoration: none;
 }
 
-.log-remove-btn i{
+.log-remove-btn i {
     padding: 0 12px 0 0;
-    
+
 }
 
-.module-table{
+.module-table {
     width: 100%;
 }
 
 
-.module-table th, .module-table td{
+.module-table th,
+.module-table td {
     padding: 12px;
 }
 
-.std-heading{
-    margin-left: 20%;
+.std-heading {
     width: 100%;
 }
 
 
 /*main login page design*/
-.main-login-page{
+.main-login-page {
 
     width: 60%;
 

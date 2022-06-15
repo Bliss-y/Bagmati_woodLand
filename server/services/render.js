@@ -38,6 +38,7 @@ exports.uData = async (req, res) => {
 		return;
 	}
 	var data = require('../controller/users').parseUsers(users, type);
+	console.log(data[0]);
 
 
 	res.render('students', { data, dataType: type });
@@ -169,7 +170,7 @@ exports.addLog = async (req, res) => {
 exports.test = async (req, res) => {
 
 	const { type } = req.params;
-	const tests = require('../controller/TestFile');
+	const tests = require('../../test/testLinks');
 	switch (type) {
 		case "addcourses":
 			await tests.addDummyCourses(4);
@@ -178,7 +179,7 @@ exports.test = async (req, res) => {
 			await tests.addModulesForAllCourses(3);
 			break;
 		case "addstudents":
-			await tests.addDummyStudents(3);
+			await tests.addStudents(3);
 			break;
 		case "addannouncements":
 			await tests.addDummyAnnouncements(2);
@@ -201,5 +202,5 @@ exports.test = async (req, res) => {
 			await require('mongoose').connection.db.dropDatabase();
 			break;
 	}
-	res.redirect('/admin/test');
+	res.redirect('/test');
 }

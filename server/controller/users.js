@@ -48,7 +48,6 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 	} catch {
 		return console.log("err");
 	}
-
 	let lastuid;
 	if (!data) {
 		lastuid = 1000;
@@ -65,7 +64,9 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 		role,
 		uID: lastuid + 1
 	});
-	await nuser.save();
+	await nuser.save((err) => {
+		console.log(err);
+	});
 	return nuser;
 }
 
@@ -105,7 +106,6 @@ exports.parseUsers = (users, type) => {
 		me.dob = hi;
 		if (type == 'teachers' && users[x].module != null) {
 			me.module = users[x].module.name;
-			me.moduleId = users[x].module._id;
 		}
 		data.push(me);
 	}

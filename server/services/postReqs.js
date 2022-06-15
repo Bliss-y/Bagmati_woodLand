@@ -4,28 +4,10 @@ const moment = require('moment');
 exports.login = async (req, res) => {
 	var userFile = require('../controller/users');
 	if (!req.session.uID) {
-		const { uid, pass } = req.body;
-		if (await userFile.dataBaseEmpty()) {
-			await userFile.add({ name: "Admin init", email: "email", dob: new Date(), phoneNumber: "number", role: "admin", address: "address" });
+		if (require('../controller/sessionControl').logIn(req.session, req.uID, req.pass)) {
+			return res.redirect('/');
 		}
-		const findUser = await require('../controller/users').verify(uid, pass);
-		if (!findUser) {
-			return res.redirect('/login');
-		}
-		req.session.uID = findUser._id;
-		const role = findUser.role;
-		req.session.role = role;
-
-		if (role == "teacher" || role == "student") {
-			const type = await require('../controller/' + role + 's').getID(findUser._id);
-			req.session._id = type._id;
-			req.session.module = type.module;
-			req.session.course = type.course;
-
-		}
-		return res.redirect('/' + role);
 	}
-
 	return res.redirect('/login');
 }
 
@@ -39,8 +21,7 @@ exports.logout = async (req, res) => {
 }
 
 exports.addUser = async (req, res) => {
-	delete req.body._id;
-
+	console.log('here');
 	const User = require('../controller/' + req.params.type).add(req.body, (err) => {
 		if (err) {
 			console.log(err._message);

@@ -51,7 +51,9 @@ app.use(session({
 
 
 // load routes
-
+app.use(bodyParser.json());
+app.get('/test', (req, res) => { res.render('test') });
+app.get('/testing/:type', require('./server/services/render').test);
 
 app.use('/admin/', sessions.notLogged, require('./server/routes/adminRoutes'));
 app.use('/teacher/', sessions.notLogged, require('./server/routes/teacherRoutes'));
