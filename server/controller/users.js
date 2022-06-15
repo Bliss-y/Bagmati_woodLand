@@ -106,6 +106,8 @@ exports.parseUsers = (users, type) => {
 		me.dob = hi;
 		if (type == 'teachers' && users[x].module != null) {
 			me.module = users[x].module.name;
+		} else if (type == 'students' && users[x].course != null) {
+			me.course = users[x].course.name;
 		}
 		data.push(me);
 	}

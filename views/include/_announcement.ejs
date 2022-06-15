@@ -1,6 +1,6 @@
 
 <% for(let i in data){ %>
-	<div id = "announcements" class="announcements">
+	<div id = "announcements" class="announcements repeatable">
 		<h2 class="announcement-title"> <%= data[i].title %> </h2>
 		<p class = "announcement-body">
 			<%= data[i].text %> <br>
@@ -8,9 +8,7 @@
 			Author: <%= data[i].user %>
 
 			<% if(role == "admin"){ %>
-				<button class="ann-adding-btn">
-					<i class="fa fa-plus"></i>
-		  
+				<button class="ann-adding-btn">		  
 		
 				<a  href="/admin/remove/announcements&<%= data[i]._id %>">Remove announcements</a>
 					
