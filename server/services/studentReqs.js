@@ -1,6 +1,7 @@
 /**
  * @todo might generalize the destructuring somehow too many repeating codes with different params 
  */
+const mongoose = require('mongoose');
 
 exports.home = async (req, res) => {
 	const user = await require('../controller/users').find({ _id: req.session.uID });
@@ -46,7 +47,8 @@ exports.availableTutors = async (req, res) => {
 	if (await require('../controller/students').checkPersonalTutor(module, req.session._id)) {
 		res.render('requestTutor', { data: [], requested: true });
 	}
-	if (await require('../controller/personalTutorRequests').find({ module, student: req.session._id })) {
+	let teacher = await require('../controller/personalTutorRequests').find({ module, student: req.session._id }).teacher;
+	if (teacher) {
 		return res.render('requestTutor', { data: [], requested: true });
 	}
 	const data = await require('../controller/teachers').getAvailableTeachers(module);
@@ -55,8 +57,13 @@ exports.availableTutors = async (req, res) => {
 }
 
 exports.requestTutor = async (req, res) => {
-	const { teacher } = req.params;
+	const { teacher, module } = req.params;
 	const requests = require('../controller/personalTutorRequests');
-	const request = await requests.add(req.session._id, teacher);
+	const request = await requests.add(req.session._id, teacher, module);
 	res.redirect('/modules');
+}
+
+exports.personalTutors = async (req, res) => {
+	const data = await require('../controller/students').getPersonalTutors(req.session._id);
+	res.rener('personalTutor', { data });
 }

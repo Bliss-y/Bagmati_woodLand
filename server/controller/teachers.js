@@ -34,7 +34,6 @@ exports.getAvailableTeachers = async (module) => {
 		return { err: "Module doesnot exist" };
 	}
 	let teachers = await Teacher.find({ module: module }).populate('user').populate('module');
-	console.log(teachers);
 	for (let i in teachers) {
 		if (teachers.personalstudentId != undefined) {
 			teachers.splice(i);

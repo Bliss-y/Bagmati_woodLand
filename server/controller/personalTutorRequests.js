@@ -7,14 +7,15 @@ const Request = require('../model/PersonalTutorRequests');
 const student = require('./students');
 const teacher = require('./teachers');
 
-exports.add = async (student, teacher) => {
+exports.add = async (student, teacher, module) => {
 	if (!mongoose.isValidObjectId(student)) {
 		return console.log('not valid student id');
 	}
 	let request = new Request(
 		{
 			student,
-			teacher
+			teacher,
+			module
 		}
 	);
 	request.save((err) => {

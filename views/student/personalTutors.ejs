@@ -1,20 +1,20 @@
 <%- include ('_header') %>
-
 	<div class = "table-main">
 
-		<h1 class="table-heading">Available Teachers for tutoring</h1>
+		<h1 class="table-heading">Current Tutors for you</h1>
 
 		<% if(data.length == 0) { %>
-				<h1>No Availabe Teacher</h1>
+				<h1> You don't have any Tutors </h1>
 			<% } else{ %>
 		
 	<% for(let i in data){ %>
 		<form method="post" action="/student/tutor/<%= data[i]._id %>&<%= data[i].module._id %>">
 			<div>
 				Name:<%= data[i].user.name %>
+				Module: <%= data[i].module.name %>
 			</div>
-			<button type="submit">Request For tutoring</button>
 		</form>
 	<% }} %>
+
 </div>
 <% include('include/_footer') %>

@@ -85,3 +85,11 @@ exports.checkPersonalTutor = async (module, student) => {
 	var tutor = await require('../model/PersonalTutorRequests').findOne({ module, student }).populate();
 	return tutor;
 }
+
+exports.getPersonalTutor = async (student) => {
+	if (!mongoose.isValidObjectId(student)) {
+		return { err: "student does not exist" };
+	}
+	var tutor = await require('../model/Teacher').find({ student }).populate('user').populate('module');
+	return tutor;
+}
