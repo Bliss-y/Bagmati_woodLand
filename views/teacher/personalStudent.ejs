@@ -1,0 +1,34 @@
+<%- include ('_header') %>
+
+	<div class = "table-main">
+		<h1 class="table-heading">Current Personal Student</h1>
+		<% if(!data) { %>
+				<h1> You don't have any personally Tutored Student </h1>
+			<% } else{ %>
+		<form method="post" action="/teacher/personalStudent/terminate">
+			<div>
+				Name:<%= data[i].user.name %>
+				uID: <%= data[i].user.uID %>
+			</div>
+				<button type="submit">Terminate Tutoring</button>
+		</form>
+		<% } %>
+		<h1 class="table-heading">Requests for Tutoring</h1>
+		<% if(requests.length == 0) { %>
+				<h1>You dont have any request for personal Tutoring</h1>
+			<% } else{ %>
+		
+	<% for(let i in requests){ %>
+ 		
+			<div>
+				Name:<%= requests[i].student.name %>
+			</div>
+			<form method="post" action="/teacher/personalStudent/deleteRequest/<%= requests[i]._id %>">
+			<button type="submit">Delete Request</button></form>
+			<form method="post" action="/teacher/personalStudent/acceptRequest/<%= requests[i]._id %>">
+			<button type="submit">Accept Request</button>
+		</form>
+	<% }} %>
+</div>
+
+<% include('include/_footer') %>

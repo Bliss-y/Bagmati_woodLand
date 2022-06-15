@@ -44,7 +44,7 @@ exports.find = async (filter) => {
 	let requests = await Request.find(filter).populate();
 	let data = [];
 	for (let i = 0; i < requests.length; i++) {
-		data.push(exports.parse(requests[i]));
+		data.push(await exports.parse(requests[i]));
 	}
 	return data;
 }
@@ -53,6 +53,7 @@ exports.parse = async (request) => {
 	let tempStudent = await student.find(request.student);
 	let tempTeacher = await teacher.find(request.teacher);
 	return {
+		_id: request._id,
 		student: {
 			_id: tempStudent,
 			name: tempStudent.user.name,

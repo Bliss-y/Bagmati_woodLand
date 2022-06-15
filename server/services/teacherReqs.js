@@ -82,3 +82,24 @@ exports.delete = async (req, res) => {
 	const del = await require('../controller/' + type).delete(_id);
 	res.send('Deleted Successfully');
 }
+
+exports.personalStudent = async (req, res) => {
+	let data = [];
+	data = await require('../controller/teachers').find(req.session._id).personalStudent;
+	const requests = await require('../controller/personalTutorRequests').find({ teacher: req.session._id });
+	console.log(requests);
+
+	return res.render('personalStudent', { data, requests });
+}
+
+exports.accept = async (req, res) => {
+	const { _id } = req.params;
+	const requests = await require('../controller/personalTutorRequests').accept(_id);
+	return res.redirect('/teacher/personalStudent');
+}
+
+exports.decline = async (req, res) => {
+	const { _id } = req.params;
+	const requests = await require('../controller/personalTutorRequests').delete(_id);
+	return res.redirect('/teacher/personalStudent');
+}
