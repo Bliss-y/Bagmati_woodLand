@@ -25,7 +25,6 @@ exports.addUser = async (req, res) => {
 			break;
 		case "teachers":
 			const modules = await require('../controller/modules').find({});
-			console.log(modules);
 			res.render("addTeacher", { data: {}, modules });
 			break;
 	}
@@ -34,7 +33,12 @@ exports.addUser = async (req, res) => {
 exports.uData = async (req, res) => {
 	const { type } = req.params;
 	var users = await require('../controller/' + type).find();
+	if (users.err) {
+		res.render('error', { err: data.err });
+		return;
+	}
 	var data = require('../controller/users').parseUsers(users, type);
+
 
 	res.render('students', { data, dataType: type });
 }
@@ -42,11 +46,16 @@ exports.uData = async (req, res) => {
 exports.editUser = async (req, res) => {
 	const { _id, type } = req.params;
 	var User = await require('../controller/' + type).find(_id);
+
 	if (!User) {
 		console.log('no student');
-		res.redirect('adduser/' + type);
+		return res.redirect('adduser/' + type);
 	}
 
+	if (User.err) {
+		res.render('error', { err: User.err });
+		return;
+	}
 	/**
 	 * @TODO Data Destructuring Turn it into funcction later !! 
 	 */
@@ -64,13 +73,13 @@ exports.editUser = async (req, res) => {
 			data[personalKeys[i]] = User[personalKeys[i]];
 		}
 	}
-	const hi = moment(data.dob).format('YYYY-MM-DD');
-	data.dob = hi;
+	const formattedDate = moment(data.dob).format('YYYY-MM-DD');
+	data.dob = formattedDate;
 	if (type == 'students') {
 		const courses = await require('../controller/courses').find();
 		return res.render('addStudent', { data, courses })
 	};
-	const modules = require('../controller/modules').find({});
+	const modules = await require('../controller/modules').find({});
 	return res.render('addTeacher', { data, modules });
 
 }
@@ -163,19 +172,15 @@ exports.test = async (req, res) => {
 	const tests = require('../controller/TestFile');
 	switch (type) {
 		case "addcourses":
-			console.log('tf');
 			await tests.addDummyCourses(4);
 			break;
 		case "addmodules":
-			console.log('tf');
 			await tests.addModulesForAllCourses(3);
 			break;
 		case "addstudents":
-			console.log('tf');
 			await tests.addDummyStudents(3);
 			break;
 		case "addannouncements":
-			console.log('tf');
 			await tests.addDummyAnnouncements(2);
 			break;
 		case "addteachers":

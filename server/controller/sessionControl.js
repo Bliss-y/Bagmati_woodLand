@@ -2,9 +2,8 @@
  * @Purpose = Handles all the necessary session validation after login
  */
 
-
 exports.notLogged = (req, res, next) => {
-	if (req.session.super) {
+	if (req.session.DEV_MODE) {
 		return next();
 	}
 	if (!req.session.uID) {
@@ -43,4 +42,3 @@ exports.isStudent = (req, res, next) => {
 		next();
 	}
 }
-

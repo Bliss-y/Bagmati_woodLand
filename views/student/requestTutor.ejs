@@ -9,13 +9,13 @@
 			<% } else{ %>
 		
 <% for(let i in data){ %>
-	<form method="post" action="/student/tutor/<%= data[i].module._id & data[i]._id %>">
+	<form method="post" action="/student/tutor/<%= data[i]._id %>">
 		<div>
 			Name:<%= data[i].user.name %>
 		</div>
+		<button type="submit">Request For tutoring</button>
 	</form>
 <% }} %>
 </div>
 </div>
-
 <% include('include/_footer') %>

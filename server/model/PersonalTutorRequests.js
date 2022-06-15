@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const Teacher = require('Teacher');
-const Student = require('Student');
+const Teacher = require('./Teacher');
+const Student = require('./Student');
+const Module = require('./Module');
 
 const { Schema } = mongoose;
 
@@ -15,6 +16,11 @@ const assignmentSchema = new Schema({
 		ref: 'Student',
 		required: true
 	},
+	module: {
+		type: Schema.Types.ObjectId,
+		ref: 'Module',
+		required: true
+	}
 
 }, { versionKey: false })
 

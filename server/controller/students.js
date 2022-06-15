@@ -5,15 +5,14 @@
 const mongoose = require('mongoose');
 const Student = require('../model/Student.js');
 const Course = require('../model/Course.js');
+var bang = { error: "error" };
 
 exports.find = async (id) => {
 	if (!id) {
 		const students = await Student.find({}).populate('user').populate('course');
-
 		return students;
 	}
 	const students = await Student.findById(id).populate('user').populate('course');
-	console.log(id);
 	return students;
 }
 
@@ -22,35 +21,55 @@ exports.getID = async (uid) => {
 	return student;
 }
 
-
-exports.add = async (user) => {
+exports.add = async (user, cb) => {
 	const { name, email, dob, phoneNumber, address, course } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role: "student" });
+	if (!mongoose.isValidObjectId(course)) {
+		return { err: "Course does not exist" };
+	}
 	const student = new Student({
 
 		user: User._id,
 		course
 
-	})
-	await student.save();
+	});
+	student.save((err) => {
+		if (err) {
+			cb(err);
+		}
+	});
 }
 
 exports.edit = async (edited) => {
 
 	const { name, email, dob, phoneNumber, address, course, _id } = edited;
-	const student = Student.findById(_id);
-	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" }, student.user);
 
-	console.log(_id);
+
+	const student = await Student.findById(_id).populate('user');
+	if (!student) {
+		return { err: "student doesnot exist" };
+	}
+
+	const User = await require('../controller/users.js').edit({ name, email, dob, phoneNumber, address, role: "student" }, student.user._id);
+
+	if (course == "") {
+		return;
+	}
 	await Student.findByIdAndUpdate(_id, {
 		course
 	});
+	return {};
 }
 
 exports.delete = async (_id) => {
+	if (!mongoose.isValidObjectId(_id)) {
+		return { err: "Student does not exist" };
+	}
 	let student = await Student.findById({ _id }).populate('user');
 	await require('./users').delete(student.user._id);
-	await Student.deleteOne({ _id });
+	await Student.deleteOne({ _id }, (err) => {
+		if (err) console.log("err");
+	});
 	return;
 }
 
@@ -60,6 +79,9 @@ exports.findByCourse = async ({ course }) => {
 }
 
 exports.checkPersonalTutor = async (module, student) => {
-	var tutor = await require('../model/Student.js').find({ module, student }).populate();
+	if (!mongoose.isValidObjectId(module) || !mongoose.isValidObjectId(student)) {
+		return { err: "either module or student does not exist" };
+	}
+	var tutor = await require('../model/PersonalTutorRequests').findOne({ module, student }).populate();
 	return tutor;
 }

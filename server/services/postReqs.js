@@ -41,15 +41,21 @@ exports.logout = async (req, res) => {
 exports.addUser = async (req, res) => {
 	delete req.body._id;
 
-	const User = require('../controller/' + req.params.type).add(req.body);
-	res.redirect('/admin/adduser/' + req.params.type);
+	const User = require('../controller/' + req.params.type).add(req.body, (err) => {
+		if (err) {
+			console.log(err._message);
+			res.render('error', { err: err._message });
+		}
+		else res.redirect('/admin/adduser/' + req.params.type);
+	});
+
 }
 
 exports.editUser = async (req, res) => {
 	const { type } = req.params;
 	req.body._id = req.params._id;
-	const User = await require('../controller/' + type).edit(req.body);
-
+	let editedUser = await require('../controller/' + type).edit(req.body);
+	if (editedUser.err) { return res.render('test', { err: editedUser.err }) };
 	res.redirect('/admin/users/' + type);
 }
 

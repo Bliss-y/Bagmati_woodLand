@@ -42,26 +42,21 @@ exports.saveSubmission = async (req, res) => {
 }
 
 exports.availableTutors = async (req, res) => {
-	const { _id } = req.params;
-	if (await require('../controller/students').checkPersonalTutor(_id, req.session._id)) {
-		res.render('availableTutors', { data: [] });
+	const { module } = req.params;
+	if (await require('../controller/students').checkPersonalTutor(module, req.session._id)) {
+		res.render('requestTutor', { data: [], requested: true });
 	}
-	let data = await require('../controller/teachers').findByModule(_id);
-	res.render('availableTutors', { data });
+	if (await require('../controller/personalTutorRequests').find({ module, student: req.session._id })) {
+		return res.render('requestTutor', { data: [], requested: true });
+	}
+	const data = await require('../controller/teachers').getAvailableTeachers(module);
+	res.render('requestTutor', { data });
 
 }
 
 exports.requestTutor = async (req, res) => {
-	const { _id, teacher } = req.params;
-	const student = req.session._id;
-	let requests = require('../model/PersonalTutorRequests');
-	let request = new requests({
-		student: student,
-		teacher: teacher
-	}, (data, err) => {
-		if (err) res.send(err);
-	});
-	await request.save();
-
+	const { teacher } = req.params;
+	const requests = require('../controller/personalTutorRequests');
+	const request = await requests.add(req.session._id, teacher);
 	res.redirect('/modules');
 }

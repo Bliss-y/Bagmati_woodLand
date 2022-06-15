@@ -70,13 +70,14 @@ exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
 }
 
 exports.edit = async (edited, _id) => {
-	return await User.findOneAndUpdate(_id, {
-		name: edited.name,
-		email: edited.email,
-		phoneNnumber: edited.phoneNumber,
-		address: edited.address,
-		dob: edited.dob
-	}, { new: true });
+
+	await User.findByIdAndUpdate(_id, {
+		name,
+		email,
+		phoneNnumber,
+		address,
+		dob
+	} = edited);
 }
 
 exports.delete = async (_id) => {

@@ -15,8 +15,8 @@ route.get('/modules', reqs.modules);
 route.get('/assignments/:module', reqs.assignment);
 route.get('/submit/:assignment', reqs.submit);
 route.post('/submit/:assignment', upload.single('upfile'), reqs.saveSubmission);
-route.get('/tutor/:_id', reqs.availableTutors);
-route.post('/tutor/:_id&:teacher', reqs.requestTutor);
+route.get('/tutor/:module', reqs.availableTutors);
+route.post('/tutor/:teacher', reqs.requestTutor);
 
 
 module.exports = route;

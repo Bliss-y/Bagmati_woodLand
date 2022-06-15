@@ -3,7 +3,7 @@
 <!-- include header -->
 
 <% if(data._id){ %>
-  <% post = "/edituser/teachers" %>
+  <% post = "edituser/teachers&"+data._id %>
 
   <% }else{  %>
 
@@ -18,7 +18,6 @@
   
 
       <div  class="form-group"  id = "Update">
-        <input type="tetxt" id="idHide" name = "_id" value="<%= data._id %>" readonly>
         <label for="email">Full Name</label>
         <input type="text" id="email" name = "name" value="<%= data.name %>" required>
       </div>
