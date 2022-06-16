@@ -31,58 +31,50 @@ exports.addUser = async (req, res) => {
 }
 
 exports.uData = async (req, res) => {
-	const { type } = req.params;
-	var users = await require('../controller/' + type).find();
-	if (users.err) {
-		res.render('error', { err: data.err });
-		return;
+	try {
+		const { type } = req.params;
+		var users = await require('../controller/' + type).find();
+		var data = require('../controller/users').parseUsers(users, type);
+		console.log(data[0]);
+		res.render('students', { data, dataType: type });
 	}
-	var data = require('../controller/users').parseUsers(users, type);
-	console.log(data[0]);
-
-
-	res.render('students', { data, dataType: type });
+	catch (err) {
+		next(err);
+	}
 }
 
-exports.editUser = async (req, res) => {
-	const { _id, type } = req.params;
-	var User = await require('../controller/' + type).find(_id);
-
-	if (!User) {
-		console.log('no student');
-		return res.redirect('adduser/' + type);
-	}
-
-	if (User.err) {
-		res.render('error', { err: User.err });
-		return;
-	}
-	/**
-	 * @TODO Data Destructuring Turn it into funcction later !! 
-	 */
-	var keys = Object.keys(User.user.toJSON());
-	var personalKeys = Object.keys(User.toJSON());
-	var data = {};
-	for (let i in keys) {
-		if (keys[i] != '_id' && keys[i] != 'password') {
-			data[keys[i]] = User.user[keys[i]];
+exports.editUser = async (req, res, next) => {
+	try {
+		const { _id, type } = req.params;
+		var User = await require('../controller/' + type).find(_id);
+		/**
+		 * @TODO Data Destructuring Turn it into funcction later !! 
+		 */
+		var keys = Object.keys(User.user.toJSON());
+		var personalKeys = Object.keys(User.toJSON());
+		var data = {};
+		for (let i in keys) {
+			if (keys[i] != '_id' && keys[i] != 'password') {
+				data[keys[i]] = User.user[keys[i]];
+			}
 		}
-	}
 
-	for (let i in personalKeys) {
-		if (personalKeys[i] != 'user' && personalKeys[i] != 'dob') {
-			data[personalKeys[i]] = User[personalKeys[i]];
+		for (let i in personalKeys) {
+			if (personalKeys[i] != 'user' && personalKeys[i] != 'dob') {
+				data[personalKeys[i]] = User[personalKeys[i]];
+			}
 		}
+		const formattedDate = moment(data.dob).format('YYYY-MM-DD');
+		data.dob = formattedDate;
+		if (type == 'students') {
+			const courses = await require('../controller/courses').find();
+			return res.render('addStudent', { data, courses })
+		};
+		const modules = await require('../controller/modules').find({});
+		return res.render('addTeacher', { data, modules });
+	} catch (err) {
+		next(err);
 	}
-	const formattedDate = moment(data.dob).format('YYYY-MM-DD');
-	data.dob = formattedDate;
-	if (type == 'students') {
-		const courses = await require('../controller/courses').find();
-		return res.render('addStudent', { data, courses })
-	};
-	const modules = await require('../controller/modules').find({});
-	return res.render('addTeacher', { data, modules });
-
 }
 
 exports.remove = async (req, res) => {
@@ -167,40 +159,3 @@ exports.addLog = async (req, res) => {
 	res.render('addLog', { data: undefined });
 }
 
-exports.test = async (req, res) => {
-
-	const { type } = req.params;
-	const tests = require('../../test/testLinks');
-	switch (type) {
-		case "addcourses":
-			await tests.addDummyCourses(4);
-			break;
-		case "addmodules":
-			await tests.addModulesForAllCourses(3);
-			break;
-		case "addstudents":
-			await tests.addStudents(3);
-			break;
-		case "addannouncements":
-			await tests.addDummyAnnouncements(2);
-			break;
-		case "addteachers":
-			break;
-		case "addAssignments":
-			break;
-		case "addsubmission":
-			break;
-		case "addlogs":
-			break;
-		case "deleteannouncements":
-			break;
-		case "deletecourses":
-			break;
-		case "deletestudents":
-			break;
-		case "dropdatabase":
-			await require('mongoose').connection.db.dropDatabase();
-			break;
-	}
-	res.redirect('/test');
-}
