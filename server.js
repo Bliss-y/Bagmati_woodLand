@@ -52,6 +52,9 @@ app.use(session({
 
 // load routes
 app.use(bodyParser.json());
+
+
+
 app.get('/test', (req, res) => { res.render('test') });
 app.get('/testing/:type', require('./server/services/render').test);
 
@@ -65,7 +68,9 @@ app.use('/fileget', express.static("./testUploads/"));
 
 app.use('/', express.static(__dirname + '/views/include'));
 
-
+app.use((err, req, res, next) => {
+	res.render('error', { err });
+})
 
 // use ejs to generate html instead of writing html manually for all pages
 app.set("view engine", "ejs");

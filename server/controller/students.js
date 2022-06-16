@@ -23,10 +23,9 @@ exports.getID = async (uid) => {
 
 exports.add = async (user, cb) => {
 	const { name, email, dob, phoneNumber, address, course } = user;
-	console.log(name);
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role: "student" });
 	if (!mongoose.isValidObjectId(course)) {
-		return { err: "Course does not exist" };
+		return cb("Course does not exist");
 	}
 	const student = new Student({
 

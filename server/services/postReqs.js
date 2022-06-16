@@ -1,6 +1,8 @@
 const session = require('express-session');
 const moment = require('moment');
 
+
+// logs the user in (only if user is logged out or no sessoin exists)
 exports.login = async (req, res) => {
 	var userFile = require('../controller/users');
 	if (!req.session.uID) {
@@ -11,6 +13,7 @@ exports.login = async (req, res) => {
 	return res.redirect('/login');
 }
 
+//clears session and logs the user out
 exports.logout = async (req, res) => {
 	req.session.destroy((err) => {
 		if (err) {
@@ -20,41 +23,27 @@ exports.logout = async (req, res) => {
 	return res.redirect('/login');
 }
 
-exports.addUser = async (req, res) => {
+// adds either teacher or students
+exports.addUser = async (req, res, next) => {
 	console.log('here');
 	const User = require('../controller/' + req.params.type).add(req.body, (err) => {
 		if (err) {
-			console.log(err._message);
-			res.render('error', { err: err._message });
+			return next(err);
 		}
 		else res.redirect('/admin/adduser/' + req.params.type);
 	});
-
 }
 
+
+// edits either students or teachers
 exports.editUser = async (req, res) => {
 	const { type } = req.params;
 	req.body._id = req.params._id;
 	let editedUser = await require('../controller/' + type).edit(req.body);
-	if (editedUser.err) { return res.render('test', { err: editedUser.err }) };
-	res.redirect('/admin/users/' + type);
+	if (editedUser.err) { return next({ err: editetUser.err }) }
+	else { return res.redirect('/admin/users/' + type) }
 }
 
-exports.addTeacher = async (req, res) => {
-	const { name, email, dob, module, phoneNumber, salary } = req.body;
-	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, course, role })
-	require('../controller/teachers.js').add(user, { module, salary });
-	// const Student = ;
-
-	res.redirect('/teachers/add');
-}
-
-exports.editStudent = async (req, res) => {
-	req.body.course = await require('../controller/users.js').find(req.body.course);
-	const User = await require('../controller/students.js').edit(req.body);
-
-	res.json(User);
-}
 
 exports.announce = async (req, res) => {
 	const { title, text } = req.body;
