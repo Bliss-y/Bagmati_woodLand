@@ -43,27 +43,33 @@ exports.saveSubmission = async (req, res) => {
 }
 
 exports.availableTutors = async (req, res) => {
-	const { module } = req.params;
-	if (await require('../controller/students').checkPersonalTutor(module, req.session._id)) {
-		res.render('requestTutor', { data: [], requested: true });
-	}
-	let teacher = await require('../controller/personalTutorRequests').find({ module, student: req.session._id }).teacher;
-	if (teacher) {
-		return res.render('requestTutor', { data: [], requested: true });
-	}
-	const data = await require('../controller/teachers').getAvailableTeachers(module);
-	res.render('requestTutor', { data });
+	try {
+		const { module } = req.params;
+		if (await require('../controller/students').checkPersonalTutor(module, req.session._id)) {
+			res.render('requestTutor', { data: [], requested: true });
+		}
+		let teacher = await require('../controller/personalTutorRequests').find({ module, student: req.session._id }).teacher;
+		if (teacher) {
+			return res.render('requestTutor', { data: [], requested: true });
+		}
+		const data = await require('../controller/teachers').getAvailableTeachers(module);
+		res.render('requestTutor', { data });
+	} catch (err) { next(err); }
 
 }
 
 exports.requestTutor = async (req, res) => {
-	const { teacher, module } = req.params;
-	const requests = require('../controller/personalTutorRequests');
-	const request = await requests.add(req.session._id, teacher, module);
-	res.redirect('/modules');
+	try {
+		const { teacher, module } = req.params;
+		const requests = require('../controller/personalTutorRequests');
+		const request = await requests.add(req.session._id, teacher, module);
+		res.redirect('/modules');
+	} catch (err) { next(err); }
 }
 
 exports.personalTutors = async (req, res) => {
-	const data = await require('../controller/students').getPersonalTutors(req.session._id);
-	res.rener('personalTutor', { data });
+	try {
+		const data = await require('../controller/students').getPersonalTutors(req.session._id);
+		res.rener('personalTutor', { data });
+	} catch (err) { next(err); }
 }

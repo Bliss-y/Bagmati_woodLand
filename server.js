@@ -69,6 +69,7 @@ app.use('/fileget', express.static("./testUploads/"));
 app.use('/', express.static(__dirname + '/views/include'));
 
 app.use((err, req, res, next) => {
+	res.status(500);
 	res.render('error', { err });
 })
 

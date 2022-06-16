@@ -12,9 +12,6 @@ exports.find = async (_id) => {
 
 		return teachers;
 	}
-	if (!mongoose.isValidObjectId(_id)) {
-		return { err: "Teacher doesnot exist" };
-	}
 	const teachers = await Teacher.findById(_id, (err, data) => { if (err) { console.log('err') } }).populate('user').populate('module');
 	return teachers;
 }
@@ -64,10 +61,6 @@ exports.add = async (user) => {
 		})
 	}
 	else {
-		if (!mongoose.isValidObjectId(module)) {
-			return { err: "Module doesnot exist" };
-		}
-
 		teacher = new Teacher({
 			user: User._id,
 			module
