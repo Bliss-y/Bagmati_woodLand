@@ -5,9 +5,5 @@ the app listens on port 3000
 link :- localhost:3000/ OR 127.0.0.1:3000/
 
 Login Ids:
-format: id(password)
-	Teachers: 1005(Teacher1), 1011(teacher2)
-	Admin: 1002(admin1)
-	Students : 1008(student1), 1012(student2)
-
-	id(1011) password(teacher2)
+format: 1001 Admin init
+To get other log in ids log in through admin and find others uID which is login id  and name is their password
