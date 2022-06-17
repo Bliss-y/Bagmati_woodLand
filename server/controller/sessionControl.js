@@ -2,7 +2,7 @@
  * @Purpose = Handles all the necessary session validation after login
  */
 
-const DEV_MODE = true;
+const DEV_MODE = false;
 
 exports.logIn = async (session, uid, pass) => {
 	const userFile = require('./users');

@@ -3,12 +3,12 @@ const moment = require('moment');
 
 
 // logs the user in (only if user is logged out or no sessoin exists)
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
 	try {
-		var userFile = require('../controller/users');
 		if (!req.session.uID) {
-			if (require('../controller/sessionControl').logIn(req.session, req.uID, req.pass)) {
+			if (await require('../controller/sessionControl').logIn(req.session, req.body.uid, req.body.pass)) {
 				return res.redirect('/');
+
 			}
 		}
 		return res.redirect('/login');
@@ -16,7 +16,7 @@ exports.login = async (req, res) => {
 }
 
 //clears session and logs the user out
-exports.logout = async (req, res) => {
+exports.logout = async (req, res, next) => {
 	try {
 		req.session.destroy((err) => {
 			if (err) {
@@ -42,7 +42,7 @@ exports.addUser = async (req, res, next) => {
 
 
 // edits either students or teachers
-exports.editUser = async (req, res) => {
+exports.editUser = async (req, res, next) => {
 	try {
 		const { type } = req.params;
 		req.body._id = req.params._id;
@@ -53,7 +53,7 @@ exports.editUser = async (req, res) => {
 }
 
 
-exports.announce = async (req, res) => {
+exports.announce = async (req, res, next) => {
 	try {
 		const { title, text } = req.body;
 		const _uid = req.session.uID;
@@ -62,7 +62,7 @@ exports.announce = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.addCourse = async (req, res) => {
+exports.addCourse = async (req, res, next) => {
 	try {
 		console.log('requested to add course');
 		const { name, duration, description } = req.body;
@@ -71,7 +71,7 @@ exports.addCourse = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.addModule = async (req, res) => {
+exports.addModule = async (req, res, next) => {
 	try {
 		const { course } = req.params;
 		const module = await require('../controller/modules').add(req.body, course);
@@ -79,7 +79,7 @@ exports.addModule = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.editModule = async (req, res) => {
+exports.editModule = async (req, res, next) => {
 	try {
 		const { _id } = req.params;
 		const module = await require('../controller/modules').edit(req.body, _id);
@@ -87,7 +87,7 @@ exports.editModule = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.addLog = async (req, res) => {
+exports.addLog = async (req, res, next) => {
 	try {
 		const { text } = req.body;
 		const { user } = req.params;

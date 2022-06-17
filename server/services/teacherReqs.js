@@ -7,7 +7,7 @@ const session = require('express-session');
 const fs = require('fs');
 const { type } = require('os');
 
-exports.home = async (req, res) => {
+exports.home = async (req, res, next) => {
 	try {
 		var user = await require('../controller/users').find({ _id: req.session.uID });
 		var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
@@ -16,18 +16,18 @@ exports.home = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.assignments = async (req, res) => {
+exports.assignments = async (req, res, next) => {
 	try {
 		const assignments = await require('../controller/assignments').findByModule(req.session.module);
 		res.render('assignments', { data: assignments });
 	} catch (err) { next(err); }
 }
 
-exports.addAssignment = async (req, res) => {
+exports.addAssignment = async (req, res, next) => {
 	try { res.render('addAssignment'); } catch (err) { next(err); }
 }
 
-exports.saveAssignments = async (req, res) => {
+exports.saveAssignments = async (req, res, next) => {
 	try {
 		const { due, title } = req.body;
 		const module = req.session.module;
@@ -39,7 +39,7 @@ exports.saveAssignments = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.submissions = async (req, res) => {
+exports.submissions = async (req, res, next) => {
 	try {
 		const assignment = req.params.assignment;
 		const submissions = await require('../controller/submissions').find({ assignment });
@@ -60,7 +60,7 @@ exports.submissions = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.grade = async (req, res) => {
+exports.grade = async (req, res, next) => {
 	try {
 		const { id } = req.params;
 		const { grade, feedback } = req.body;
@@ -69,7 +69,7 @@ exports.grade = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.module = async (req, res) => {
+exports.module = async (req, res, next) => {
 	try {
 		const { module } = req.session;
 		const mod = await require('../controller/modules').find({ _id: module });
@@ -87,7 +87,7 @@ exports.module = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.delete = async (req, res) => {
+exports.delete = async (req, res, next) => {
 	try {
 		const { type, _id } = req.params;
 		const del = await require('../controller/' + type).delete(_id);
@@ -95,7 +95,7 @@ exports.delete = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.personalStudent = async (req, res) => {
+exports.personalStudent = async (req, res, next) => {
 	try {
 		let data = [];
 		data = await require('../controller/teachers').find(req.session._id).personalStudent;
@@ -106,7 +106,7 @@ exports.personalStudent = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.accept = async (req, res) => {
+exports.accept = async (req, res, next) => {
 	try {
 		const { _id } = req.params;
 		const requests = await require('../controller/personalTutorRequests').accept(_id);
@@ -114,7 +114,7 @@ exports.accept = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.decline = async (req, res) => {
+exports.decline = async (req, res, next) => {
 	try {
 		const { _id } = req.params;
 		const requests = await require('../controller/personalTutorRequests').delete(_id);
