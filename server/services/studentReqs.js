@@ -4,15 +4,19 @@
 const mongoose = require('mongoose');
 
 exports.home = async (req, res, next) => {
-	const user = await require('../controller/users').find({ _id: req.session.uID });
+	try {
+		const user = await require('../controller/users').find({ _id: req.session.uID });
 
-	const data = { ID: user.uID, name: user.name, role: user.role, address: user.address };
-	res.render('stdIndex', { data });
+		const data = { ID: user.uID, name: user.name, role: user.role, address: user.address };
+		res.render('stdIndex', { data });
+	} catch (err) { next(err); }
 }
 
 exports.modules = async (req, res, next) => {
-	const modules = await require('../controller/modules').find({ id: null, course: req.session.course });
-	res.render('modules', { data: modules });
+	try {
+		const modules = await require('../controller/modules').find({ id: null, course: req.session.course });
+		res.render('modules', { data: modules });
+	} catch (err) { next(err); }
 }
 
 /**
@@ -20,26 +24,32 @@ exports.modules = async (req, res, next) => {
  * @Produce give assignment with submissions by the student, and a button to submit 
  */
 exports.assignment = async (req, res, next) => {
-	const assignments = await require('../controller/assignments').findByModule(req.params.module);
+	try {
+		const assignments = await require('../controller/assignments').findByModule(req.params.module);
 
-	res.render('stdAssignments', { data: assignments });
+		res.render('stdAssignments', { data: assignments });
+	} catch (err) { next(err); }
 }
 
 exports.submit = async (req, res, next) => {
-	const { assignment } = req.params;
-	const submission = await require('../controller/submissions').findForStudent({ student: req.session._id, assignment });
-	const assign = await require('../controller/assignments').find(assignment);
-	res.render('submit', { data: submission, assignment: assign });
+	try {
+		const { assignment } = req.params;
+		const submission = await require('../controller/submissions').findForStudent({ student: req.session._id, assignment });
+		const assign = await require('../controller/assignments').find(assignment);
+		res.render('submit', { data: submission, assignment: assign });
+	} catch (err) { next(err); }
 }
 
 exports.saveSubmission = async (req, res, next) => {
-	const filename = req.file.originalname;
-	const { comment } = req.body;
-	const extension = filename.substring(filename.lastIndexOf('.'), filename.length);
-	const submission = await require('../controller/submissions').add(req.params.assignment, req.session._id, extension, comment);
+	try {
+		const filename = req.file.originalname;
+		const { comment } = req.body;
+		const extension = filename.substring(filename.lastIndexOf('.'), filename.length);
+		const submission = await require('../controller/submissions').add(req.params.assignment, req.session._id, extension, comment);
 
-	await require('fs').promises.writeFile('./testUploads/' + submission + extension, req.file.buffer);
-	res.redirect('/modules');
+		await require('fs').promises.writeFile('./testUploads/' + submission + extension, req.file.buffer);
+		res.redirect('/modules');
+	} catch (err) { next(err); }
 }
 
 exports.availableTutors = async (req, res, next) => {
