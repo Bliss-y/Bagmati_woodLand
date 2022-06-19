@@ -90,6 +90,6 @@ exports.getPersonalTutor = async (student) => {
 	if (!mongoose.isValidObjectId(student)) {
 		return { err: "student does not exist" };
 	}
-	var tutor = await require('../model/Teacher').find({ student }).populate('user').populate('module');
+	var tutor = await require('../model/Teacher').find({ personalStudentId: student }).populate('user').populate('module');
 	return tutor;
 }

@@ -16,6 +16,10 @@ exports.find = async (_id) => {
 	return teachers;
 }
 
+exports.getPersonalStudent = async (_id) => {
+	return await Teacher.findById(_id).populate('personalStudentId');
+}
+
 exports.findByModule = async (module) => {
 	if (!mongoose.isValidObjectId(module)) {
 		return { err: "Module doesnot exist" };

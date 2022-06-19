@@ -25,5 +25,6 @@ route.get('/delete/:type&:_id', reqs.delete);
 route.get('/personalStudent', reqs.personalStudent);
 route.post('/personalStudent/deleteRequest/:_id', reqs.decline);
 route.post('/personalStudent/acceptRequest/:_id', reqs.accept);
+route.post('/personalStudent/terminate/', reqs.terminateTutoring);
 
 module.exports = route;

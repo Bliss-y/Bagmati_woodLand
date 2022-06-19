@@ -30,7 +30,6 @@ exports.logout = async (req, res, next) => {
 // adds either teacher or students
 exports.addUser = async (req, res, next) => {
 	try {
-		console.log('here');
 		const User = require('../controller/' + req.params.type).add(req.body, (err) => {
 			if (err) {
 				return next(err);
@@ -64,7 +63,6 @@ exports.announce = async (req, res, next) => {
 
 exports.addCourse = async (req, res, next) => {
 	try {
-		console.log('requested to add course');
 		const { name, duration, description } = req.body;
 		const announcement = await require('../controller/courses.js').add({ name, duration, description });
 		res.redirect('/admin/courses');

@@ -73,7 +73,6 @@ exports.module = async (req, res, next) => {
 	try {
 		const { module } = req.session;
 		const mod = await require('../controller/modules').find({ _id: module });
-		console.log(mod);
 		const students = await require('../controller/students').findByCourse({ course: mod.course._id });
 		var data = [];
 		for (let i in students) {
@@ -97,14 +96,19 @@ exports.delete = async (req, res, next) => {
 
 exports.personalStudent = async (req, res, next) => {
 	try {
-		let data = [];
-		data = await require('../controller/teachers').find(req.session._id).personalStudent;
-		const requests = await require('../controller/personalTutorRequests').find({ teacher: req.session._id });
-		console.log(requests);
 
+		const personalStudent = await require('../controller/teachers').getPersonalStudent(req.session._id);
+		let data;
+		if (personalStudent.personalStudentId) {
+			data = await require('../controller/students').find(personalStudent.personalStudentId._id);
+		}
+		console.log(data);
+		const requests = await require('../controller/personalTutorRequests').find({ teacher: req.session._id });
 		return res.render('personalStudent', { data, requests });
 	} catch (err) { next(err); }
 }
+
+
 
 exports.accept = async (req, res, next) => {
 	try {
@@ -120,4 +124,14 @@ exports.decline = async (req, res, next) => {
 		const requests = await require('../controller/personalTutorRequests').delete(_id);
 		return res.redirect('/teacher/personalStudent');
 	} catch (err) { next(err); }
+}
+
+exports.terminateTutoring = async (req, res, next) => {
+	try {
+		await require('../model/Teacher').findByIdAndUpdate(req.session._id, {
+			personalStudentId: null
+		});
+	} catch (err) {
+		next(err);
+	}
 }

@@ -42,7 +42,6 @@ exports.uData = async (req, res) => {
 		const { type } = req.params;
 		var users = await require('../controller/' + type).find();
 		var data = require('../controller/users').parseUsers(users, type);
-		console.log(data[0]);
 		res.render('students', { data, dataType: type });
 	}
 	catch (err) {

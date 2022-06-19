@@ -9,7 +9,7 @@ const teacher = require('./teachers');
 
 exports.add = async (student, teacher, module) => {
 	if (!mongoose.isValidObjectId(student)) {
-		return console.log('not valid student id');
+		return;
 	}
 	let request = new Request(
 		{
@@ -19,21 +19,19 @@ exports.add = async (student, teacher, module) => {
 		}
 	);
 	request.save((err) => {
-		if (err) console.log("Error Adding request\n" + err);
+		if (err) {
+			return;
+		}
 	});
 }
 
 exports.accept = async (_id) => {
-	let request = Request.findById(_id).populate();
+	let request = await Request.findById(_id).populate();
+	console.log(request);
 	await require('../model/Teacher').findByIdAndUpdate(request.teacher, {
 		personalStudentId: request.student
-	}, (err, data) => {
-		if (err) {
-			console.log(err);
-		} else {
-			exports.delete(_id);
-		}
 	});
+	await exports.delete(_id);
 }
 
 exports.delete = async (_id) => {

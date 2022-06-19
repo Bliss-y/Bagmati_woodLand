@@ -63,13 +63,14 @@ exports.requestTutor = async (req, res, next) => {
 		const { teacher, module } = req.params;
 		const requests = require('../controller/personalTutorRequests');
 		const request = await requests.add(req.session._id, teacher, module);
-		res.redirect('/modules');
+		res.redirect('/student/modules');
 	} catch (err) { next(err); }
 }
 
 exports.personalTutors = async (req, res, next) => {
 	try {
-		const data = await require('../controller/students').getPersonalTutors(req.session._id);
-		res.rener('personalTutor', { data });
+		const data = await require('../controller/students').getPersonalTutor(req.session._id);
+		console.log(data);
+		res.render('personalTutors', { data });
 	} catch (err) { next(err); }
 }
