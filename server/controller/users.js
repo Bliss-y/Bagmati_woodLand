@@ -39,7 +39,6 @@ exports.find = async ({ _id, uID }) => {
 }
 
 exports.add = async ({ name, email, dob, phoneNumber, role, address }) => {
-	var v;
 	data = await User.findOne({}).limit(1).sort({ $natural: -1 }).populate();
 	password = name;
 	try {

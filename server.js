@@ -14,13 +14,8 @@ const session = require("express-session");
 const users = require('./testData');
 const sessions = require('./server/controller/sessionControl');
 
-const upload = multer();
 
 const app = express();
-
-/**
- * @TODO Use different file to handle mongo connection also store environment variable 
-*/
 
 const url = 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
@@ -70,6 +65,7 @@ app.use('/', express.static(__dirname + '/views/include'));
 
 app.use((err, req, res, next) => {
 	res.status(500);
+	console.log(err);
 	res.render('error', { err });
 })
 

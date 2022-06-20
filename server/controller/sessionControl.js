@@ -2,7 +2,7 @@
  * @Purpose = Handles all the necessary session validation after login
  */
 
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 exports.logIn = async (session, uid, pass) => {
 	const userFile = require('./users');
@@ -29,8 +29,8 @@ exports.logIn = async (session, uid, pass) => {
 exports.notLogged = async (req, res, next) => {
 	if (DEV_MODE) {
 		if (req.body.dev_uiD) {
+			console.log(req.body);
 			if (await exports.logIn(req.session, req.body.dev_uiD, req.body.dev_pass)) {
-				console.log(req.session.uID)
 				return next();
 			};
 		}
@@ -45,7 +45,6 @@ exports.notLogged = async (req, res, next) => {
 }
 
 exports.isAdmin = (req, res, next) => {
-	console.log('yes');
 
 	if (req.session.super) {
 		return next();
@@ -54,7 +53,6 @@ exports.isAdmin = (req, res, next) => {
 
 		return res.redirect('/');
 	} else {
-		console.log('yes');
 		next();
 	}
 }

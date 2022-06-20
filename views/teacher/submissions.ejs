@@ -6,16 +6,19 @@
 <div class="table-main">
 
 <% for(let i in data){ %>
-	<div id = "announcements" >
-		<div class="announcement-title"> <%= data[i].name %> </div>
-		<p class = "announcement-body">
-			<%= data[i].comment %> <br>
-			Date: <%= data[i].date %> <br>
-			Student UID = <%= data[i].uid %> <br>
-			Student Name = <%= data[i].name %>
-		</p>
-		<a href="/fileget/<%= data[i]._id + data[i].filename %>">Download file</a>
+	
 	<form action="/teacher/grade/<%= data[i]._id %>" method="post">
+		<div id = "announcements" >
+			<div class="announcement-title"> <%= data[i].name %> </div>
+			<p class = "announcement-body">
+				<%= data[i].comment %> <br>
+				Date: <%= data[i].date %> <br>
+				Student UID = <%= data[i].uid %> <br>
+				Student Name = <%= data[i].name %>
+			</p>
+		</div>
+
+		<a href="/fileget/<%= data[i]._id + data[i].filename %>">Download file</a>
 		<select name = "grade" required>
         <option value="A+">A+</option>
         <option value="A">A</option>
@@ -30,13 +33,11 @@
         <option value="D">D</option>
         <option value="D-">D-</option>
 		<option value="F">F</option>
-		<input type="text" name="feedback" placeholder="Feedback">
+		<input type="text" name="feedback" placeholder="Feedback" required>
     </select>
 	<button type="submit">Grade</button>
 	</form>
-	</div>
 <% } %>
-</div>
 </div>
 
 <!-- include header -->

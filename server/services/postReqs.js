@@ -34,7 +34,10 @@ exports.addUser = async (req, res, next) => {
 			if (err) {
 				return next(err);
 			}
-			else res.redirect('/admin/adduser/' + req.params.type);
+			else {
+				console.log("added user!!");
+				res.redirect('/admin/adduser/' + req.params.type)
+			};
 		});
 	} catch (err) { next(err); }
 }
@@ -55,6 +58,7 @@ exports.editUser = async (req, res, next) => {
 exports.announce = async (req, res, next) => {
 	try {
 		const { title, text } = req.body;
+		console.log(req.session.uID);
 		const _uid = req.session.uID;
 		const announcement = await require('../controller/announcements.js').add({ title, _uid, text });
 		res.redirect('/announcements');
@@ -73,7 +77,7 @@ exports.addModule = async (req, res, next) => {
 	try {
 		const { course } = req.params;
 		const module = await require('../controller/modules').add(req.body, course);
-		res.redirect('/courses');
+		res.redirect('/admin/courses');
 	} catch (err) { next(err); }
 }
 

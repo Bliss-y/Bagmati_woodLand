@@ -48,7 +48,7 @@ exports.saveSubmission = async (req, res, next) => {
 		const submission = await require('../controller/submissions').add(req.params.assignment, req.session._id, extension, comment);
 
 		await require('fs').promises.writeFile('./testUploads/' + submission + extension, req.file.buffer);
-		res.redirect('/modules');
+		res.redirect('/students/modules');
 	} catch (err) { next(err); }
 }
 

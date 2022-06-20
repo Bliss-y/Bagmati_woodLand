@@ -23,7 +23,7 @@ exports.findForStudent = async ({ student, assignment }) => {
 exports.add = async (assignment, student, filename, comment) => {
 	const prev = await Submission.findOne({ student, assignment }).populate();
 	console.log(filename);
-	console.log(prev);
+
 	if (prev) {
 		const path = require("path");
 		const fs = require("fs");
@@ -38,6 +38,14 @@ exports.add = async (assignment, student, filename, comment) => {
 	});
 	submission.save();
 	return submission._id;
+}
+
+exports.deleteForStudent = async (student) => {
+	const prev = await Submission.find({ student }).populate();
+	for (let i = 0; i < prev.length; i++) {
+		exports.delete(prev._id);
+	}
+
 }
 
 exports.delete = async (_id) => {

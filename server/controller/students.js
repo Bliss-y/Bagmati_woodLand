@@ -67,6 +67,8 @@ exports.delete = async (_id) => {
 	}
 	let student = await Student.findById({ _id }).populate('user');
 	await require('./users').delete(student.user._id);
+	await require('./submissions').add();
+	await require('../model/personalTutorRequests').find({ student: student._id }).remove().exec();
 	await Student.deleteOne({ _id }, (err) => {
 		if (err) console.log("err");
 	});

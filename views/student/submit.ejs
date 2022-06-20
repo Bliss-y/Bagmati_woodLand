@@ -5,9 +5,10 @@
 <div class = "table-main">
 
 
-	<div class="announcement-title"> <%= assignment.title %> </div>
+	<h1 class="announcement-title"> <%= assignment.title %> </h1>
+	<h2>Your Submissions:</h2>
 	<% if(data){ %>
-		<div id = "announcements" >
+		<div class="repeatable">
 		<p class = "announcement-body">
 			<%= data.comment %> <br>
 			Date: <%= data.date %> <br>
@@ -16,7 +17,9 @@
 		</p>
 		<a href="/fileget/<%= data._id + data.filename %>">Download file</a>
 	</div>
-	<% } %>
+	<% }else{ %>
+		<h1>You have no submissions for this assignment</h1>
+		<% }%>
 
 		<% if(new Date(assignment.due) > new Date() ) { %>
 			<h3>Submit or resubmit</h3>

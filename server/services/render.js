@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-exports.login = (req, res) => {
+exports.login = (req, res, next) => {
 	try {
 		if (req.session.uID) {
 			return res.redirect('/');
@@ -10,7 +10,7 @@ exports.login = (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.home = async (req, res) => {
+exports.home = async (req, res, next) => {
 	try {
 		var user = await require('../controller/users').find({ _id: req.session.uID });
 		var data = { ID: user.uID, name: user.name, role: user.role, address: user.address }
@@ -18,7 +18,7 @@ exports.home = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.addUser = async (req, res) => {
+exports.addUser = async (req, res, next) => {
 	try {
 		const { type } = req.params;
 		switch (type) {
@@ -37,7 +37,7 @@ exports.addUser = async (req, res) => {
 	};
 }
 
-exports.uData = async (req, res) => {
+exports.uData = async (req, res, next) => {
 	try {
 		const { type } = req.params;
 		var users = await require('../controller/' + type).find();
@@ -83,7 +83,7 @@ exports.editUser = async (req, res, next) => {
 	}
 }
 
-exports.remove = async (req, res) => {
+exports.remove = async (req, res, next) => {
 	try {
 		const { type, id } = req.params;
 		await require('../controller/' + type).delete(id);
@@ -91,7 +91,7 @@ exports.remove = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.announcements = async (req, res) => {
+exports.announcements = async (req, res, next) => {
 	try {
 		const announcements = await require('../controller/announcements').find();
 		data = [];
@@ -111,11 +111,11 @@ exports.announcements = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.announce = async (req, res) => {
+exports.announce = async (req, res, next) => {
 	try { res.render('addAnnouncement', { data: {} }); } catch (err) { next(err); }
 }
 
-exports.courses = async (req, res) => {
+exports.courses = async (req, res, next) => {
 	try {
 		const courses = await require('../controller/courses').find();
 		var data = [];
@@ -137,11 +137,11 @@ exports.courses = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.addCourse = (req, res) => {
+exports.addCourse = (req, res, next) => {
 	try { res.render('addCourse', { data: {} }); } catch (err) { next(err); }
 }
 
-exports.module = async (res, req) => {
+exports.module = async (res, req, next) => {
 	try {
 		const { name } = req.params;
 		const module = await require('../controller/modules').find({ name: name });
@@ -150,14 +150,14 @@ exports.module = async (res, req) => {
 	} catch (err) { next(err); }
 }
 
-exports.addModule = async (req, res) => {
+exports.addModule = async (req, res, next) => {
 	try {
 		const { course } = req.params;
 		res.render('addModule', { data: {}, course });
 	} catch (err) { next(err); }
 }
 
-exports.editModule = async (req, res) => {
+exports.editModule = async (req, res, next) => {
 	try {
 		const { _id } = req.params;
 		const module = await require('../controller/modules').find({ _id, course: null });
@@ -165,7 +165,7 @@ exports.editModule = async (req, res) => {
 	} catch (err) { next(err); }
 }
 
-exports.logs = async (req, res) => {
+exports.logs = async (req, res, next) => {
 	try {
 		const user = req.session.uID;
 		const role = req.session.role;
@@ -175,28 +175,29 @@ exports.logs = async (req, res) => {
 
 }
 
-exports.addLog = async (req, res) => {
+exports.addLog = async (req, res, next) => {
 	try { res.render('addLog', { data: undefined }); } catch (err) { next(err); }
 }
 
-exports.test = async (req, res) => {
+exports.test = async (req, res, next) => {
 	try {
 		const { type } = req.params;
 		const tests = require('../../test/testLinks');
 		switch (type) {
 			case "addcourses":
-				await tests.addDummyCourses(4);
+				await tests.addCourses(4);
 				break;
 			case "addmodules":
-				await tests.addModulesForAllCourses(3);
+				await tests.addModules(3);
 				break;
 			case "addstudents":
 				await tests.addStudents(3);
 				break;
 			case "addannouncements":
-				await tests.addDummyAnnouncements(2);
+				await tests.addAnnouncements(2);
 				break;
 			case "addteachers":
+				await tests.addTeachers(3);
 				break;
 			case "addAssignments":
 				break;

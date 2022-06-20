@@ -53,10 +53,8 @@ exports.removeModule = async (module) => {
 	}
 }
 
-exports.add = async (user) => {
-
-
-	const { name, email, dob, phoneNumber, address, role, module } = user;
+exports.add = async (user, cb) => {
+	const { name, email, dob, phoneNumber, address, role, module, salary } = user;
 	const User = await require('../controller/users.js').add({ name, email, dob, phoneNumber, address, role });
 	let teacher;
 	if (role == "admin" || module == "none") {
@@ -67,12 +65,14 @@ exports.add = async (user) => {
 	else {
 		teacher = new Teacher({
 			user: User._id,
-			module
+			module,
+			salary
 
 		})
 	}
 	await teacher.save();
-	return {};
+	cb();
+	return;
 }
 
 exports.edit = async (edited) => {
