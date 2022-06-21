@@ -2,7 +2,30 @@
  * @Purpose = Handles all the necessary session validation after login
  */
 
-const DEV_MODE = true;
+// SET DEV_MODE TO TRUE IF IN DEVELOPMENT TO STOP LOGGING IN EVERY SINGLE TIME
+const DEV_MODE = false;
+
+//IF THE REQ HAS NO SESSION ESTABLISHED THEN REDIRECT TO LOGIN
+exports.notLogged = async (req, res, next) => {
+
+	//IF IN DEV MODE AUTOMATICALLY LOG THE USER IN AS THE DEFAULT ADMIN
+	if (DEV_MODE) {
+		if (req.body.dev_uiD) {
+			console.log(req.body);
+			if (await exports.logIn(req.session, req.body.dev_uiD, req.body.dev_pass)) {
+				return next();
+			};
+		}
+		else { await exports.logIn(req.session, 1001, "Admin init") };
+		return next();
+	}
+	if (!req.session.uID) {
+		return res.redirect('/login');
+	} else {
+		next();
+	}
+}
+
 
 exports.logIn = async (session, uid, pass) => {
 	const userFile = require('./users');
@@ -26,23 +49,7 @@ exports.logIn = async (session, uid, pass) => {
 	return true;
 }
 
-exports.notLogged = async (req, res, next) => {
-	if (DEV_MODE) {
-		if (req.body.dev_uiD) {
-			console.log(req.body);
-			if (await exports.logIn(req.session, req.body.dev_uiD, req.body.dev_pass)) {
-				return next();
-			};
-		}
-		else { await exports.logIn(req.session, 1001, "Admin init") };
-		return next();
-	}
-	if (!req.session.uID) {
-		return res.redirect('/login');
-	} else {
-		next();
-	}
-}
+
 
 exports.isAdmin = (req, res, next) => {
 

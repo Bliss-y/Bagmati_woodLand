@@ -20,11 +20,11 @@
 			Due: <%= data[i].due %>
 		</p>
 		<button class="ann-adding-btn">
-			<a href="/fileget/<%= data[i]._id%>" class="add-button">Download file</a>
+			<a href="/fileget/<%= data[i]._id + data[i].extension %>" class="add-button">Download file</a>
 		</button>
 
 		<button class="ann-adding-btn">
-			<a href="/teacher/submissions/<%= data[i]._id%>" class="add-button">view submissions</a>
+			<a href="/teacher/submissions/<%= data[i]._id %>" class="add-button">view submissions</a>
 		</button>
 		
 		
