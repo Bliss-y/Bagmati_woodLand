@@ -9,7 +9,7 @@
 
 			<% if(role == "admin"){ %>
 		
-				<a class="log-adding-btn" href="/admin/remove/announcements&<%= data[i]._id %>" onclick="return confirm('Confirm to remove announcement');">
+				<a class="log-remove-btn" href="/admin/remove/announcements&<%= data[i]._id %>" onclick="return confirm('Confirm to remove announcement');">
 					
 					<i class="fa fa-trash-o"></i>
 					Remove announcements

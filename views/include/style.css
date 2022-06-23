@@ -77,6 +77,10 @@ li {
     border-spacing: 4px;
 }
 
+.repeatable{
+    width: 100%;
+    height: 200px;
+}
 
 .repeatable:nth-child(even) {
     background: rgb(242, 171, 171)
@@ -94,7 +98,8 @@ li {
 .log-heading,
 .announcement-heading,
 .course-heading,
-.std-heading {
+.std-heading,
+.log-head {
     margin: 0;
     padding: 1vw 0;
     background-color: rgba(33, 33, 33, 1);
