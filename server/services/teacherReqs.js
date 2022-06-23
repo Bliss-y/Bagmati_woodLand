@@ -131,6 +131,7 @@ exports.terminateTutoring = async (req, res, next) => {
 		await require('../model/Teacher').findByIdAndUpdate(req.session._id, {
 			personalStudentId: null
 		});
+		return res.redirect('/teacher/personalStudent');
 	} catch (err) {
 		next(err);
 	}
