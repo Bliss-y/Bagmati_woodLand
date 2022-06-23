@@ -10,7 +10,7 @@
 				Name:<%= data.user.name %>
 				uID: <%= data.user.uID %>
 			</div>
-				<button type="submit">Terminate Tutoring</button>
+				<button type="submit" class="ann-remove">Terminate Tutoring</button>
 		</form>
 		<% } %>
 		<h1 class="table-heading">Requests for Tutoring</h1>
@@ -20,13 +20,13 @@
 		
 	<% for(let i in requests){ %>
  		
-			<div>
+			<h4>
 				Name:<%= requests[i].student.name %>
-			</div>
+			</h4>
 			<form method="post" action="/teacher/personalStudent/deleteRequest/<%= requests[i]._id %>">
-			<button type="submit">Delete Request</button></form>
+			<button type="submit" class="ann-remove">Delete Request</button></form>
 			<form method="post" action="/teacher/personalStudent/acceptRequest/<%= requests[i]._id %>">
-			<button type="submit">Accept Request</button>
+			<button type="submit" class="ann-remove">Accept Request</button>
 		</form>
 	<% }} %>
 </div>

@@ -14,8 +14,8 @@
 			Date: <%= data[i].date %> <br>
 			Due: <%= data[i].due %>
 		</p>
-		<a href="/fileget/<%= data[i]._id + data[i].extension %>">Download file</a>
-		<a href="/student/submit/<%= data[i]._id%>">view submissions</a>
+		<a class="ann-remove" href="/fileget/<%= data[i]._id + data[i].extension %>">Download file</a>
+		<a class="ann-remove" href="/student/submit/<%= data[i]._id%>">view submissions</a>
 	</div>
 <% } %>
 </div>
