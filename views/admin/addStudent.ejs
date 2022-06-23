@@ -2,17 +2,19 @@
 <%- include ('_header') %>
 <!-- include header -->
 
-<% if(data._id){ %>
-  <% post = "/edituser/students&"+data._id %>
-
-  <% }else{  %>
-
-  <% post = "/adduser/students" %>
-  <% data = "" %>
-
-  <% } %>
 
 <div class = "table-main"> 
+    <% if(data._id){ %>
+      <% post = "/edituser/students&"+data._id %>
+     <h1 class="course-heading"> Edit Student </h1>
+
+    <% }else{  %>
+      <h1 class="course-heading"> Add Student </h1>
+
+      <% post = "/adduser/students" %>
+    <% data = "" %>
+
+    <% } %>
   <form method="POST" action="/admin<%= post %>">
   
 

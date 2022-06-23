@@ -2,20 +2,16 @@
 
 <%- include ('_header') %>
 
-
-
-
-	<% if(data._id){ %>
+    <div class="table-main">
+      	<% if(data._id){ %>
   <% post = "/announcedit" %>
-
+<h1 class="std-heading">EDIT Announcements</h1>
   <% }else{  %>
-
+<h1 class="std-heading">ADD Announcements</h1>
   <% post = "/announce" %>
   <% data = "" %>
 
   <% } %>
-
-    <div class="table-main">
       <form method="POST" action="#" class="ann-form">
 	  
         <div  class="form-group"  id = "Update">

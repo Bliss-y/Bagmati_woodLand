@@ -77,6 +77,14 @@ li {
     border-spacing: 4px;
 }
 
+.repeatable {
+    padding: 3%;
+    margin-top: 2px;
+    font-size: larger;
+    font-style: oblique;
+    font-weight: bolder;
+    margin-bottom: 20px;
+}
 
 .repeatable:nth-child(even) {
     background: rgb(242, 171, 171)
@@ -243,20 +251,21 @@ input {
 /*from decoration ended*/
 .add-std button,
 .log-adding-btn,
-.ann-adding-btn, .ann-remove {
-    
+.ann-adding-btn,
+.ann-remove {
+
     background-color: none;
     margin: 12px 20px;
     border: none;
-    
-    
+
+
 }
 
 .add-std button a,
 .log-adding-btn a,
 .ann-adding-btn a,
-.ann-remove{
-    
+.ann-remove {
+
     padding: 10px 30px;
     border-radius: 12px;
     background-color: #1a73e8;
@@ -297,7 +306,7 @@ input {
     box-shadow: 3px 3px 13px 3px black;
 } */
 
-.log-remove-btn{
+.log-remove-btn {
     margin: 12px 20px;
     padding: 10px 30px;
     background-color: #f32013;
@@ -342,10 +351,11 @@ input {
 
 }
 
-.module-btn-list{
+.module-btn-list {
     display: inline-block;
     padding: 15px;
 }
-.mod-title{
+
+.mod-title {
     margin-top: 12px;
 }

@@ -3,7 +3,7 @@
  */
 
 // SET DEV_MODE TO TRUE IF IN DEVELOPMENT TO STOP LOGGING IN EVERY SINGLE TIME
-const DEV_MODE = false;
+const DEV_MODE = true;
 
 //IF THE REQ HAS NO SESSION ESTABLISHED THEN REDIRECT TO LOGIN
 exports.notLogged = async (req, res, next) => {

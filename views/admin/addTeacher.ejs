@@ -2,18 +2,22 @@
 <%- include ('_header') %>
 <!-- include header -->
 
-<% if(data._id){ %>
+
+
+
+  <div class = "table-main">
+
+    <% if(data._id){ %>
   <% post = "edituser/teachers&"+data._id %>
+<h1 class="course-heading"> Edit Teacher </h1>
 
   <% }else{  %>
 
+<h1 class="course-heading"> Add Teacher </h1>
   <% post = "adduser/teachers" %>
   <% data = "" %>
 
   <% } %>
-
-
-  <div class = "table-main">
     <form method="POST" action="/admin/<%= post %>">
   
 

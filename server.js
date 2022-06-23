@@ -13,11 +13,15 @@ const fs = require("fs");
 const session = require("express-session");
 const users = require('./testData');
 const sessions = require('./server/controller/sessionControl');
+const env = require('dotenv');
 
 
+env.config();
 const app = express();
 
-const url = 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+console.log(process.env.URI);
+
+const url = process.env.URI || 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
 
 

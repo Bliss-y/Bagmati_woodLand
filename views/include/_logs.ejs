@@ -1,10 +1,5 @@
-
-
-
 <div class="table-main">
-
-
-	<h1 class="log-heading">Logs</h1>
+	<h1 class="std-heading">Logs</h1>
 	<button class="log-adding-btn">
 		
 		<a href="/logs/add/<%= user %>" ><i class="fa fa-plus"></i>Add</a>
@@ -18,11 +13,6 @@
 		<p class = "logbody">
 			<%= data[i].text %>
 		</p>
-		
-		
-
-		
-			
 			<a class="log-remove-btn" href="/remove/logs&<%= data[i]._id %>" onclick="return confirm('Confirm to remove log');"><i class="fa fa-trash-o"></i> Delete log</a>
 		
 	</div>

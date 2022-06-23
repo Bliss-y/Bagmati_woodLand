@@ -85,7 +85,7 @@ exports.editModule = async (req, res, next) => {
 	try {
 		const { _id } = req.params;
 		const module = await require('../controller/modules').edit(req.body, _id);
-		res.redirect('/courses');
+		res.redirect('/admin/courses');
 	} catch (err) { next(err); }
 }
 

@@ -1,17 +1,18 @@
 <%- include ('_header') %>
 
 
+
+  <div class="table-main">
 	<% if(data._id){ %>
   <% post = "/editModule/" + data._id %>
-
+<h1 class="std-heading">EDIT MODULE</h1>
   <% }else{  %>
+<h1 class="std-heading">ADD MODULE</h1>
 
   <% post = "/addmodule/" + course %>
   <% data = "" %>
 
   <% } %>
-  <div class="table-main">
-
   <form method="POST" action="#">
 	  
   <div  class="form-group"  id = "Update">
@@ -27,8 +28,10 @@
   <a href="#">
    <button type="submit" class="submit">Submit</button></a>
 </form>
-  
+  <% if(data._id){ %>
   <a class="log-remove-btn" href="/admin/remove/modules&<%= data._id %>" onclick="return confirm('Confirm to remove module');"><i class="fa fa-trash-o"></i> Remove</a>
+
+  <% } %>
 
 </div>
 
