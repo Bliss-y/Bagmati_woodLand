@@ -4,8 +4,8 @@
 	
 	<div class = "add-std">
 		<button>
-			<i class="fa fa-plus"></i>
-			<a href="/admin/adduser/<%= dataType %>" class="add-button">Add</a>
+			
+			<a href="/admin/adduser/<%= dataType %>" class="add-button"><i class="fa fa-plus"></i>Add</a>
 		</button>
 	</div>
 	<% if (data.length > 0){%>
@@ -22,7 +22,7 @@
 			<td><%= data[i][keys[c]]%></td>
 			<% } %>
 			<td><a href="/admin/edituser/<%= dataType %>&<%= data[i]._id %>" id = "">Edit</a></td>
-			<td><a  href="/admin/remove/<%= dataType %>&<%= data[i]._id %>" class="removeData">Remove</a></td>
+			<td><a  href="/admin/remove/<%= dataType %>&<%= data[i]._id %>" class="removeData" onclick="return confirm('Confirm to remove');">Remove</a></td>
 		</tr>
 		
 	<% } %>

@@ -12,12 +12,10 @@
 			Credit: <%= data[i].credit %> <br>
 			Duration: <%= data[i].duration + " years" %> 
 		</p>
-		<button class="ann-adding-btn">
-			<a href="/student/assignments/<%= data[i]._id %>" class="add-button">View Assignments</a>
-		</button>
-		<button class="ann-adding-btn">
-			<a href="/student/tutor/<%= data[i]._id %>" class="add-button">Request For Personal Tutor</a>
-		</button>
+			<a class="ann-remove" href="/student/assignments/<%= data[i]._id %>" class="add-button">View Assignments</a>
+
+			<a class="ann-remove" href="/student/tutor/<%= data[i]._id %>" class="add-button">Request For Personal Tutor</a>
+		
 		
 	</div>
 <% } %>

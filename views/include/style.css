@@ -243,22 +243,26 @@ input {
 /*from decoration ended*/
 .add-std button,
 .log-adding-btn,
-.ann-adding-btn {
+.ann-adding-btn, .ann-remove {
+    
+    background-color: none;
     margin: 12px 20px;
-    padding: 10px 30px;
-    background-color: #1a73e8;
-    color: aliceblue;
     border: none;
-    border-radius: 12px;
-    box-shadow: 3px 3px 13px 3px black;
+    
+    
 }
 
 .add-std button a,
 .log-adding-btn a,
-.ann-adding-btn a {
-
+.ann-adding-btn a,
+.ann-remove{
+    
+    padding: 10px 30px;
+    border-radius: 12px;
+    background-color: #1a73e8;
     color: white;
     text-decoration: none;
+    box-shadow: 3px 3px 13px 3px black;
 }
 
 .add-std button i,
@@ -283,7 +287,7 @@ input {
 
 }
 
-.log-remove-btn {
+/* .log-remove-btn {
     margin: 12px 20px;
     padding: 10px 30px;
     background-color: #f32013;
@@ -291,9 +295,15 @@ input {
     border: none;
     border-radius: 12px;
     box-shadow: 3px 3px 13px 3px black;
-}
+} */
 
-.log-remove-btn a {
+.log-remove-btn{
+    margin: 12px 20px;
+    padding: 10px 30px;
+    background-color: #f32013;
+    color: aliceblue;
+    border-radius: 12px;
+    box-shadow: 3px 3px 13px 3px black;
 
     color: white;
     text-decoration: none;
@@ -330,4 +340,12 @@ input {
     margin-right: auto;
 
 
+}
+
+.module-btn-list{
+    display: inline-block;
+    padding: 15px;
+}
+.mod-title{
+    margin-top: 12px;
 }

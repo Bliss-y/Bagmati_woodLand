@@ -8,12 +8,12 @@
 			Author: <%= data[i].user %>
 
 			<% if(role == "admin"){ %>
-				<button class="ann-adding-btn">		  
 		
-				<a  href="/admin/remove/announcements&<%= data[i]._id %>">Remove announcements</a>
+				<a class="log-adding-btn" href="/admin/remove/announcements&<%= data[i]._id %>" onclick="return confirm('Confirm to remove announcement');">
 					
-				</button>
-
+					<i class="fa fa-trash-o"></i>
+					Remove announcements
+				</a>
 			<% } %>
 		</p>
 	</div>

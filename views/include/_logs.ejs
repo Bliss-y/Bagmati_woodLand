@@ -6,8 +6,8 @@
 
 	<h1 class="log-heading">Logs</h1>
 	<button class="log-adding-btn">
-		<i class="fa fa-plus"></i>
-		<a href="/logs/add/<%= user %>" class="add-button">Add</a>
+		
+		<a href="/logs/add/<%= user %>" ><i class="fa fa-plus"></i>Add</a>
 	</button>
 
 
@@ -21,10 +21,10 @@
 		
 		
 
-		<button class="log-remove-btn">
-			<i class="fa fa-trash-o"></i>
-			<a href="/remove/logs&<%= data[i]._id %>">Delete log</a>
-		</button>
+		
+			
+			<a class="log-remove-btn" href="/remove/logs&<%= data[i]._id %>" onclick="return confirm('Confirm to remove log');"><i class="fa fa-trash-o"></i> Delete log</a>
+		
 	</div>
 <% } %>
 </div>

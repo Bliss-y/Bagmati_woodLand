@@ -5,8 +5,8 @@
 <div class = "table-main">
 	<h1>Assignments</h1>
 	<button class="ann-adding-btn">
-		<i class="fa fa-plus"></i>
-		<a href="/teacher/addAssignments" class="add-button">Add</a>
+		
+		<a href="/teacher/addAssignments" class="add-button"><i class="fa fa-plus"></i> Add</a>
 	</button>
 
 	
@@ -19,20 +19,22 @@
 			Date: <%= data[i].date %> <br>
 			Due: <%= data[i].due %>
 		</p>
-		<button class="ann-adding-btn">
-			<a href="/fileget/<%= data[i]._id + data[i].extension %>" class="add-button">Download file</a>
-		</button>
 
-		<button class="ann-adding-btn">
-			<a href="/teacher/submissions/<%= data[i]._id %>" class="add-button">view submissions</a>
-		</button>
+			<a class="ann-remove" href="/fileget/<%= data[i]._id + data[i].extension %>">Download file</a>
+	
+
+		
+			<a class="ann-remove" href="/teacher/submissions/<%= data[i]._id %>">view submissions</a>
+	
 		
 		
 	</div>
-	<button class="log-remove-btn">
-		<i class="fa fa-trash-o"></i>
-		<a href="/teacher/delete/assignments&<%= data[i]._id %>">Remove</a>
-	</button>
+		
+		<a class="log-remove-btn" href="/teacher/delete/assignments&<%= data[i]._id %>" onclick="return confirm('Confirm to remove module');">
+			<i class="fa fa-trash-o"></i>
+			Remove
+		</a>
+	
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
