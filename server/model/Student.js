@@ -17,6 +17,8 @@ const studentSchema = new Schema({
 	},
 
 
+
+
 }, { versionKey: false })
 
 const Student = mongoose.model('Student', studentSchema);

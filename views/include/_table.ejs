@@ -11,7 +11,7 @@
 	<% if (data.length > 0){%>
 	<table id="realTable">
 		<% var keys = Object.keys(data[0])%>
-		<%  keys.splice(keys.indexOf('_id'),0) %>
+		<%  keys.splice(keys.indexOf('_id'),1) %>
 		<% for (let key in keys) { %>
 		<th><%= keys[key] %></th>
 	<% } %>

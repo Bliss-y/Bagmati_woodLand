@@ -6,6 +6,8 @@
 	<% if(data._id){ %>
   <% post = "/editModule/" + data._id %>
 <h1 class="std-heading">EDIT MODULE</h1>
+			
+
   <% }else{  %>
 <h1 class="std-heading">ADD MODULE</h1>
 
@@ -14,7 +16,12 @@
 
   <% } %>
   <form method="POST" action="#">
-	  
+	  <% if(data._id){ %>
+ 
+		<a class="ann-remove" href="/admin/teachers/<%= data._id %>"><i class="fa fa-plus"></i> View Tutors for This module</a>
+			
+
+  <% } %>
   <div  class="form-group"  id = "Update">
 	  <label for="announcement-title">Name</label>
 	  <input type="text" class="form-control course-input" id="email" name = "name" value="<%= data.name %>" required>

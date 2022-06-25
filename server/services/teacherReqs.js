@@ -52,6 +52,7 @@ exports.submissions = async (req, res, next) => {
 			m.name = student.user.name;
 			m.comment = submissions[i].comment;
 			m.date = submissions[i].date;
+			m.filename = submissions[i].filename;
 			data.push(m);
 		}
 		const subModule = await require('../controller/modules').find({ id: req.session.module, course: undefined }).name;

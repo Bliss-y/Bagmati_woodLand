@@ -16,6 +16,8 @@ route.get('/announce', renders.announce);
 route.post('/announce', postReqs.announce);
 
 route.get('/courses', renders.courses);
+route.get('/students/:course', renders.studentsByCourse);
+route.get('/teachers/:module', renders.teachersByModule);
 
 route.get('/addcourse', renders.addCourse);
 route.post('/addcourse', postReqs.addCourse);

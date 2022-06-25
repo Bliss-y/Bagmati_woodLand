@@ -76,7 +76,7 @@ exports.delete = async (_id) => {
 }
 
 exports.findByCourse = async ({ course }) => {
-	const students = await Student.find({ course }).populate('user');
+	const students = await Student.find({ course }).populate('user').populate('course');
 	return students;
 }
 

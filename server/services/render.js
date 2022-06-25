@@ -218,3 +218,25 @@ exports.test = async (req, res, next) => {
 		res.redirect('/test');
 	} catch (err) { next(err); }
 }
+
+exports.studentsByCourse = async (req, res, next) => {
+	try {
+		const { course } = req.params;
+		var users = await require('../controller/students').findByCourse({ course });
+		var data = require('../controller/users').parseUsers(users, "students");
+		res.render('students', { data, dataType: "students" });
+	} catch (err) {
+		next(err);
+	}
+}
+
+exports.teachersByModule = async (req, res, next) => {
+	try {
+		const { module } = req.params;
+		var users = await require('../controller/teachers').findByModule(module);
+		var data = require('../controller/users').parseUsers(users, "teachers");
+		res.render('students', { data, dataType: "teachers" });
+	} catch (err) {
+		next(err);
+	}
+}
