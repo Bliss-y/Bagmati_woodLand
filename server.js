@@ -22,7 +22,7 @@ const app = express();
 console.log(process.env.URI);
 
 // set an environment mongodb variable if u want faster result yeilds
-const url = process.env.URI || 'mongodb+srv://bliss:2eRYfCRdRuVMXi7M@woodland.pfprl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+const url = process.env.URI;
 
 
 
